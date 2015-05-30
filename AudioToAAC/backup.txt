@@ -1,0 +1,52 @@
+﻿ AudioInfo info = item.Tag as AudioInfo;
+                string bat = getbat(info.FullName, "");
+                ProcessStartInfo processinfo = new ProcessStartInfo();
+                processinfo.FileName = "ffmpeg";//Environment.GetEnvironmentVariable("ComSpec");
+                processinfo.Arguments = ffmpegArg(info.FullName);
+                processinfo.UseShellExecute = false;    //输出信息重定向
+                //processinfo.CreateNoWindow = true;
+                processinfo.RedirectStandardInput = true;
+                processinfo.RedirectStandardOutput = true;
+                processinfo.RedirectStandardError = true;
+                Process ffmpeg = new Process();
+                ffmpeg.StartInfo = processinfo;
+                ffmpeg.Start();
+                processinfo.FileName = "neroAacEnc";
+                processinfo.Arguments = neroaacArg(
+                    Path.GetFileNameWithoutExtension(info.FullName) + ".m4a");
+                Process neroaac = new Process();
+                neroaac.StartInfo = processinfo;
+                neroaac.Start();
+
+                {
+                    char[] buffer = new char[10000];
+                    int bytecount = ffmpeg.StandardOutput.ReadBlock(buffer, 0, 10000);
+                    neroaac.StandardInput.Write(buffer, 0, bytecount);
+                } while ((!ffmpeg.StandardOutput.EndOfStream))
+                    ffmpeg.WaitForExit();            //等待进程结束
+                neroaac.WaitForExit();
+
+				        private string ffmpegArg(string input)
+        {
+            return string.Format(" -i \"{0}\" -f wav ",
+                input);
+        }
+
+        private string neroaacArg(string output)
+        {
+            return string.Format(" -ignorelength -q {2} -lc -if - -of \"{1}\" ",
+                output);
+        }
+
+		                        ID3Info id3 = new ID3Info(info.FullName, true);
+                        if (id3.ID3v1Info.HaveTag || id3.ID3v2Info.HaveTag)
+                        {
+                            id3.AttachAnotherFile(output);
+                            id3.Save();
+                        }
+                        else
+                        {
+                            id3.AttachAnotherFile(output);
+                            TagConsole.ReadTagToID3(id3, info.FullName);
+                            id3.Save();
+                        }

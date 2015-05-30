@@ -1,0 +1,53 @@
+﻿SetWorkingDir("$avisynth_plugin$")
+LoadPlugin("ffms2.dll")     #加载FFmpegSource挂载方式
+LoadPlugin("LSMASHSource.dll") #LWLibavVideoSource挂载方式
+LoadPlugin("VSFilter.dll")     #加载字幕插件
+Load_Stdcall_Plugin("yadif.dll")     #Yadif反交错滤镜
+LoadPlugin("nnedi3-0.9.4\nnedi3.dll")
+LoadPlugin("RemoveGrain-1.0\RemoveGrainSSE3.dll")
+LoadPlugin("RemoveGrain-1.0\RepairSSE3.dll")
+LoadPlugin("FluxSmooth-1.1a\FluxSmooth.dll")
+LoadPlugin("FFT3dGPU.dll")
+LoadPlugin("dither-1.23.0\avstp.dll")
+LoadPlugin("SmoothAdjust-v2.80\avs-2.6.x\x86\SmoothAdjust.dll")
+LoadPlugin("masktools-26-for-2.6alpha4\mt_masktools-26.dll")
+LoadPlugin("VSFilter.dll")
+LoadPlugin("deblock.dll")
+LoadPlugin("dither-1.23.0\dither.dll")
+Import("dither-1.23.0\dither.avsi")
+LoadPlugin("RemoveGrainSSE3.dll")
+LoadPlugin("RepairSSE3.dll")
+LoadPlugin("FFT3Dfilter.dll")
+LoadPlugin("DctFilter.dll")
+LoadPlugin("mvtools-2.6.0.5\mvtools2.dll")
+LoadPlugin("svpflow1.dll")
+LoadPlugin("svpflow2.dll")
+LoadPlugin("gradfun2db.dll")
+LoadPlugin("AddGrainC-1.7.0\AddGrainC.dll")
+Import("LSFmod.v1.9.avsi")
+Import("Deblock_QEDmod.avsi")
+Import("masktools-v2.0a48\masktools\LimitedSharpenFaster.avsi")
+Import("masktools-v2.0a48\masktools\mfToon-v0.54.avsi")
+Import("masktools-v2.0a48\masktools\vmToon-v0.74.avsi")
+Import("GradFun2DBmod.v1.5.avsi")
+Import("QTGMC-3.33.avsi")
+Import("nnedi3_resize16_v2.6.avsi")
+#Setmtmode(2) 
+#LWLibavVideoSource("$InputVedio$")
+FFVideoSource("$InputVedio$",pp="l5:a")#pp="l5:a" 加反交错
+#Yadif(mode=0,order=-1) #yadif反交错
+
+#QTGMC(preset="fast") # 高质量反交错 
+#SelectEven()   # Add this line to keep original frame rate, leave it out for smoother doubled frame rate
+SMDegrain()
+#FFT3Dfilter() #降噪 MT2
+#FFT3Dgpu() #GPU版降噪
+deblock_QED()  #deblock
+#LanczosResize(1920,1080)
+#nnedi3_resize16(1920, 1080,lsb_in=false,lsb=false)
+#FluxSmoothST(7,7) # Medium Noise MT2
+#Removegrain(2,2) 
+#Tweak(0,1,0,1)  #综合调色调
+#LSFmod()  #锐化
+GradFun2DBmod() #deband
+ConvertToYV12()
