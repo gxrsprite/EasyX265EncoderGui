@@ -66,7 +66,7 @@ namespace Easyx264CoderGUI
 #if X265
             this.toolTip1.SetToolTip(this.cbColorDepth, "x265推荐10bit");
             cbColorDepth.Text = "10";
-            txtUserArgs.Text = "--merange 25 --no-rect --no-amp --no-sao --no-strong-intra-smoothing --deblock -1:-1 --qcomp 0.75";
+            txtUserArgs.Text = "--input-depth 10 --merange 25 --no-rect --no-amp --no-sao --no-strong-intra-smoothing --deblock -1:-1 --qcomp 0.75";
 
 #else
 
@@ -640,6 +640,7 @@ namespace Easyx264CoderGUI
             {
                 cbColorDepth.Text = "8";
                 cbcsp.SelectedIndex = 0;
+                txtUserArgs.Text = txtUserArgs.Text.Replace("--input-depth 10", "");
 #if X265
 
 #else
@@ -670,6 +671,7 @@ namespace Easyx264CoderGUI
             {
                 cbColorDepth.Text = "10";
                 cbcsp.SelectedIndex = 2;
+                txtUserArgs.AppendText(" --input-depth 10");
 #if X265
                 cbpreset.Text = "medium";
 #else
@@ -719,6 +721,19 @@ namespace Easyx264CoderGUI
                     txtAvsScript.Text = text;
                 }
             }
+        }
+
+        private void cbColorDepth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbColorDepth.Text == "10")
+            {
+                txtUserArgs.AppendText(" --input-depth 10");
+            }
+            else
+            {
+                txtUserArgs.Text = txtUserArgs.Text.Replace("--input-depth 10", "");
+            }
+
         }
     }
 }

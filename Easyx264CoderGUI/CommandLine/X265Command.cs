@@ -254,7 +254,7 @@ namespace Easyx264CoderGUI
 
             if (vedioConfig.depth == 10)
             {
-                x264Line = x264Line.Replace("$profile$", "--input-depth 10 --profile main10");
+                x264Line = x264Line.Replace("$profile$", "--profile main10");
             }
             else
             {
@@ -276,7 +276,7 @@ namespace Easyx264CoderGUI
             }
             if (fileConfig.InputType == InputType.AvisynthScriptFile)
             {
-                x264Line = x264Line.Replace("$input$", "");
+                x264Line = x264Line.Replace("$input$", fileConfig.AvsFileFullName);
             }
             else if (fileConfig.InputType == InputType.AvisynthScript)
             {

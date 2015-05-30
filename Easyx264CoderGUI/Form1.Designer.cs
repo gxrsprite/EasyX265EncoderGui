@@ -469,6 +469,7 @@
             this.cbColorDepth.TabIndex = 3;
             this.cbColorDepth.Text = "8";
             this.toolTip1.SetToolTip(this.cbColorDepth, "8bit兼容性好，10bit压缩率好");
+            this.cbColorDepth.SelectedIndexChanged += new System.EventHandler(this.cbColorDepth_SelectedIndexChanged);
             // 
             // label5
             // 
