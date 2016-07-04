@@ -35,7 +35,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>H:\FrapsOutput\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;X265</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -80,12 +80,14 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandLine\FFmpegCommand.cs" />
     <Compile Include="CommandLine\X264Command.cs" />
     <Compile Include="ColorMatrix.cs" />
     <Compile Include="CommandLine\CommandHelper.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="EncoderExcepetion.cs" />
     <Compile Include="EncoderTaskInfo.cs" />
     <Compile Include="EncoderTaskInfoForm.cs">

@@ -64,5 +64,9 @@ namespace CommonLibrary
             }
         }
 
+        public static string RandomName(string path)
+        {
+            return Path.Combine(path, Guid.NewGuid().ToString("N"));
+        }
     }
 }

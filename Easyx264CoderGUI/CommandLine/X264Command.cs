@@ -262,7 +262,7 @@ namespace Easyx264CoderGUI.CommandLine
             }
             else
             {//临时目录
-                outputpath = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), ".mp4"));
+                outputpath = FileUtility.RandomName(Config.Temp) + ".mp4";
 
             }
             if (fileConfig.InputType == InputType.AvisynthScriptFile)

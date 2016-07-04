@@ -18,7 +18,7 @@ namespace Easyx264CoderGUI
         {
             AudioConfig audioConfig = fileConfig.AudioConfig;
             ProcessStartInfo processinfo = new ProcessStartInfo();
-            string tmp = Path.GetTempFileName();
+            string tmp = Config.Temp;
             string audiofile = Path.Combine(Path.GetDirectoryName(tmp), Path.GetFileNameWithoutExtension(tmp) + ".aac");
             processinfo.FileName = Environment.GetEnvironmentVariable("ComSpec");
 

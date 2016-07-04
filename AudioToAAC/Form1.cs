@@ -242,8 +242,10 @@ namespace AudioToAAC
             {
                 output = Path.GetFileNameWithoutExtension(input) + ".m4a";
             }
-            return string.Format("tools\\ffmpeg.exe -vn -i \"{0}\" -f  wav pipe:| tools\\neroAacEnc -ignorelength -q {2} -lc -if - -of \"{1}\"",
-                input, output, txtQuality.Text);
+            string ac = string.IsNullOrEmpty(txtCh.Text) ? "" : ("-ac " + txtCh.Text);
+
+            return string.Format("tools\\ffmpeg.exe -vn -i \"{0}\" -f {3}  wav pipe:| tools\\neroAacEnc -ignorelength -q {2} -lc -if - -of \"{1}\"",
+                input, output, txtQuality.Text, ac);
         }
 
         private void btnOutputPath_Click(object sender, EventArgs e)

@@ -20,6 +20,7 @@ namespace Easyx264CoderGUI
         public int Height = 1080;
         public string csp = "i420";
         public string AvsScript = "";//if inputtype == AvisynthScript
+        public string VapoursynthScript = "";
         public Encoder Encoder = Encoder.x264;
         public bool deinterlace = false;
         public bool scanorder = true;

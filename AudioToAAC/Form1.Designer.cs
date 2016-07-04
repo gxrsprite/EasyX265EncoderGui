@@ -34,6 +34,10 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.AudioPage = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.cblCompeteAction = new System.Windows.Forms.ComboBox();
+            this.cbCompleteDo = new System.Windows.Forms.CheckBox();
             this.btnClearList = new System.Windows.Forms.Button();
             this.cbCopyID3 = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,10 +55,8 @@
             this.States = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FilePath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.cbCompleteDo = new System.Windows.Forms.CheckBox();
-            this.cblCompeteAction = new System.Windows.Forms.ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.txtCh = new System.Windows.Forms.TextBox();
+            this.lbch = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.AudioPage.SuspendLayout();
@@ -106,6 +108,8 @@
             // 
             // AudioPage
             // 
+            this.AudioPage.Controls.Add(this.lbch);
+            this.AudioPage.Controls.Add(this.txtCh);
             this.AudioPage.Controls.Add(this.button2);
             this.AudioPage.Controls.Add(this.textBox2);
             this.AudioPage.Controls.Add(this.cblCompeteAction);
@@ -129,6 +133,45 @@
             this.AudioPage.TabIndex = 1;
             this.AudioPage.Text = "音频转码";
             this.AudioPage.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(439, 342);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 16;
+            this.button2.Text = "浏览";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(195, 344);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(239, 21);
+            this.textBox2.TabIndex = 15;
+            // 
+            // cblCompeteAction
+            // 
+            this.cblCompeteAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cblCompeteAction.FormattingEnabled = true;
+            this.cblCompeteAction.Items.AddRange(new object[] {
+            "拷贝到",
+            "剪切到"});
+            this.cblCompeteAction.Location = new System.Drawing.Point(102, 346);
+            this.cblCompeteAction.Name = "cblCompeteAction";
+            this.cblCompeteAction.Size = new System.Drawing.Size(71, 20);
+            this.cblCompeteAction.TabIndex = 14;
+            // 
+            // cbCompleteDo
+            // 
+            this.cbCompleteDo.AutoSize = true;
+            this.cbCompleteDo.Location = new System.Drawing.Point(34, 351);
+            this.cbCompleteDo.Name = "cbCompleteDo";
+            this.cbCompleteDo.Size = new System.Drawing.Size(60, 16);
+            this.cbCompleteDo.TabIndex = 13;
+            this.cbCompleteDo.Text = "完成后";
+            this.cbCompleteDo.UseVisualStyleBackColor = true;
             // 
             // btnClearList
             // 
@@ -155,7 +198,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(263, 269);
+            this.label3.Location = new System.Drawing.Point(268, 303);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 9;
@@ -163,7 +206,7 @@
             // 
             // txtTaskCount
             // 
-            this.txtTaskCount.Location = new System.Drawing.Point(312, 261);
+            this.txtTaskCount.Location = new System.Drawing.Point(317, 295);
             this.txtTaskCount.Name = "txtTaskCount";
             this.txtTaskCount.Size = new System.Drawing.Size(27, 21);
             this.txtTaskCount.TabIndex = 8;
@@ -269,44 +312,21 @@
             this.FilePath.Text = "路径";
             this.FilePath.Width = 268;
             // 
-            // cbCompleteDo
+            // txtCh
             // 
-            this.cbCompleteDo.AutoSize = true;
-            this.cbCompleteDo.Location = new System.Drawing.Point(34, 351);
-            this.cbCompleteDo.Name = "cbCompleteDo";
-            this.cbCompleteDo.Size = new System.Drawing.Size(60, 16);
-            this.cbCompleteDo.TabIndex = 13;
-            this.cbCompleteDo.Text = "完成后";
-            this.cbCompleteDo.UseVisualStyleBackColor = true;
+            this.txtCh.Location = new System.Drawing.Point(281, 260);
+            this.txtCh.Name = "txtCh";
+            this.txtCh.Size = new System.Drawing.Size(31, 21);
+            this.txtCh.TabIndex = 17;
             // 
-            // cblCompeteAction
+            // lbch
             // 
-            this.cblCompeteAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cblCompeteAction.FormattingEnabled = true;
-            this.cblCompeteAction.Items.AddRange(new object[] {
-            "拷贝到",
-            "剪切到"});
-            this.cblCompeteAction.Location = new System.Drawing.Point(102, 346);
-            this.cblCompeteAction.Name = "cblCompeteAction";
-            this.cblCompeteAction.Size = new System.Drawing.Size(71, 20);
-            this.cblCompeteAction.TabIndex = 14;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(195, 344);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(239, 21);
-            this.textBox2.TabIndex = 15;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(439, 342);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "浏览";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.lbch.AutoSize = true;
+            this.lbch.Location = new System.Drawing.Point(234, 264);
+            this.lbch.Name = "lbch";
+            this.lbch.Size = new System.Drawing.Size(41, 12);
+            this.lbch.TabIndex = 18;
+            this.lbch.Text = "声道：";
             // 
             // Form1
             // 
@@ -359,6 +379,8 @@
         private System.Windows.Forms.CheckBox cbCompleteDo;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label lbch;
+        private System.Windows.Forms.TextBox txtCh;
     }
 }
 

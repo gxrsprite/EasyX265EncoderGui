@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tsanie.FlvBugger;
 using CommonLibrary;
+using System.Xml.Linq;
 
 namespace Easyx264CoderGUI
 {
@@ -63,6 +64,12 @@ namespace Easyx264CoderGUI
                 var files = Directory.EnumerateFiles("Template\\avs");
                 cbAvsTemplate.Items.AddRange(files.Select(f => Path.GetFileName(f)).ToArray());
             }
+
+            if (Directory.Exists("Template\\vs"))
+            {
+                var files = Directory.EnumerateFiles("Template\\vs");
+                combVSTemplate.Items.AddRange(files.Select(f => Path.GetFileName(f)).ToArray());
+            }
 #if X265
             this.toolTip1.SetToolTip(this.cbColorDepth, "x265推荐10bit");
             cbColorDepth.Text = "10";
@@ -71,6 +78,24 @@ namespace Easyx264CoderGUI
 #else
 
 #endif
+            if (File.Exists("config.xml"))
+            {
+                XElement config = XElement.Load("config.xml");
+                var temp = (string)config.Element("Temp");
+                if (!string.IsNullOrEmpty(temp))
+                {
+                    Config.Temp = temp;
+                }
+                else
+                {
+                    Config.Temp = Path.GetTempPath();
+                }
+            }
+            else
+            {
+                Config.Temp = Path.GetTempPath();
+            }
+
         }
 
         public static string FileExtension = ".avi|.mp4|.mkv|.wmv|.avs|.ts|.tp|.m2ts";
@@ -115,9 +140,29 @@ namespace Easyx264CoderGUI
             FileConfig fileConfig = new FileConfig();
             fileConfig.FullName = path;
             fileConfig.DirPath = dir;
+            //检查是否有字幕
+            if (cbloadSub.Checked == true)
+            {
+                var files = Directory.EnumerateFiles(Path.GetDirectoryName(path));
+                foreach (var item in files)
+                {
+                    if (Path.GetFileNameWithoutExtension(item).StartsWith(Path.GetFileNameWithoutExtension(path)) && ".ass,.ssa,.srt".Split(',').Contains(Path.GetExtension(item)))
+                    {
+                        fileConfig.SubPath = item;
+                        break;
+                    }
+                }
+            }
+
+
             if (Path.GetExtension(path).Equals(".avs", StringComparison.OrdinalIgnoreCase))
             {
                 fileConfig.InputType = InputType.AvisynthScriptFile;
+                fileConfig.AvsFileFullName = path;
+            }
+            else if (Path.GetExtension(path).Equals(".vpy", StringComparison.OrdinalIgnoreCase))
+            {
+                fileConfig.InputType = InputType.VapoursynthScriptFile;
                 fileConfig.AvsFileFullName = path;
             }
             else
@@ -262,6 +307,14 @@ namespace Easyx264CoderGUI
                 string avsscript = txtAvsScript.Text;
                 avsscript = avsscript.Replace("$InputVedio$", fileConfig.VedioFileFullName)
                     .Replace("$avisynth_plugin$", Path.Combine(Application.StartupPath, "tools\\avsplugin"));
+                vedioConfig.AvsScript = avsscript;
+            }
+            else if (cbUseVSTemplete.Checked)
+            {//处理自定义avs模板
+                fileConfig.InputType = InputType.VapoursynthScript;
+                string avsscript = txtAvsScript.Text;
+                avsscript = avsscript.Replace("$InputVedio$", fileConfig.VedioFileFullName)
+                    .Replace("$vapoursynth_plugin$", Path.Combine(Application.StartupPath, "tools\\vsplugin"));
                 vedioConfig.AvsScript = avsscript;
             }
         }
@@ -461,6 +514,19 @@ namespace Easyx264CoderGUI
                                 fileConfig.AvsFileFullName = avsfilename;
                                 fileConfig.InputType = InputType.AvisynthScriptFile;
                                 vedioOutputFile = X265Command.RunAvsx264mod(fileConfig);
+                            }
+                            else if (fileConfig.InputType == InputType.VapoursynthScriptFile)
+                            {
+                                vedioOutputFile = X265Command.RunVSx265(fileConfig);
+                            }
+                            else if (fileConfig.InputType == InputType.VapoursynthScript)
+                            {
+                                fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
+                                string avsfilename = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), ".vpy"));
+                                File.WriteAllText(avsfilename, vedioconfig.VapoursynthScript, System.Text.Encoding.Default);
+                                fileConfig.VapoursynthFileFullName = avsfilename;
+                                fileConfig.InputType = InputType.VapoursynthScriptFile;
+                                vedioOutputFile = X265Command.RunVSx265(fileConfig);
                             }
                         }
                     }

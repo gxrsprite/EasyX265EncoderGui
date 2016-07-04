@@ -271,7 +271,7 @@ namespace Easyx264CoderGUI
             }
             else
             {//临时目录
-                outputpath = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), ".mkv"));
+                outputpath = FileUtility.RandomName(Config.Temp) + ".mkv";
 
             }
             if (fileConfig.InputType == InputType.AvisynthScriptFile)
@@ -292,5 +292,33 @@ namespace Easyx264CoderGUI
         }
 
 
+
+        internal static string RunVSx265(FileConfig fileConfig)
+        {
+            var vedioConfig = fileConfig.VedioConfig;
+            var finalX265Path = "";
+            if (vedioConfig.depth == 8)
+            {
+                finalX265Path = x265Excute8;
+            }
+            else if (vedioConfig.depth == 10)
+            {
+                finalX265Path = x265Excute10;
+            }
+            if (!File.Exists(finalX265Path))
+            {
+                throw new EncoderException("找不到指定程序：" + finalX265Path);
+            }
+
+            ProcessStartInfo processinfo = new ProcessStartInfo();
+            var bat = string.Format("\"{0}\" --y4m \"{1}\" - | \"{2}\" --y4m {3} -o \"{4}\" - ");
+            var tempfile = "12345.bat";
+            File.WriteAllText(tempfile, bat, Encoding.Default);
+            processinfo.FileName = tempfile;
+            Process run = new Process();
+            run.StartInfo = processinfo;
+            run.Start();
+            return "";
+        }
     }
 }

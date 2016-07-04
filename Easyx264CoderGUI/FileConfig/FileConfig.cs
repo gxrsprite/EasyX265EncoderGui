@@ -22,6 +22,7 @@ namespace Easyx264CoderGUI
         public int state = -1;
         public string FullName = "";
         public string AvsFileFullName = "";
+        public string VapoursynthFileFullName = "";
         public string VedioFileFullName = "";
         public string DirPath = "";
         public bool CompleteDo = false;
@@ -41,6 +42,8 @@ namespace Easyx264CoderGUI
         public AudioConfig AudioConfig = new AudioConfig();
         public VedioConfig VedioConfig = new VedioConfig();
         public MediaInfo mediaInfo = null;
+
+        public string SubPath = null;
         [NonSerialized]
         public EncoderTaskInfo EncoderTaskInfo = null;
 
@@ -68,6 +71,8 @@ namespace Easyx264CoderGUI
     {
         Vedio,
         AvisynthScriptFile,
-        AvisynthScript
+        AvisynthScript,
+        VapoursynthScript,
+        VapoursynthScriptFile
     }
 }
