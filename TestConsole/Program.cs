@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            x264tmod();
+            VSx265();
         }
 
         private static void x264tmod()
@@ -58,6 +59,18 @@ namespace TestConsole
             ffmpeg.WaitForExit();
             //ffmpeg.Kill();//等待进程结束
             ffmpeg.Dispose();
+        }
+
+        private static void VSx265()
+        {
+            ProcessStartInfo processinfo = new ProcessStartInfo();
+            var bat = "\"D:\\Program Files (x86)\\VapourSynth\\core64\\vspipe.exe\" --y4m \"D:\\do.vpy\" - | \"D:\\简单x265批量转码\\tools\\x265-16bit-full.exe\" --y4m --preset medium --merange 25 --no-rect --no-sao --input-depth 10 -o \"somename.mkv\" - ";
+            var tempfile = "12345.bat";
+            File.WriteAllText(tempfile, bat, Encoding.Default);
+            processinfo.FileName = tempfile;
+            Process ffmpeg = new Process();
+            ffmpeg.StartInfo = processinfo;
+            ffmpeg.Start();
         }
     }
 }
