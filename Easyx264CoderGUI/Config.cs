@@ -8,5 +8,6 @@ namespace Easyx264CoderGUI
     public static class Config
     {
         public static string Temp { set; get; }
+        public static string VspipePath { set; get; }
     }
 }

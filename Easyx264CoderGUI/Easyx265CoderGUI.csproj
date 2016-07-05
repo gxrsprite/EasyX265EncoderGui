@@ -175,6 +175,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="20131120094621866_easyicon_net_48.ico" />
+    <Content Include="config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Template\avs\简单地图炮.txt" />
   </ItemGroup>
   <ItemGroup>

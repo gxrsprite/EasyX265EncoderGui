@@ -310,15 +310,28 @@ namespace Easyx264CoderGUI
                 throw new EncoderException("找不到指定程序：" + finalX265Path);
             }
 
+            string fileExtension = "." + fileConfig.Muxer;
+            var outputpath = string.Empty;
+            if (fileConfig.AudioConfig.CopyStream || !fileConfig.AudioConfig.Enabled)
+            {
+                outputpath = fileConfig.OutputFile + fileExtension;
+            }
+            else
+            {//临时目录
+                outputpath = FileUtility.RandomName(Config.Temp) + ".mkv";
+            }
+
+            var x265args = "";
+            Getx265Line(fileConfig, 0, out x265args, out outputpath);
             ProcessStartInfo processinfo = new ProcessStartInfo();
-            var bat = string.Format("\"{0}\" --y4m \"{1}\" - | \"{2}\" --y4m {3} -o \"{4}\" - ");
-            var tempfile = "12345.bat";
-            File.WriteAllText(tempfile, bat, Encoding.Default);
-            processinfo.FileName = tempfile;
+            var bat = string.Format("\"{0}\" --y4m \"{1}\" - | \"{2}\" --y4m {3} - ", Config.VspipePath, fileConfig.VapoursynthFileFullName, x265args);
+            var batfile = FileUtility.RandomName(Config.Temp) + "bat";
+            File.WriteAllText(batfile, bat, Encoding.Default);
+            processinfo.FileName = batfile;
             Process run = new Process();
             run.StartInfo = processinfo;
             run.Start();
-            return "";
+            return outputpath;
         }
     }
 }

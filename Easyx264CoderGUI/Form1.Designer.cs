@@ -83,6 +83,7 @@
             this.FullName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FilePath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tbAvs = new System.Windows.Forms.TabPage();
+            this.cbloadSub = new System.Windows.Forms.CheckBox();
             this.cbAvsTemplate = new System.Windows.Forms.ComboBox();
             this.txtAvsScript = new System.Windows.Forms.TextBox();
             this.cbUseAvsTemplete = new System.Windows.Forms.CheckBox();
@@ -91,6 +92,10 @@
             this.label14 = new System.Windows.Forms.Label();
             this.txtAudioInput = new System.Windows.Forms.TextBox();
             this.txtAvsFile = new System.Windows.Forms.TextBox();
+            this.tabVS = new System.Windows.Forms.TabPage();
+            this.combVSTemplate = new System.Windows.Forms.ComboBox();
+            this.txtVsScript = new System.Windows.Forms.TextBox();
+            this.cbUseVSTemplete = new System.Windows.Forms.CheckBox();
             this.TaskList = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -105,20 +110,15 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.tabVS = new System.Windows.Forms.TabPage();
-            this.cbloadSub = new System.Windows.Forms.CheckBox();
-            this.combVSTemplate = new System.Windows.Forms.ComboBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.cbUseVSTemplete = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.AddTask.SuspendLayout();
             this.gbVedio.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tbAvs.SuspendLayout();
+            this.tabVS.SuspendLayout();
             this.TaskList.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.tabVS.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -167,7 +167,7 @@
             this.tabControl1.Controls.Add(this.TaskList);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 30);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(819, 793);
@@ -194,9 +194,9 @@
             this.AddTask.Controls.Add(this.btnAddtoTasklist);
             this.AddTask.Controls.Add(this.listView1);
             this.AddTask.Location = new System.Drawing.Point(4, 25);
-            this.AddTask.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AddTask.Margin = new System.Windows.Forms.Padding(4);
             this.AddTask.Name = "AddTask";
-            this.AddTask.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AddTask.Padding = new System.Windows.Forms.Padding(4);
             this.AddTask.Size = new System.Drawing.Size(811, 764);
             this.AddTask.TabIndex = 1;
             this.AddTask.Text = "添加视频";
@@ -225,7 +225,7 @@
             "战渣浪后黑",
             "战渣浪前黑"});
             this.cbMuxer.Location = new System.Drawing.Point(116, 715);
-            this.cbMuxer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbMuxer.Margin = new System.Windows.Forms.Padding(4);
             this.cbMuxer.Name = "cbMuxer";
             this.cbMuxer.Size = new System.Drawing.Size(131, 24);
             this.cbMuxer.TabIndex = 23;
@@ -252,7 +252,7 @@
             "战渣浪",
             "高保真游戏视频"});
             this.cbVedioConfigTemplete.Location = new System.Drawing.Point(325, 406);
-            this.cbVedioConfigTemplete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbVedioConfigTemplete.Margin = new System.Windows.Forms.Padding(4);
             this.cbVedioConfigTemplete.Name = "cbVedioConfigTemplete";
             this.cbVedioConfigTemplete.Size = new System.Drawing.Size(160, 24);
             this.cbVedioConfigTemplete.TabIndex = 21;
@@ -262,7 +262,7 @@
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button4.Location = new System.Drawing.Point(517, 259);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(100, 31);
             this.button4.TabIndex = 20;
@@ -274,7 +274,7 @@
             // 
             this.btnOneclickStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOneclickStart.Location = new System.Drawing.Point(667, 719);
-            this.btnOneclickStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOneclickStart.Margin = new System.Windows.Forms.Padding(4);
             this.btnOneclickStart.Name = "btnOneclickStart";
             this.btnOneclickStart.Size = new System.Drawing.Size(100, 31);
             this.btnOneclickStart.TabIndex = 19;
@@ -306,9 +306,9 @@
             this.gbVedio.Controls.Add(this.textBox3);
             this.gbVedio.Controls.Add(this.label4);
             this.gbVedio.Location = new System.Drawing.Point(21, 435);
-            this.gbVedio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbVedio.Margin = new System.Windows.Forms.Padding(4);
             this.gbVedio.Name = "gbVedio";
-            this.gbVedio.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbVedio.Padding = new System.Windows.Forms.Padding(4);
             this.gbVedio.Size = new System.Drawing.Size(740, 185);
             this.gbVedio.TabIndex = 18;
             this.gbVedio.TabStop = false;
@@ -318,7 +318,7 @@
             // 
             this.cbEnableQpmod.AutoSize = true;
             this.cbEnableQpmod.Location = new System.Drawing.Point(175, 20);
-            this.cbEnableQpmod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbEnableQpmod.Margin = new System.Windows.Forms.Padding(4);
             this.cbEnableQpmod.Name = "cbEnableQpmod";
             this.cbEnableQpmod.Size = new System.Drawing.Size(18, 17);
             this.cbEnableQpmod.TabIndex = 21;
@@ -339,7 +339,7 @@
             // txtbitrate
             // 
             this.txtbitrate.Location = new System.Drawing.Point(112, 59);
-            this.txtbitrate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbitrate.Margin = new System.Windows.Forms.Padding(4);
             this.txtbitrate.Name = "txtbitrate";
             this.txtbitrate.Size = new System.Drawing.Size(83, 22);
             this.txtbitrate.TabIndex = 19;
@@ -363,7 +363,7 @@
             "i444",
             "rgb"});
             this.cbcsp.Location = new System.Drawing.Point(464, 17);
-            this.cbcsp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbcsp.Margin = new System.Windows.Forms.Padding(4);
             this.cbcsp.Name = "cbcsp";
             this.cbcsp.Size = new System.Drawing.Size(67, 24);
             this.cbcsp.TabIndex = 17;
@@ -393,7 +393,7 @@
             // txtUserArgs
             // 
             this.txtUserArgs.Location = new System.Drawing.Point(96, 103);
-            this.txtUserArgs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtUserArgs.Margin = new System.Windows.Forms.Padding(4);
             this.txtUserArgs.Multiline = true;
             this.txtUserArgs.Name = "txtUserArgs";
             this.txtUserArgs.Size = new System.Drawing.Size(596, 73);
@@ -403,7 +403,7 @@
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(645, 63);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(4);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(67, 22);
             this.textBox5.TabIndex = 11;
@@ -412,7 +412,7 @@
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(563, 63);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(73, 22);
             this.textBox4.TabIndex = 10;
@@ -422,7 +422,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(443, 65);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(100, 21);
             this.checkBox1.TabIndex = 9;
@@ -450,7 +450,7 @@
             "lp",
             "lp++"});
             this.comboBox1.Location = new System.Drawing.Point(331, 61);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(73, 24);
             this.comboBox1.TabIndex = 7;
@@ -478,23 +478,11 @@
             "veryslow",
             "placebo"});
             this.cbpreset.Location = new System.Drawing.Point(631, 21);
-            this.cbpreset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbpreset.Margin = new System.Windows.Forms.Padding(4);
             this.cbpreset.Name = "cbpreset";
             this.cbpreset.Size = new System.Drawing.Size(93, 24);
-            this.cbpreset.TabIndex = 5;
-            this.cbpreset.Text = "medium";
             this.cbpreset.TabIndex = 3;
-            // 
-            // cbloadSub
-            // 
-            this.cbloadSub.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cbloadSub.AutoSize = true;
-            this.cbloadSub.Location = new System.Drawing.Point(25, 533);
-            this.cbloadSub.Name = "cbloadSub";
-            this.cbloadSub.Size = new System.Drawing.Size(96, 16);
-            this.cbloadSub.TabIndex = 26;
-            this.cbloadSub.Text = "自动加载字幕";
-            this.cbloadSub.UseVisualStyleBackColor = true;
+            this.cbpreset.Text = "medium";
             // 
             // label6
             // 
@@ -513,7 +501,7 @@
             "8",
             "10"});
             this.cbColorDepth.Location = new System.Drawing.Point(285, 19);
-            this.cbColorDepth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbColorDepth.Margin = new System.Windows.Forms.Padding(4);
             this.cbColorDepth.Name = "cbColorDepth";
             this.cbColorDepth.Size = new System.Drawing.Size(52, 24);
             this.cbColorDepth.TabIndex = 3;
@@ -534,7 +522,7 @@
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(112, 19);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(53, 22);
             this.textBox3.TabIndex = 1;
@@ -559,9 +547,9 @@
             this.groupBox1.Controls.Add(this.txtQuality);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(20, 629);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(568, 77);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
@@ -571,7 +559,7 @@
             // 
             this.cbcopuaudio.AutoSize = true;
             this.cbcopuaudio.Location = new System.Drawing.Point(413, 29);
-            this.cbcopuaudio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbcopuaudio.Margin = new System.Windows.Forms.Padding(4);
             this.cbcopuaudio.Name = "cbcopuaudio";
             this.cbcopuaudio.Size = new System.Drawing.Size(100, 21);
             this.cbcopuaudio.TabIndex = 12;
@@ -584,7 +572,7 @@
             this.cbUseAudio.Checked = true;
             this.cbUseAudio.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbUseAudio.Location = new System.Drawing.Point(9, 28);
-            this.cbUseAudio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbUseAudio.Margin = new System.Windows.Forms.Padding(4);
             this.cbUseAudio.Name = "cbUseAudio";
             this.cbUseAudio.Size = new System.Drawing.Size(86, 21);
             this.cbUseAudio.TabIndex = 11;
@@ -604,7 +592,7 @@
             // txtQuality
             // 
             this.txtQuality.Location = new System.Drawing.Point(217, 25);
-            this.txtQuality.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtQuality.Margin = new System.Windows.Forms.Padding(4);
             this.txtQuality.Name = "txtQuality";
             this.txtQuality.Size = new System.Drawing.Size(52, 22);
             this.txtQuality.TabIndex = 5;
@@ -624,7 +612,7 @@
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button2.Location = new System.Drawing.Point(643, 349);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 31);
             this.button2.TabIndex = 16;
@@ -637,7 +625,7 @@
             this.textBox2.AllowDrop = true;
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox2.Location = new System.Drawing.Point(269, 351);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(317, 22);
             this.textBox2.TabIndex = 15;
@@ -648,7 +636,7 @@
             this.cbKeepFileTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbKeepFileTree.AutoSize = true;
             this.cbKeepFileTree.Location = new System.Drawing.Point(67, 386);
-            this.cbKeepFileTree.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbKeepFileTree.Margin = new System.Windows.Forms.Padding(4);
             this.cbKeepFileTree.Name = "cbKeepFileTree";
             this.cbKeepFileTree.Size = new System.Drawing.Size(114, 21);
             this.cbKeepFileTree.TabIndex = 7;
@@ -664,7 +652,7 @@
             "拷贝到",
             "剪切到"});
             this.cblCompeteAction.Location = new System.Drawing.Point(155, 351);
-            this.cblCompeteAction.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cblCompeteAction.Margin = new System.Windows.Forms.Padding(4);
             this.cblCompeteAction.Name = "cblCompeteAction";
             this.cblCompeteAction.Size = new System.Drawing.Size(93, 24);
             this.cblCompeteAction.TabIndex = 14;
@@ -674,7 +662,7 @@
             this.cbCompleteDo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbCompleteDo.AutoSize = true;
             this.cbCompleteDo.Location = new System.Drawing.Point(67, 354);
-            this.cbCompleteDo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCompleteDo.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompleteDo.Name = "cbCompleteDo";
             this.cbCompleteDo.Size = new System.Drawing.Size(72, 21);
             this.cbCompleteDo.TabIndex = 13;
@@ -685,7 +673,7 @@
             // 
             this.btnClearList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnClearList.Location = new System.Drawing.Point(643, 259);
-            this.btnClearList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClearList.Margin = new System.Windows.Forms.Padding(4);
             this.btnClearList.Name = "btnClearList";
             this.btnClearList.Size = new System.Drawing.Size(100, 31);
             this.btnClearList.TabIndex = 11;
@@ -697,7 +685,7 @@
             // 
             this.btnOutputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOutputPath.Location = new System.Drawing.Point(643, 298);
-            this.btnOutputPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOutputPath.Margin = new System.Windows.Forms.Padding(4);
             this.btnOutputPath.Name = "btnOutputPath";
             this.btnOutputPath.Size = new System.Drawing.Size(100, 31);
             this.btnOutputPath.TabIndex = 3;
@@ -710,7 +698,7 @@
             this.textBox1.AllowDrop = true;
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox1.Location = new System.Drawing.Point(29, 301);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(565, 22);
             this.textBox1.TabIndex = 2;
@@ -721,7 +709,7 @@
             // 
             this.btnAddtoTasklist.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddtoTasklist.Location = new System.Drawing.Point(667, 679);
-            this.btnAddtoTasklist.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddtoTasklist.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddtoTasklist.Name = "btnAddtoTasklist";
             this.btnAddtoTasklist.Size = new System.Drawing.Size(100, 31);
             this.btnAddtoTasklist.TabIndex = 1;
@@ -732,15 +720,15 @@
             // listView1
             // 
             this.listView1.AllowDrop = true;
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.FullName,
             this.FilePath});
             this.listView1.Location = new System.Drawing.Point(11, 8);
-            this.listView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(788, 234);
             this.listView1.TabIndex = 0;
@@ -776,18 +764,29 @@
             this.tbAvs.Controls.Add(this.txtAudioInput);
             this.tbAvs.Controls.Add(this.txtAvsFile);
             this.tbAvs.Location = new System.Drawing.Point(4, 25);
-            this.tbAvs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbAvs.Margin = new System.Windows.Forms.Padding(4);
             this.tbAvs.Name = "tbAvs";
             this.tbAvs.Size = new System.Drawing.Size(811, 764);
             this.tbAvs.TabIndex = 3;
             this.tbAvs.Text = "AVS添加";
             this.tbAvs.UseVisualStyleBackColor = true;
             // 
+            // cbloadSub
+            // 
+            this.cbloadSub.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbloadSub.AutoSize = true;
+            this.cbloadSub.Location = new System.Drawing.Point(14, 718);
+            this.cbloadSub.Name = "cbloadSub";
+            this.cbloadSub.Size = new System.Drawing.Size(114, 21);
+            this.cbloadSub.TabIndex = 26;
+            this.cbloadSub.Text = "自动加载字幕";
+            this.cbloadSub.UseVisualStyleBackColor = true;
+            // 
             // cbAvsTemplate
             // 
             this.cbAvsTemplate.FormattingEnabled = true;
             this.cbAvsTemplate.Location = new System.Drawing.Point(33, 248);
-            this.cbAvsTemplate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbAvsTemplate.Margin = new System.Windows.Forms.Padding(4);
             this.cbAvsTemplate.Name = "cbAvsTemplate";
             this.cbAvsTemplate.Size = new System.Drawing.Size(491, 24);
             this.cbAvsTemplate.TabIndex = 9;
@@ -795,11 +794,11 @@
             // 
             // txtAvsScript
             // 
-            this.txtAvsScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.txtAvsScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAvsScript.Location = new System.Drawing.Point(33, 285);
-            this.txtAvsScript.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAvsScript.Margin = new System.Windows.Forms.Padding(4);
             this.txtAvsScript.Multiline = true;
             this.txtAvsScript.Name = "txtAvsScript";
             this.txtAvsScript.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -810,7 +809,7 @@
             // 
             this.cbUseAvsTemplete.AutoSize = true;
             this.cbUseAvsTemplete.Location = new System.Drawing.Point(13, 219);
-            this.cbUseAvsTemplete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbUseAvsTemplete.Margin = new System.Windows.Forms.Padding(4);
             this.cbUseAvsTemplete.Name = "cbUseAvsTemplete";
             this.cbUseAvsTemplete.Size = new System.Drawing.Size(385, 21);
             this.cbUseAvsTemplete.TabIndex = 5;
@@ -820,7 +819,7 @@
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(621, 135);
-            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button5.Margin = new System.Windows.Forms.Padding(4);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(100, 31);
             this.button5.TabIndex = 4;
@@ -852,7 +851,7 @@
             // 
             this.txtAudioInput.AllowDrop = true;
             this.txtAudioInput.Location = new System.Drawing.Point(127, 84);
-            this.txtAudioInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAudioInput.Margin = new System.Windows.Forms.Padding(4);
             this.txtAudioInput.Name = "txtAudioInput";
             this.txtAudioInput.Size = new System.Drawing.Size(593, 22);
             this.txtAudioInput.TabIndex = 1;
@@ -863,12 +862,59 @@
             // 
             this.txtAvsFile.AllowDrop = true;
             this.txtAvsFile.Location = new System.Drawing.Point(127, 24);
-            this.txtAvsFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAvsFile.Margin = new System.Windows.Forms.Padding(4);
             this.txtAvsFile.Name = "txtAvsFile";
             this.txtAvsFile.Size = new System.Drawing.Size(593, 22);
             this.txtAvsFile.TabIndex = 0;
             this.txtAvsFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBoxFile_DragDrop);
             this.txtAvsFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox1_DragEnter);
+            // 
+            // tabVS
+            // 
+            this.tabVS.Controls.Add(this.combVSTemplate);
+            this.tabVS.Controls.Add(this.txtVsScript);
+            this.tabVS.Controls.Add(this.cbUseVSTemplete);
+            this.tabVS.Location = new System.Drawing.Point(4, 25);
+            this.tabVS.Name = "tabVS";
+            this.tabVS.Padding = new System.Windows.Forms.Padding(3);
+            this.tabVS.Size = new System.Drawing.Size(811, 764);
+            this.tabVS.TabIndex = 4;
+            this.tabVS.Text = "Vapoursynth";
+            this.tabVS.UseVisualStyleBackColor = true;
+            // 
+            // combVSTemplate
+            // 
+            this.combVSTemplate.FormattingEnabled = true;
+            this.combVSTemplate.Location = new System.Drawing.Point(41, 53);
+            this.combVSTemplate.Margin = new System.Windows.Forms.Padding(4);
+            this.combVSTemplate.Name = "combVSTemplate";
+            this.combVSTemplate.Size = new System.Drawing.Size(512, 24);
+            this.combVSTemplate.TabIndex = 12;
+            this.combVSTemplate.SelectedValueChanged += new System.EventHandler(this.combVSTemplate_SelectedValueChanged);
+            // 
+            // txtVsScript
+            // 
+            this.txtVsScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtVsScript.Location = new System.Drawing.Point(41, 90);
+            this.txtVsScript.Margin = new System.Windows.Forms.Padding(4);
+            this.txtVsScript.Multiline = true;
+            this.txtVsScript.Name = "txtVsScript";
+            this.txtVsScript.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtVsScript.Size = new System.Drawing.Size(732, 648);
+            this.txtVsScript.TabIndex = 11;
+            // 
+            // cbUseVSTemplete
+            // 
+            this.cbUseVSTemplete.AutoSize = true;
+            this.cbUseVSTemplete.Location = new System.Drawing.Point(21, 24);
+            this.cbUseVSTemplete.Margin = new System.Windows.Forms.Padding(4);
+            this.cbUseVSTemplete.Name = "cbUseVSTemplete";
+            this.cbUseVSTemplete.Size = new System.Drawing.Size(376, 21);
+            this.cbUseVSTemplete.TabIndex = 10;
+            this.cbUseVSTemplete.Text = "使用VS模版添加任务(视频文件在第一个“添加视频”添加)";
+            this.cbUseVSTemplete.UseVisualStyleBackColor = true;
             // 
             // TaskList
             // 
@@ -877,7 +923,7 @@
             this.TaskList.Controls.Add(this.txtTaskCount);
             this.TaskList.Controls.Add(this.listView2);
             this.TaskList.Location = new System.Drawing.Point(4, 25);
-            this.TaskList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TaskList.Margin = new System.Windows.Forms.Padding(4);
             this.TaskList.Name = "TaskList";
             this.TaskList.Size = new System.Drawing.Size(811, 764);
             this.TaskList.TabIndex = 2;
@@ -887,7 +933,7 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(497, 679);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(100, 31);
             this.button3.TabIndex = 12;
@@ -908,7 +954,7 @@
             // txtTaskCount
             // 
             this.txtTaskCount.Location = new System.Drawing.Point(295, 683);
-            this.txtTaskCount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTaskCount.Margin = new System.Windows.Forms.Padding(4);
             this.txtTaskCount.Name = "txtTaskCount";
             this.txtTaskCount.Size = new System.Drawing.Size(35, 22);
             this.txtTaskCount.TabIndex = 10;
@@ -917,7 +963,7 @@
             // listView2
             // 
             this.listView2.AllowDrop = true;
-            this.listView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.listView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2,
@@ -927,7 +973,7 @@
             this.listView2.ContextMenuStrip = this.contextMenuStrip1;
             this.listView2.FullRowSelect = true;
             this.listView2.Location = new System.Drawing.Point(4, 4);
-            this.listView2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listView2.Margin = new System.Windows.Forms.Padding(4);
             this.listView2.Name = "listView2";
             this.listView2.Size = new System.Drawing.Size(768, 652);
             this.listView2.TabIndex = 1;
@@ -971,52 +1017,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // tabVS
-            // 
-            this.tabVS.Controls.Add(this.combVSTemplate);
-            this.tabVS.Controls.Add(this.textBox6);
-            this.tabVS.Controls.Add(this.cbUseVSTemplete);
-            this.tabVS.Location = new System.Drawing.Point(4, 25);
-            this.tabVS.Name = "tabVS";
-            this.tabVS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVS.Size = new System.Drawing.Size(811, 764);
-            this.tabVS.TabIndex = 4;
-            this.tabVS.Text = "Vapoursynth";
-            this.tabVS.UseVisualStyleBackColor = true;
-            // 
-            // combVSTemplate
-            // 
-            this.combVSTemplate.FormattingEnabled = true;
-            this.combVSTemplate.Location = new System.Drawing.Point(41, 53);
-            this.combVSTemplate.Margin = new System.Windows.Forms.Padding(4);
-            this.combVSTemplate.Name = "combVSTemplate";
-            this.combVSTemplate.Size = new System.Drawing.Size(512, 24);
-            this.combVSTemplate.TabIndex = 12;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox6.Location = new System.Drawing.Point(41, 90);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox6.Multiline = true;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox6.Size = new System.Drawing.Size(732, 648);
-            this.textBox6.TabIndex = 11;
-            // 
-            // cbUseVSTemplete
-            // 
-            this.cbUseVSTemplete.AutoSize = true;
-            this.cbUseVSTemplete.Location = new System.Drawing.Point(21, 24);
-            this.cbUseVSTemplete.Margin = new System.Windows.Forms.Padding(4);
-            this.cbUseVSTemplete.Name = "cbUseVSTemplete";
-            this.cbUseVSTemplete.Size = new System.Drawing.Size(376, 21);
-            this.cbUseVSTemplete.TabIndex = 10;
-            this.cbUseVSTemplete.Text = "使用VS模版添加任务(视频文件在第一个“添加视频”添加)";
-            this.cbUseVSTemplete.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1026,7 +1026,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "简单批量x264转码";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -1041,11 +1041,11 @@
             this.groupBox1.PerformLayout();
             this.tbAvs.ResumeLayout(false);
             this.tbAvs.PerformLayout();
+            this.tabVS.ResumeLayout(false);
+            this.tabVS.PerformLayout();
             this.TaskList.ResumeLayout(false);
             this.TaskList.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.tabVS.ResumeLayout(false);
-            this.tabVS.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1131,7 +1131,7 @@
         private System.Windows.Forms.ComboBox cbAvsTemplate;
         private System.Windows.Forms.TabPage tabVS;
         private System.Windows.Forms.ComboBox combVSTemplate;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtVsScript;
         private System.Windows.Forms.CheckBox cbUseVSTemplete;
     }
 }

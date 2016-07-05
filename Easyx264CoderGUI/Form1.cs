@@ -85,11 +85,18 @@ namespace Easyx264CoderGUI
                 if (!string.IsNullOrEmpty(temp))
                 {
                     Config.Temp = temp;
+                    if (!Directory.Exists(Config.Temp))
+                    {
+                        Directory.CreateDirectory(Config.Temp);
+                    }
                 }
                 else
                 {
                     Config.Temp = Path.GetTempPath();
                 }
+
+                var vspipe = (string)config.Element("vspipe");
+                Config.VspipePath = vspipe;
             }
             else
             {
@@ -678,7 +685,7 @@ namespace Easyx264CoderGUI
         private void btnOneclickStart_Click(object sender, EventArgs e)
         {
             添加到任务列表();
-            tabControl1.SelectedIndex = 2;
+            tabControl1.SelectedIndex = 3;
             开始转码();
 
         }
@@ -785,6 +792,19 @@ namespace Easyx264CoderGUI
                 {
                     var text = File.ReadAllText(path);
                     txtAvsScript.Text = text;
+                }
+            }
+        }
+
+        private void combVSTemplate_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(combVSTemplate.Text))
+            {
+                var path = "Template\\vs\\" + combVSTemplate.Text;
+                if (File.Exists(path))
+                {
+                    var text = File.ReadAllText(path);
+                    txtVsScript.Text = text;
                 }
             }
         }
