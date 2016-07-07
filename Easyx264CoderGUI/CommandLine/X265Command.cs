@@ -331,6 +331,7 @@ namespace Easyx264CoderGUI
             Process run = new Process();
             run.StartInfo = processinfo;
             run.Start();
+            run.WaitForExit();
             return outputpath;
         }
     }

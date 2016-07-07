@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandLine\Eac3toCommand.cs" />
     <Compile Include="CommandLine\ffmpegCommand.cs" />
     <Compile Include="CommandLine\Mp4boxCommand.cs" />
     <Compile Include="Form1.cs">

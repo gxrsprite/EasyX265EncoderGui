@@ -223,8 +223,17 @@ namespace ToolSet
             });
         }
 
-
-
-
+        private void btnEac3toAAC_Click(object sender, EventArgs e)
+        {
+            string filename = txtFileEac.Text;
+            string q = txtEac3toQuality.Text;
+            string tracker = txtEacTracker.Text;
+            Task.Factory.StartNew(() =>
+            {
+                string output = Path.GetFileNameWithoutExtension(filename);
+                string dir = Path.GetDirectoryName(filename);
+                Eac3toCommand.ConvertMusic(filename, FileUtility.GetNoSameNameFile(Path.Combine(dir, output + ".m4a")), q, tracker);
+            });
+        }
     }
 }

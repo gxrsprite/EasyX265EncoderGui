@@ -83,6 +83,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandLine\Eac3toCommand.cs" />
     <Compile Include="CommandLine\FFmpegCommand.cs" />
     <Compile Include="CommandLine\X264Command.cs" />
     <Compile Include="ColorMatrix.cs" />

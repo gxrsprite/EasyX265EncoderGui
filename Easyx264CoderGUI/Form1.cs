@@ -97,6 +97,16 @@ namespace Easyx264CoderGUI
 
                 var vspipe = (string)config.Element("vspipe");
                 Config.VspipePath = vspipe;
+                var VsPluginPath = (string)config.Element("VsPluginPath");
+                if (!string.IsNullOrEmpty(VsPluginPath))
+                {
+                    Config.VsPluginPath = VsPluginPath;
+                }
+                else
+                {
+                    Config.VsPluginPath = "vs\\plugin";
+                }
+
             }
             else
             {
@@ -273,6 +283,7 @@ namespace Easyx264CoderGUI
             {
                 fileConfig.AudioConfig.Enabled = false;
             }
+            audioConfig.Tracker = int.Parse(txtAudioTracker.Text);
         }
 
         private void SetVedioConfigByControl(FileConfig fileConfig)
@@ -578,7 +589,14 @@ namespace Easyx264CoderGUI
                             }
                             else
                             {
-                                audiofile = CommandHelper.RunFFmpegToAAC(fileConfig);
+                                if (fileConfig.AudioConfig.UseEac3to)
+                                {
+                                    audiofile = Eac3toCommand.ConvertMusic(fileConfig);
+                                }
+                                else
+                                {
+                                    audiofile = CommandHelper.RunFFmpegToAAC(fileConfig);
+                                }
                             }
 
 

@@ -2,4 +2,5 @@
 <config>
   <Temp></Temp>
   <vspipe></vspipe>
+  <VsPluginPath></VsPluginPath>
 </config>

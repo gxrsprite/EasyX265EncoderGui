@@ -64,6 +64,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbUseEac3to = new System.Windows.Forms.CheckBox();
             this.cbcopuaudio = new System.Windows.Forms.CheckBox();
             this.cbUseAudio = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -110,6 +111,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.txtAudioTracker = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.AddTask.SuspendLayout();
@@ -541,6 +543,8 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.txtAudioTracker);
+            this.groupBox1.Controls.Add(this.cbUseEac3to);
             this.groupBox1.Controls.Add(this.cbcopuaudio);
             this.groupBox1.Controls.Add(this.cbUseAudio);
             this.groupBox1.Controls.Add(this.label1);
@@ -550,15 +554,25 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(568, 77);
+            this.groupBox1.Size = new System.Drawing.Size(621, 77);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "音频参数";
             // 
+            // cbUseEac3to
+            // 
+            this.cbUseEac3to.AutoSize = true;
+            this.cbUseEac3to.Location = new System.Drawing.Point(473, 29);
+            this.cbUseEac3to.Name = "cbUseEac3to";
+            this.cbUseEac3to.Size = new System.Drawing.Size(74, 21);
+            this.cbUseEac3to.TabIndex = 13;
+            this.cbUseEac3to.Text = "Eac3to";
+            this.cbUseEac3to.UseVisualStyleBackColor = true;
+            // 
             // cbcopuaudio
             // 
             this.cbcopuaudio.AutoSize = true;
-            this.cbcopuaudio.Location = new System.Drawing.Point(413, 29);
+            this.cbcopuaudio.Location = new System.Drawing.Point(366, 29);
             this.cbcopuaudio.Margin = new System.Windows.Forms.Padding(4);
             this.cbcopuaudio.Name = "cbcopuaudio";
             this.cbcopuaudio.Size = new System.Drawing.Size(100, 21);
@@ -582,7 +596,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(155, 29);
+            this.label1.Location = new System.Drawing.Point(111, 28);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 17);
@@ -591,7 +605,7 @@
             // 
             // txtQuality
             // 
-            this.txtQuality.Location = new System.Drawing.Point(217, 25);
+            this.txtQuality.Location = new System.Drawing.Point(184, 25);
             this.txtQuality.Margin = new System.Windows.Forms.Padding(4);
             this.txtQuality.Name = "txtQuality";
             this.txtQuality.Size = new System.Drawing.Size(52, 22);
@@ -601,7 +615,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(279, 29);
+            this.label2.Location = new System.Drawing.Point(246, 29);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(111, 17);
@@ -1017,6 +1031,14 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // txtAudioTracker
+            // 
+            this.txtAudioTracker.Location = new System.Drawing.Point(564, 29);
+            this.txtAudioTracker.Name = "txtAudioTracker";
+            this.txtAudioTracker.Size = new System.Drawing.Size(24, 22);
+            this.txtAudioTracker.TabIndex = 14;
+            this.txtAudioTracker.Text = "2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1133,6 +1155,8 @@
         private System.Windows.Forms.ComboBox combVSTemplate;
         private System.Windows.Forms.TextBox txtVsScript;
         private System.Windows.Forms.CheckBox cbUseVSTemplete;
+        private System.Windows.Forms.CheckBox cbUseEac3to;
+        private System.Windows.Forms.TextBox txtAudioTracker;
     }
 }
 
