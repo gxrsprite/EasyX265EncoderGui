@@ -104,7 +104,7 @@ namespace Easyx264CoderGUI
                 }
                 else
                 {
-                    Config.VsPluginPath = "vs\\plugin";
+                    Config.VsPluginPath = "tools\\vsplugin";
                 }
 
             }
@@ -332,7 +332,7 @@ namespace Easyx264CoderGUI
                 fileConfig.InputType = InputType.VapoursynthScript;
                 string avsscript = txtAvsScript.Text;
                 avsscript = avsscript.Replace("$InputVedio$", fileConfig.VedioFileFullName)
-                    .Replace("$vapoursynth_plugin$", Path.Combine(Application.StartupPath, "tools\\vsplugin"));
+                    .Replace("$vapoursynth_plugin$", Path.Combine(Application.StartupPath, Config.VsPluginPath));
                 vedioConfig.AvsScript = avsscript;
             }
         }
