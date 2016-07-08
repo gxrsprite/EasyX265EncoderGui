@@ -83,7 +83,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandLine\Eac3toCommand.cs" />
+    <Compile Include="CommandLine\Eac3toCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CommandLine\FFmpegCommand.cs" />
     <Compile Include="CommandLine\X264Command.cs" />
     <Compile Include="ColorMatrix.cs" />
@@ -178,6 +180,7 @@
     <Content Include="20131120094621866_easyicon_net_48.ico" />
     <Content Include="config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Template\avs\简单地图炮.txt" />
   </ItemGroup>
