@@ -12,7 +12,9 @@ namespace Easyx264CoderGUI
     public class X265Command
     {
         public static string x265Excute8 = "tools" + Path.DirectorySeparatorChar + "x265-8bit-full.exe";
+        public static string x265Excute8lite = "tools" + Path.DirectorySeparatorChar + "x265.exe";
         public static string x265Excute10 = "tools" + Path.DirectorySeparatorChar + "x265-16bit-full.exe";
+        public static string x265Excute10lite = "tools" + Path.DirectorySeparatorChar + "x265-10b.exe";
         public static string avs4x265 = "tools" + Path.DirectorySeparatorChar + "avs4x265.exe";
         public static string x265Args = "  $crf$  --preset $preset$  $tune$ $userargs$   -o  \"$outputfile$\" \"$input$\"";
 
