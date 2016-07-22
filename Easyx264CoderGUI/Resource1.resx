@@ -202,6 +202,6 @@ Down10($depth$,stack=false, dither=-1, tvrange=$tvrange$)</value>
     <value>--acodec $acodec$ --output-csp $csp$ $profile$   $crf$  --preset $preset$  $tune$  $resize$    $userargs$   -o  "$outputfile$" "$input$"</value>
   </data>
   <data name="x265Line" xml:space="preserve">
-    <value>$crf$ $profile$  --preset $preset$  $tune$  $userargs$   -o  "$outputfile$"  $input$</value>
+    <value>$crf$ $profile$  --preset $preset$  $tune$  $userargs$   -o  "$outputfile$"  "$input$"</value>
   </data>
 </root>
