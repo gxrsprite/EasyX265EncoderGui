@@ -217,11 +217,11 @@ namespace Easyx264CoderGUI
 
         private static void OutputToText(FileConfig fileConfig, Process avsx264mod)
         {
-            avsx264mod.OutputDataReceived += new DataReceivedEventHandler(delegate(object sender, DataReceivedEventArgs e)
+            avsx264mod.OutputDataReceived += new DataReceivedEventHandler(delegate (object sender, DataReceivedEventArgs e)
             {
                 fileConfig.EncoderTaskInfo.AppendOutput(e.Data);
             });
-            avsx264mod.ErrorDataReceived += new DataReceivedEventHandler(delegate(object sender, DataReceivedEventArgs e)
+            avsx264mod.ErrorDataReceived += new DataReceivedEventHandler(delegate (object sender, DataReceivedEventArgs e)
             {
                 //fileConfig.state = -10;
                 //fileConfig.EncoderTaskInfo.AppendOutput("[简单批量x264编码]avs转码错误");
@@ -280,7 +280,7 @@ namespace Easyx264CoderGUI
             {
                 x264Line = x264Line.Replace("$input$", fileConfig.AvsFileFullName);
             }
-            else if (fileConfig.InputType == InputType.AvisynthScript)
+            else if (fileConfig.InputType == InputType.AvisynthScript || fileConfig.InputType == InputType.VapoursynthScriptFile)
             {
                 x264Line = x264Line.Replace("\"$input$\"", "");
             }
@@ -307,6 +307,8 @@ namespace Easyx264CoderGUI
             {
                 finalX265Path = x265Excute10lite;
             }
+
+            finalX265Path = Path.Combine(Environment.CurrentDirectory, finalX265Path);
             if (!File.Exists(finalX265Path))
             {
                 throw new EncoderException("找不到指定程序：" + finalX265Path);
@@ -326,8 +328,8 @@ namespace Easyx264CoderGUI
             var x265args = "";
             Getx265Line(fileConfig, 0, out x265args, out outputpath);
             ProcessStartInfo processinfo = new ProcessStartInfo();
-            var bat = string.Format("\"{0}\" --y4m \"{1}\" - | \"{2}\" --y4m {3} - ", Config.VspipePath, fileConfig.VapoursynthFileFullName, x265args);
-            var batfile = FileUtility.RandomName(Config.Temp) + "bat";
+            var bat = string.Format("\"{0}\" --y4m \"{1}\" - | \"{2}\" --y4m {3} - ", Config.VspipePath, fileConfig.VapoursynthFileFullName, finalX265Path, x265args);
+            var batfile = FileUtility.RandomName(Config.Temp) + ".bat";
             File.WriteAllText(batfile, bat, Encoding.Default);
             processinfo.FileName = batfile;
             Process run = new Process();

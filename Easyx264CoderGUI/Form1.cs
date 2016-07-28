@@ -331,10 +331,10 @@ namespace Easyx264CoderGUI
             else if (cbUseVSTemplete.Checked)
             {//处理自定义avs模板
                 fileConfig.InputType = InputType.VapoursynthScript;
-                string avsscript = txtAvsScript.Text;
+                string avsscript = txtVsScript.Text;
                 avsscript = avsscript.Replace("$InputVedio$", fileConfig.VedioFileFullName)
                     .Replace("$vapoursynth_plugin$", Path.Combine(Application.StartupPath, Config.VsPluginPath));
-                vedioConfig.AvsScript = avsscript;
+                vedioConfig.VapoursynthScript = avsscript;
             }
         }
 
@@ -382,12 +382,12 @@ namespace Easyx264CoderGUI
         private void 开始转码()
         {
             int threadcount = Convert.ToInt32(txtTaskCount.Text);
-            Task.Factory.StartNew(delegate()
+            Task.Factory.StartNew(delegate ()
             {
                 List<Task> tasks = new List<Task>();
                 for (int i = 0; i < threadcount; i++)
                 {
-                    var t = Task.Factory.StartNew(delegate()
+                    var t = Task.Factory.StartNew(delegate ()
                     {
                         StartOneThread();
                     });
@@ -415,7 +415,7 @@ namespace Easyx264CoderGUI
                         hasHandle++;
                         isHandling = hasHandle;
 
-                        this.Invoke((Action)delegate()
+                        this.Invoke((Action)delegate ()
                         {
                             item = listView2.Items[isHandling];
                             fileConfig = item.Tag as FileConfig;
@@ -433,7 +433,7 @@ namespace Easyx264CoderGUI
                             continue;
                         }
 
-                        this.Invoke((Action)delegate()
+                        this.Invoke((Action)delegate ()
                          {
                              if (fileConfig.InputType == InputType.AvisynthScriptFile || fileConfig.InputType == InputType.AvisynthScript)
                              {
@@ -542,7 +542,7 @@ namespace Easyx264CoderGUI
                             {
                                 fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
                                 string avsfilename = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), ".vpy"));
-                                File.WriteAllText(avsfilename, vedioconfig.VapoursynthScript, System.Text.Encoding.Default);
+                                File.WriteAllText(avsfilename, vedioconfig.VapoursynthScript, System.Text.Encoding.UTF8);
                                 fileConfig.VapoursynthFileFullName = avsfilename;
                                 fileConfig.InputType = InputType.VapoursynthScriptFile;
                                 vedioOutputFile = X265Command.RunVSx265(fileConfig);
@@ -551,7 +551,7 @@ namespace Easyx264CoderGUI
                     }
                     catch (EncoderException e)
                     {
-                        this.Invoke((Action)delegate()
+                        this.Invoke((Action)delegate ()
                         {
                             listView2.Items[isHandling].SubItems["States"].Text = e.Message;
                         });
@@ -561,7 +561,7 @@ namespace Easyx264CoderGUI
 
                     if (!File.Exists(vedioOutputFile))
                     {
-                        this.Invoke((Action)delegate()
+                        this.Invoke((Action)delegate ()
                         {
                             listView2.Items[isHandling].SubItems["States"].Text = "视频编码失败";
                         });
@@ -577,7 +577,7 @@ namespace Easyx264CoderGUI
                         }
                         else
                         {
-                            this.Invoke((Action)delegate()
+                            this.Invoke((Action)delegate ()
                             {
                                 item = listView2.Items[isHandling];
                                 item.SubItems["States"].Text = "音频转码中";
@@ -601,7 +601,7 @@ namespace Easyx264CoderGUI
                             }
 
 
-                            this.Invoke((Action)delegate()
+                            this.Invoke((Action)delegate ()
                             {
                                 item = listView2.Items[isHandling];
                                 item.SubItems["States"].Text = "封装中";
@@ -650,7 +650,7 @@ namespace Easyx264CoderGUI
                             copyto = FileUtility.GetNoSameNameFile(copyto);
                             if (fileConfig.CompleteAction == "拷贝到")
                             {
-                                this.Invoke((Action)delegate()
+                                this.Invoke((Action)delegate ()
                                 {
                                     listView2.Items[isHandling].SubItems["States"].Text = "拷贝中";
                                 });
@@ -660,7 +660,7 @@ namespace Easyx264CoderGUI
                             }
                             else if (fileConfig.CompleteAction == "剪切到")
                             {
-                                this.Invoke((Action)delegate()
+                                this.Invoke((Action)delegate ()
                                 {
                                     listView2.Items[isHandling].SubItems["States"].Text = "剪切中";
                                 });
@@ -671,7 +671,7 @@ namespace Easyx264CoderGUI
                         catch { }
                     }
 
-                    this.Invoke((Action)delegate()
+                    this.Invoke((Action)delegate ()
                     {
                         if (fileConfig.state == -10)
                         {
@@ -686,7 +686,7 @@ namespace Easyx264CoderGUI
                 }
                 catch (Exception ex)
                 {
-                    this.Invoke((Action)delegate()
+                    this.Invoke((Action)delegate ()
                     {
                         listView2.Items[isHandling].SubItems["States"].Text = "失败：" + ex.Message;
                     });
