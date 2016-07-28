@@ -73,11 +73,12 @@ namespace Easyx264CoderGUI
 #if X265
             this.toolTip1.SetToolTip(this.cbColorDepth, "x265推荐10bit");
             cbColorDepth.Text = "10";
-            txtUserArgs.Text = "--input-depth 10 --merange 25 --no-rect --no-amp --no-sao --no-strong-intra-smoothing --deblock -1:-1 --qcomp 0.75";
-
+            txtUserArgs.Text = "--input-depth 10 --merange 25 --no-rect --no-amp --no-sao --no-strong-intra-smoothing --deblock -1:-1 --qcomp 0.75 --range limited ";
+            cbpreset.Text = "medium";
 #else
 
 #endif
+
             if (File.Exists("config.xml"))
             {
                 XElement config = XElement.Load("config.xml");
@@ -115,7 +116,7 @@ namespace Easyx264CoderGUI
 
         }
 
-        public static string FileExtension = ".avi|.mp4|.mkv|.wmv|.avs|.ts|.tp|.m2ts";
+        public static string FileExtension = ".avi|.mp4|.mkv|.wmv|.avs|.ts|.tp|.m2ts|.mov";
         private void listView1_DragDrop(object sender, DragEventArgs e)
         {
             string[] s = (string[])e.Data.GetData(DataFormats.FileDrop, false);

@@ -151,22 +151,26 @@ namespace Easyx264CoderGUI.CommandLine
             string x264exe = "";
             if (vedioConfig.depth == 10)
             {
-                x264exe = Path.Combine(Application.StartupPath, "tools\\x264_64_tMod-10bit-all.exe");
+                x264exe = Path.Combine(Application.StartupPath, "tools\\x264-10b_64.exe");
             }
             else
             {
-                x264exe = Path.Combine(Application.StartupPath, "tools\\x264_64_tMod-8bit-all.exe");
+                x264exe = Path.Combine(Application.StartupPath, "tools\\x264_64.exe");
             }
             if (!Environment.Is64BitOperatingSystem || !File.Exists(x264exe))
             {
                 if (vedioConfig.depth == 10)
                 {
-                    x264exe = Path.Combine(Application.StartupPath, "tools\\x264_32_tMod-10bit-all.exe");
+                    x264exe = Path.Combine(Application.StartupPath, "tools\\x264.exe");
                 }
                 else
                 {
-                    x264exe = Path.Combine(Application.StartupPath, "tools\\x264_32_tMod-8bit-all.exe");
+                    x264exe = Path.Combine(Application.StartupPath, "tools\\x264_10b.exe");
                 }
+            }
+            if (!File.Exists(x264exe))
+            {
+                throw new Exception("程序" + x264exe + "不存在，请下载：www.msystem.waw.pl/x265");
             }
             return x264exe;
         }

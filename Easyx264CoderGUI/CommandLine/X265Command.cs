@@ -37,11 +37,11 @@ namespace Easyx264CoderGUI
             }
             if (vedioConfig.depth == 8)
             {
-                finalX265Path = x265Excute8;
+                finalX265Path = x265Excute8lite;
             }
             else if (vedioConfig.depth == 10)
             {
-                finalX265Path = x265Excute10;
+                finalX265Path = x265Excute10lite;
             }
 
             if (!File.Exists(finalX265Path))
@@ -165,11 +165,11 @@ namespace Easyx264CoderGUI
             string finalX265Path = "";
             if (vedioConfig.depth == 8)
             {
-                finalX265Path = x265Excute8;
+                finalX265Path = x265Excute8lite;
             }
             else if (vedioConfig.depth == 10)
             {
-                finalX265Path = x265Excute10;
+                finalX265Path = x265Excute10lite;
             }
             if (!File.Exists(finalX265Path))
             {
@@ -301,11 +301,11 @@ namespace Easyx264CoderGUI
             var finalX265Path = "";
             if (vedioConfig.depth == 8)
             {
-                finalX265Path = x265Excute8;
+                finalX265Path = x265Excute8lite;
             }
             else if (vedioConfig.depth == 10)
             {
-                finalX265Path = x265Excute10;
+                finalX265Path = x265Excute10lite;
             }
             if (!File.Exists(finalX265Path))
             {
