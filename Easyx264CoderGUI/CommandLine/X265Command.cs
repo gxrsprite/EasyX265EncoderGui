@@ -217,11 +217,11 @@ namespace Easyx264CoderGUI
 
         private static void OutputToText(FileConfig fileConfig, Process avsx264mod)
         {
-            avsx264mod.OutputDataReceived += new DataReceivedEventHandler(delegate (object sender, DataReceivedEventArgs e)
+            avsx264mod.OutputDataReceived += new DataReceivedEventHandler(delegate(object sender, DataReceivedEventArgs e)
             {
                 fileConfig.EncoderTaskInfo.AppendOutput(e.Data);
             });
-            avsx264mod.ErrorDataReceived += new DataReceivedEventHandler(delegate (object sender, DataReceivedEventArgs e)
+            avsx264mod.ErrorDataReceived += new DataReceivedEventHandler(delegate(object sender, DataReceivedEventArgs e)
             {
                 //fileConfig.state = -10;
                 //fileConfig.EncoderTaskInfo.AppendOutput("[简单批量x264编码]avs转码错误");
@@ -314,6 +314,10 @@ namespace Easyx264CoderGUI
                 throw new EncoderException("找不到指定程序：" + finalX265Path);
             }
 
+            if (!File.Exists(Config.VspipePath))
+            {
+                throw new EncoderException("找不到指定程序：" + Config.VspipePath);
+            }
             string fileExtension = "." + fileConfig.Muxer;
             var outputpath = string.Empty;
             if (fileConfig.AudioConfig.CopyStream || !fileConfig.AudioConfig.Enabled)
