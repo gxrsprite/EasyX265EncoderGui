@@ -13,7 +13,7 @@ namespace Easyx264CoderGUI
     {
         public static string x265Excute8 = "tools" + Path.DirectorySeparatorChar + "x265-8bit-full.exe";
         public static string x265Excute8lite = "tools" + Path.DirectorySeparatorChar + "x265.exe";
-        public static string x265Excute10 = "tools" + Path.DirectorySeparatorChar + "x265-16bit-full.exe";
+        public static string x265Excute10 = "tools" + Path.DirectorySeparatorChar + "x265-10bit-full.exe";
         public static string x265Excute10lite = "tools" + Path.DirectorySeparatorChar + "x265-10b.exe";
         public static string avs4x265 = "tools" + Path.DirectorySeparatorChar + "avs4x265.exe";
         public static string x265Args = "  $crf$  --preset $preset$  $tune$ $userargs$   -o  \"$outputfile$\" \"$input$\"";
@@ -254,14 +254,8 @@ namespace Easyx264CoderGUI
                 x264Line = x264Line.Replace("$crf$", twopassstr);
             }
 
-            if (vedioConfig.depth == 10)
-            {
-                x264Line = x264Line.Replace("$profile$", "--profile main10");
-            }
-            else
-            {
-                x264Line = x264Line.Replace("$profile$", "");
-            }
+
+            x264Line = x264Line.Replace("$profile$", "");
 
             outputpath = string.Empty;
 
@@ -278,11 +272,11 @@ namespace Easyx264CoderGUI
             }
             if (fileConfig.InputType == InputType.AvisynthScriptFile)
             {
-                x264Line = x264Line.Replace("$input$", fileConfig.AvsFileFullName);
+                x264Line = x264Line.Replace("$input$", fileConfig.AvsFileFullName.Maohao());
             }
             else if (fileConfig.InputType == InputType.AvisynthScript || fileConfig.InputType == InputType.VapoursynthScriptFile)
             {
-                x264Line = x264Line.Replace("\"$input$\"", "");
+                x264Line = x264Line.Replace("$input$", "");
             }
             else
             {

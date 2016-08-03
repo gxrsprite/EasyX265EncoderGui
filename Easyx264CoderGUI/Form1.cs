@@ -73,8 +73,9 @@ namespace Easyx264CoderGUI
 #if X265
             this.toolTip1.SetToolTip(this.cbColorDepth, "x265推荐10bit");
             cbColorDepth.Text = "10";
-            txtUserArgs.Text = "--input-depth 10 --merange 25 --no-rect --no-amp --no-sao --no-strong-intra-smoothing --deblock -1:-1 --qcomp 0.75 --range limited ";
+            txtUserArgs.Text = "--merange 25 --no-rect --no-amp --no-sao --no-strong-intra-smoothing --deblock -1:-1 --qcomp 0.75 --range limited ";
             cbpreset.Text = "medium";
+            this.Text = "简单批量x265转码";
 #else
 
 #endif
@@ -712,6 +713,7 @@ namespace Easyx264CoderGUI
         private void button4_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Multiselect = true;
             ofd.Filter = "视频文件|*.mp4;*.mkv;*.avi;*.ts;*.tp;*.ts;*.tp;*.m2ts|所有文件|*";
             var result = ofd.ShowDialog();
 
@@ -734,7 +736,7 @@ namespace Easyx264CoderGUI
                 cbcsp.SelectedIndex = 0;
                 txtUserArgs.Text = txtUserArgs.Text.Replace("--input-depth 10", "");
 #if X265
-
+                txtUserArgs.Text += " --range limited";
 #else
                 txtUserArgs.Text = Resource1.TempleteOnline;
 #endif
@@ -750,6 +752,7 @@ namespace Easyx264CoderGUI
                 cbcsp.SelectedIndex = 0;
 #if X265
                 cbpreset.Text = "medium";
+                txtUserArgs.Text += " --range limited";
 #else
                 txtUserArgs.Text = Resource1.TempleteHDi420;
 #endif
@@ -766,6 +769,7 @@ namespace Easyx264CoderGUI
                 txtUserArgs.AppendText(" --input-depth 10");
 #if X265
                 cbpreset.Text = "medium";
+                txtUserArgs.Text += " --range limited";
 #else
                 txtUserArgs.Text = Resource1.TempleteGamei444;
 #endif

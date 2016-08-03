@@ -183,7 +183,14 @@ namespace Easyx264CoderGUI.CommandLine
 
             if (vedioConfig.depth == 10)
             {
-                x264Line = x264Line.Replace("$profile$", "--input-depth 10");
+                if (fileConfig.InputType == InputType.VapoursynthScriptFile)
+                {
+                    x264Line = x264Line.Replace("$profile$", "--input-depth 10");
+                }
+                else
+                {
+                    x264Line = x264Line.Replace("$profile$", "");
+                }
             }
             else
             {
