@@ -73,7 +73,7 @@ namespace Easyx264CoderGUI
 #if X265
             this.toolTip1.SetToolTip(this.cbColorDepth, "x265推荐10bit");
             cbColorDepth.Text = "10";
-            txtUserArgs.Text = "--input-depth 10 --merange 25 --no-rect --no-amp --no-sao --no-strong-intra-smoothing --deblock -1:-1 --qcomp 0.75";
+            txtUserArgs.Text = "--input-depth 10 --no-sao --no-strong-intra-smoothing --deblock -1:-1 --qcomp 0.75";
 
 #else
 
@@ -283,6 +283,7 @@ namespace Easyx264CoderGUI
             {
                 fileConfig.AudioConfig.Enabled = false;
             }
+            audioConfig.UseEac3to = cbUseEac3to.Checked;
             audioConfig.Tracker = int.Parse(txtAudioTracker.Text);
         }
 

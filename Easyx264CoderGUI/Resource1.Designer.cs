@@ -150,14 +150,5 @@ namespace Easyx264CoderGUI {
                 return ResourceManager.GetString("x264Line", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   查找类似 $crf$ $profile$  --preset $preset$  $tune$  $userargs$   -o  &quot;$outputfile$&quot;  &quot;$input$&quot; 的本地化字符串。
-        /// </summary>
-        internal static string x265Line {
-            get {
-                return ResourceManager.GetString("x265Line", resourceCulture);
-            }
-        }
     }
 }
