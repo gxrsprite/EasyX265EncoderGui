@@ -16,7 +16,7 @@ namespace Easyx264CoderGUI
         public static string x265Excute10 = "tools" + Path.DirectorySeparatorChar + "x265-10bit-full.exe";
         public static string x265Excute10lite = "tools" + Path.DirectorySeparatorChar + "x265-10b.exe";
         public static string avs4x265 = "tools" + Path.DirectorySeparatorChar + "avs4x265.exe";
-        public static string x265Args = "  $crf$  --preset $preset$  $tune$ $userargs$   -o  \"$outputfile$\" \"$input$\"";
+        public static string x265Args = " $crf$ $profile$  --preset $preset$  $tune$  $userargs$   -o  \"$outputfile$\"  $input$";
 
         public static string RunAvsx264mod(FileConfig fileConfig)
         {
@@ -232,7 +232,7 @@ namespace Easyx264CoderGUI
         private static void Getx265Line(FileConfig fileConfig, int pass, out string x264Line, out string outputpath)
         {
             VedioConfig vedioConfig = fileConfig.VedioConfig;
-            x264Line = Resource1.x265Line;
+            x264Line = x265Args;
             x264Line = x264Line.Replace("$preset$", vedioConfig.preset);
             if (string.IsNullOrEmpty(vedioConfig.tune))
             {
@@ -280,7 +280,7 @@ namespace Easyx264CoderGUI
             }
             else
             {
-                x264Line = x264Line.Replace("$input$", "--input \"" + fileConfig.VedioFileFullName + "\"");
+                x264Line = x264Line.Replace("$input$", "--input " + fileConfig.VedioFileFullName.Maohao());
             }
             x264Line = x264Line.Replace("$outputfile$", FileUtility.GetNoSameNameFile(outputpath));
 

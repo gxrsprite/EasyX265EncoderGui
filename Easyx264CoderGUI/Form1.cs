@@ -79,7 +79,6 @@ namespace Easyx264CoderGUI
 #else
 
 #endif
-
             if (File.Exists("config.xml"))
             {
                 XElement config = XElement.Load("config.xml");
@@ -117,7 +116,7 @@ namespace Easyx264CoderGUI
 
         }
 
-        public static string FileExtension = ".avi|.mp4|.mkv|.wmv|.avs|.ts|.tp|.m2ts|.mov";
+        public static string FileExtension = ".avi|.mp4|.mkv|.wmv|.avs|.ts|.tp|.m2ts";
         private void listView1_DragDrop(object sender, DragEventArgs e)
         {
             string[] s = (string[])e.Data.GetData(DataFormats.FileDrop, false);
@@ -285,6 +284,7 @@ namespace Easyx264CoderGUI
             {
                 fileConfig.AudioConfig.Enabled = false;
             }
+            audioConfig.UseEac3to = cbUseEac3to.Checked;
             audioConfig.Tracker = int.Parse(txtAudioTracker.Text);
         }
 
@@ -736,7 +736,7 @@ namespace Easyx264CoderGUI
                 cbcsp.SelectedIndex = 0;
                 txtUserArgs.Text = txtUserArgs.Text.Replace("--input-depth 10", "");
 #if X265
-                txtUserArgs.Text += " --range limited";
+
 #else
                 txtUserArgs.Text = Resource1.TempleteOnline;
 #endif
@@ -752,7 +752,6 @@ namespace Easyx264CoderGUI
                 cbcsp.SelectedIndex = 0;
 #if X265
                 cbpreset.Text = "medium";
-                txtUserArgs.Text += " --range limited";
 #else
                 txtUserArgs.Text = Resource1.TempleteHDi420;
 #endif

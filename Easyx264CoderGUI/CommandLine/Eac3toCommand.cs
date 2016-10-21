@@ -18,10 +18,9 @@ namespace Easyx264CoderGUI.CommandLine
             AudioConfig audioConfig = fileConfig.AudioConfig;
             string tmp = Config.Temp;
             string audiofile = FileUtility.RandomName(tmp) + ".m4a";
-            string bat = string.Format("{0} {3}: {1} -q {2}", fileConfig.VedioFileFullName, audioConfig.Quality, audiofile, audioConfig.Tracker);
-            ProcessCmd.SilenceRun(Eac3toExecute, bat);
+            string bat = $"{Eac3toExecute.Maohao()} {fileConfig.VedioFileFullName.Maohao()} {audioConfig.Tracker}: {audiofile.Maohao()}  -quality={audioConfig.Quality}";
+            ProcessCmd.RunBat(bat, Config.Temp);
             return audiofile;
         }
     }
 }
- 

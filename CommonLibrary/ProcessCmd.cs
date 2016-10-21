@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonLibrary;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -30,7 +31,7 @@ namespace ToolSet
             p.WaitForExit();
         }
 
-        public static void Run(string process, string args)
+        public static void Run(string process, string args = "")
         {
             ProcessStartInfo processinfo = new ProcessStartInfo();
             processinfo.FileName = process;
@@ -44,5 +45,13 @@ namespace ToolSet
             p.Start();
             p.WaitForExit();
         }
+
+        public static void RunBat(string bat, string temp)
+        {
+            var batfile = FileUtility.RandomName(temp) + ".bat";
+            File.WriteAllText(batfile, bat, Encoding.Default);
+            ProcessCmd.Run(batfile);
+        }
+
     }
 }
