@@ -64,6 +64,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtAudioTracker = new System.Windows.Forms.TextBox();
             this.cbUseEac3to = new System.Windows.Forms.CheckBox();
             this.cbcopuaudio = new System.Windows.Forms.CheckBox();
             this.cbUseAudio = new System.Windows.Forms.CheckBox();
@@ -111,7 +112,8 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.txtAudioTracker = new System.Windows.Forms.TextBox();
+            this.inputfileMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.删除toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.AddTask.SuspendLayout();
@@ -121,6 +123,7 @@
             this.tabVS.SuspendLayout();
             this.TaskList.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.inputfileMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -130,8 +133,7 @@
             this.文件ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(819, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(614, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -140,23 +142,22 @@
             this.文件ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.退出RToolStripMenuItem});
             this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
-            this.文件ToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
+            this.文件ToolStripMenuItem.Size = new System.Drawing.Size(58, 21);
             this.文件ToolStripMenuItem.Text = "文件(&F)";
             // 
             // 退出RToolStripMenuItem
             // 
             this.退出RToolStripMenuItem.Name = "退出RToolStripMenuItem";
-            this.退出RToolStripMenuItem.Size = new System.Drawing.Size(134, 26);
+            this.退出RToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.退出RToolStripMenuItem.Text = "退出(&X)";
             this.退出RToolStripMenuItem.Click += new System.EventHandler(this.退出RToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(0, 823);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 612);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(819, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(614, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -168,11 +169,10 @@
             this.tabControl1.Controls.Add(this.tabVS);
             this.tabControl1.Controls.Add(this.TaskList);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 30);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl1.Location = new System.Drawing.Point(0, 25);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(819, 793);
+            this.tabControl1.Size = new System.Drawing.Size(614, 587);
             this.tabControl1.TabIndex = 5;
             // 
             // AddTask
@@ -195,11 +195,10 @@
             this.AddTask.Controls.Add(this.textBox1);
             this.AddTask.Controls.Add(this.btnAddtoTasklist);
             this.AddTask.Controls.Add(this.listView1);
-            this.AddTask.Location = new System.Drawing.Point(4, 25);
-            this.AddTask.Margin = new System.Windows.Forms.Padding(4);
+            this.AddTask.Location = new System.Drawing.Point(4, 22);
             this.AddTask.Name = "AddTask";
-            this.AddTask.Padding = new System.Windows.Forms.Padding(4);
-            this.AddTask.Size = new System.Drawing.Size(811, 764);
+            this.AddTask.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.AddTask.Size = new System.Drawing.Size(606, 561);
             this.AddTask.TabIndex = 1;
             this.AddTask.Text = "添加视频";
             this.AddTask.UseVisualStyleBackColor = true;
@@ -208,10 +207,9 @@
             // 
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(21, 719);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Location = new System.Drawing.Point(16, 531);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(78, 17);
+            this.label16.Size = new System.Drawing.Size(65, 12);
             this.label16.TabIndex = 24;
             this.label16.Text = "封装容器：";
             // 
@@ -226,20 +224,18 @@
             "flv",
             "战渣浪后黑",
             "战渣浪前黑"});
-            this.cbMuxer.Location = new System.Drawing.Point(116, 715);
-            this.cbMuxer.Margin = new System.Windows.Forms.Padding(4);
+            this.cbMuxer.Location = new System.Drawing.Point(87, 528);
             this.cbMuxer.Name = "cbMuxer";
-            this.cbMuxer.Size = new System.Drawing.Size(131, 24);
+            this.cbMuxer.Size = new System.Drawing.Size(99, 20);
             this.cbMuxer.TabIndex = 23;
             // 
             // label10
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(201, 410);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(151, 300);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(106, 17);
+            this.label10.Size = new System.Drawing.Size(89, 12);
             this.label10.TabIndex = 22;
             this.label10.Text = "视频参数模板：";
             // 
@@ -253,20 +249,18 @@
             "高清视频",
             "战渣浪",
             "高保真游戏视频"});
-            this.cbVedioConfigTemplete.Location = new System.Drawing.Point(325, 406);
-            this.cbVedioConfigTemplete.Margin = new System.Windows.Forms.Padding(4);
+            this.cbVedioConfigTemplete.Location = new System.Drawing.Point(244, 296);
             this.cbVedioConfigTemplete.Name = "cbVedioConfigTemplete";
-            this.cbVedioConfigTemplete.Size = new System.Drawing.Size(160, 24);
+            this.cbVedioConfigTemplete.Size = new System.Drawing.Size(121, 20);
             this.cbVedioConfigTemplete.TabIndex = 21;
             this.cbVedioConfigTemplete.SelectedIndexChanged += new System.EventHandler(this.cbVedioConfigTemplete_SelectedIndexChanged);
             // 
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button4.Location = new System.Drawing.Point(517, 259);
-            this.button4.Margin = new System.Windows.Forms.Padding(4);
+            this.button4.Location = new System.Drawing.Point(388, 186);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 31);
+            this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 20;
             this.button4.Text = "添加视频";
             this.button4.UseVisualStyleBackColor = true;
@@ -275,10 +269,9 @@
             // btnOneclickStart
             // 
             this.btnOneclickStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOneclickStart.Location = new System.Drawing.Point(667, 719);
-            this.btnOneclickStart.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOneclickStart.Location = new System.Drawing.Point(500, 531);
             this.btnOneclickStart.Name = "btnOneclickStart";
-            this.btnOneclickStart.Size = new System.Drawing.Size(100, 31);
+            this.btnOneclickStart.Size = new System.Drawing.Size(75, 23);
             this.btnOneclickStart.TabIndex = 19;
             this.btnOneclickStart.Text = "一键开始";
             this.btnOneclickStart.UseVisualStyleBackColor = true;
@@ -307,11 +300,9 @@
             this.gbVedio.Controls.Add(this.label5);
             this.gbVedio.Controls.Add(this.textBox3);
             this.gbVedio.Controls.Add(this.label4);
-            this.gbVedio.Location = new System.Drawing.Point(21, 435);
-            this.gbVedio.Margin = new System.Windows.Forms.Padding(4);
+            this.gbVedio.Location = new System.Drawing.Point(16, 318);
             this.gbVedio.Name = "gbVedio";
-            this.gbVedio.Padding = new System.Windows.Forms.Padding(4);
-            this.gbVedio.Size = new System.Drawing.Size(740, 185);
+            this.gbVedio.Size = new System.Drawing.Size(555, 139);
             this.gbVedio.TabIndex = 18;
             this.gbVedio.TabStop = false;
             this.gbVedio.Text = "视频参数";
@@ -319,10 +310,9 @@
             // cbEnableQpmod
             // 
             this.cbEnableQpmod.AutoSize = true;
-            this.cbEnableQpmod.Location = new System.Drawing.Point(175, 20);
-            this.cbEnableQpmod.Margin = new System.Windows.Forms.Padding(4);
+            this.cbEnableQpmod.Location = new System.Drawing.Point(131, 15);
             this.cbEnableQpmod.Name = "cbEnableQpmod";
-            this.cbEnableQpmod.Size = new System.Drawing.Size(18, 17);
+            this.cbEnableQpmod.Size = new System.Drawing.Size(15, 14);
             this.cbEnableQpmod.TabIndex = 21;
             this.toolTip1.SetToolTip(this.cbEnableQpmod, "使用恒定量化");
             this.cbEnableQpmod.UseVisualStyleBackColor = true;
@@ -331,28 +321,25 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(204, 65);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Location = new System.Drawing.Point(153, 49);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(25, 17);
+            this.label13.Size = new System.Drawing.Size(17, 12);
             this.label13.TabIndex = 20;
             this.label13.Text = "Kb";
             // 
             // txtbitrate
             // 
-            this.txtbitrate.Location = new System.Drawing.Point(112, 59);
-            this.txtbitrate.Margin = new System.Windows.Forms.Padding(4);
+            this.txtbitrate.Location = new System.Drawing.Point(84, 44);
             this.txtbitrate.Name = "txtbitrate";
-            this.txtbitrate.Size = new System.Drawing.Size(83, 22);
+            this.txtbitrate.Size = new System.Drawing.Size(63, 21);
             this.txtbitrate.TabIndex = 19;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(33, 65);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Location = new System.Drawing.Point(25, 49);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(64, 17);
+            this.label12.Size = new System.Drawing.Size(53, 12);
             this.label12.TabIndex = 18;
             this.label12.Text = "二次编码";
             // 
@@ -364,10 +351,9 @@
             "i422",
             "i444",
             "rgb"});
-            this.cbcsp.Location = new System.Drawing.Point(464, 17);
-            this.cbcsp.Margin = new System.Windows.Forms.Padding(4);
+            this.cbcsp.Location = new System.Drawing.Point(348, 13);
             this.cbcsp.Name = "cbcsp";
-            this.cbcsp.Size = new System.Drawing.Size(67, 24);
+            this.cbcsp.Size = new System.Drawing.Size(51, 20);
             this.cbcsp.TabIndex = 17;
             this.cbcsp.Text = "i420";
             this.toolTip1.SetToolTip(this.cbcsp, "RGB24的视频这里要设置成i444才是高保真色彩");
@@ -375,58 +361,52 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(387, 21);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Location = new System.Drawing.Point(290, 16);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(78, 17);
+            this.label11.Size = new System.Drawing.Size(65, 12);
             this.label11.TabIndex = 16;
             this.label11.Text = "色彩空间：";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(17, 103);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(13, 77);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(64, 17);
+            this.label9.Size = new System.Drawing.Size(53, 12);
             this.label9.TabIndex = 13;
             this.label9.Text = "自定义：";
             // 
             // txtUserArgs
             // 
-            this.txtUserArgs.Location = new System.Drawing.Point(96, 103);
-            this.txtUserArgs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtUserArgs.Location = new System.Drawing.Point(72, 77);
             this.txtUserArgs.Multiline = true;
             this.txtUserArgs.Name = "txtUserArgs";
-            this.txtUserArgs.Size = new System.Drawing.Size(596, 73);
+            this.txtUserArgs.Size = new System.Drawing.Size(448, 56);
             this.txtUserArgs.TabIndex = 12;
             this.txtUserArgs.Text = "--input-range pc --range pc ";
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(645, 63);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox5.Location = new System.Drawing.Point(484, 47);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(67, 22);
+            this.textBox5.Size = new System.Drawing.Size(51, 21);
             this.textBox5.TabIndex = 11;
             this.textBox5.Text = "720";
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(563, 63);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox4.Location = new System.Drawing.Point(422, 47);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(73, 22);
+            this.textBox4.Size = new System.Drawing.Size(56, 21);
             this.textBox4.TabIndex = 10;
             this.textBox4.Text = "1280";
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(443, 65);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBox1.Location = new System.Drawing.Point(332, 49);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(100, 21);
+            this.checkBox1.Size = new System.Drawing.Size(84, 16);
             this.checkBox1.TabIndex = 9;
             this.checkBox1.Text = "调整分辨率";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -434,10 +414,9 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(273, 65);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(205, 49);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(36, 17);
+            this.label8.Size = new System.Drawing.Size(29, 12);
             this.label8.TabIndex = 8;
             this.label8.Text = "调校";
             // 
@@ -451,19 +430,17 @@
             "animation",
             "lp",
             "lp++"});
-            this.comboBox1.Location = new System.Drawing.Point(331, 61);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox1.Location = new System.Drawing.Point(248, 46);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(73, 24);
+            this.comboBox1.Size = new System.Drawing.Size(56, 20);
             this.comboBox1.TabIndex = 7;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(584, 23);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(438, 17);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 17);
+            this.label7.Size = new System.Drawing.Size(29, 12);
             this.label7.TabIndex = 6;
             this.label7.Text = "预设";
             // 
@@ -479,20 +456,18 @@
             "slower",
             "veryslow",
             "placebo"});
-            this.cbpreset.Location = new System.Drawing.Point(631, 21);
-            this.cbpreset.Margin = new System.Windows.Forms.Padding(4);
+            this.cbpreset.Location = new System.Drawing.Point(473, 16);
             this.cbpreset.Name = "cbpreset";
-            this.cbpreset.Size = new System.Drawing.Size(93, 24);
+            this.cbpreset.Size = new System.Drawing.Size(71, 20);
             this.cbpreset.TabIndex = 3;
             this.cbpreset.Text = "medium";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(347, 23);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(260, 17);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(23, 17);
+            this.label6.Size = new System.Drawing.Size(23, 12);
             this.label6.TabIndex = 4;
             this.label6.Text = "bit";
             // 
@@ -502,10 +477,9 @@
             this.cbColorDepth.Items.AddRange(new object[] {
             "8",
             "10"});
-            this.cbColorDepth.Location = new System.Drawing.Point(285, 19);
-            this.cbColorDepth.Margin = new System.Windows.Forms.Padding(4);
+            this.cbColorDepth.Location = new System.Drawing.Point(214, 14);
             this.cbColorDepth.Name = "cbColorDepth";
-            this.cbColorDepth.Size = new System.Drawing.Size(52, 24);
+            this.cbColorDepth.Size = new System.Drawing.Size(40, 20);
             this.cbColorDepth.TabIndex = 3;
             this.cbColorDepth.Text = "8";
             this.toolTip1.SetToolTip(this.cbColorDepth, "8bit兼容性好，10bit压缩率好");
@@ -514,29 +488,26 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(245, 25);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(184, 19);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(36, 17);
+            this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 2;
             this.label5.Text = "色深";
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(112, 19);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox3.Location = new System.Drawing.Point(84, 14);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(53, 22);
+            this.textBox3.Size = new System.Drawing.Size(41, 21);
             this.textBox3.TabIndex = 1;
             this.textBox3.Text = "26";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(33, 25);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(25, 19);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 17);
+            this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 0;
             this.label4.Text = "恒定质量";
             // 
@@ -550,21 +521,29 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtQuality);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(20, 629);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Location = new System.Drawing.Point(15, 464);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(621, 77);
+            this.groupBox1.Size = new System.Drawing.Size(466, 58);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "音频参数";
             // 
+            // txtAudioTracker
+            // 
+            this.txtAudioTracker.Location = new System.Drawing.Point(423, 22);
+            this.txtAudioTracker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAudioTracker.Name = "txtAudioTracker";
+            this.txtAudioTracker.Size = new System.Drawing.Size(19, 21);
+            this.txtAudioTracker.TabIndex = 14;
+            this.txtAudioTracker.Text = "2";
+            // 
             // cbUseEac3to
             // 
             this.cbUseEac3to.AutoSize = true;
-            this.cbUseEac3to.Location = new System.Drawing.Point(473, 29);
+            this.cbUseEac3to.Location = new System.Drawing.Point(355, 22);
+            this.cbUseEac3to.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbUseEac3to.Name = "cbUseEac3to";
-            this.cbUseEac3to.Size = new System.Drawing.Size(74, 21);
+            this.cbUseEac3to.Size = new System.Drawing.Size(60, 16);
             this.cbUseEac3to.TabIndex = 13;
             this.cbUseEac3to.Text = "Eac3to";
             this.cbUseEac3to.UseVisualStyleBackColor = true;
@@ -572,10 +551,9 @@
             // cbcopuaudio
             // 
             this.cbcopuaudio.AutoSize = true;
-            this.cbcopuaudio.Location = new System.Drawing.Point(366, 29);
-            this.cbcopuaudio.Margin = new System.Windows.Forms.Padding(4);
+            this.cbcopuaudio.Location = new System.Drawing.Point(274, 22);
             this.cbcopuaudio.Name = "cbcopuaudio";
-            this.cbcopuaudio.Size = new System.Drawing.Size(100, 21);
+            this.cbcopuaudio.Size = new System.Drawing.Size(84, 16);
             this.cbcopuaudio.TabIndex = 12;
             this.cbcopuaudio.Text = "复制音频流";
             this.cbcopuaudio.UseVisualStyleBackColor = true;
@@ -585,10 +563,9 @@
             this.cbUseAudio.AutoSize = true;
             this.cbUseAudio.Checked = true;
             this.cbUseAudio.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbUseAudio.Location = new System.Drawing.Point(9, 28);
-            this.cbUseAudio.Margin = new System.Windows.Forms.Padding(4);
+            this.cbUseAudio.Location = new System.Drawing.Point(7, 21);
             this.cbUseAudio.Name = "cbUseAudio";
-            this.cbUseAudio.Size = new System.Drawing.Size(86, 21);
+            this.cbUseAudio.Size = new System.Drawing.Size(72, 16);
             this.cbUseAudio.TabIndex = 11;
             this.cbUseAudio.Text = "启用音频";
             this.cbUseAudio.UseVisualStyleBackColor = true;
@@ -596,39 +573,35 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(111, 28);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(83, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 17);
+            this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 4;
             this.label1.Text = "质量：";
             // 
             // txtQuality
             // 
-            this.txtQuality.Location = new System.Drawing.Point(184, 25);
-            this.txtQuality.Margin = new System.Windows.Forms.Padding(4);
+            this.txtQuality.Location = new System.Drawing.Point(138, 19);
             this.txtQuality.Name = "txtQuality";
-            this.txtQuality.Size = new System.Drawing.Size(52, 22);
+            this.txtQuality.Size = new System.Drawing.Size(40, 21);
             this.txtQuality.TabIndex = 5;
             this.txtQuality.Text = "0.65";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(246, 29);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(184, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 17);
+            this.label2.Size = new System.Drawing.Size(95, 12);
             this.label2.TabIndex = 6;
             this.label2.Text = "(0~1,0.65 250K)";
             // 
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(643, 349);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Location = new System.Drawing.Point(482, 254);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 31);
+            this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 16;
             this.button2.Text = "浏览";
             this.button2.UseVisualStyleBackColor = true;
@@ -638,10 +611,9 @@
             // 
             this.textBox2.AllowDrop = true;
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox2.Location = new System.Drawing.Point(269, 351);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox2.Location = new System.Drawing.Point(202, 255);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(317, 22);
+            this.textBox2.Size = new System.Drawing.Size(239, 21);
             this.textBox2.TabIndex = 15;
             this.toolTip1.SetToolTip(this.textBox2, "完成后拷贝到360云盘目录就自动上传了呗");
             // 
@@ -649,10 +621,9 @@
             // 
             this.cbKeepFileTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbKeepFileTree.AutoSize = true;
-            this.cbKeepFileTree.Location = new System.Drawing.Point(67, 386);
-            this.cbKeepFileTree.Margin = new System.Windows.Forms.Padding(4);
+            this.cbKeepFileTree.Location = new System.Drawing.Point(50, 281);
             this.cbKeepFileTree.Name = "cbKeepFileTree";
-            this.cbKeepFileTree.Size = new System.Drawing.Size(114, 21);
+            this.cbKeepFileTree.Size = new System.Drawing.Size(96, 16);
             this.cbKeepFileTree.TabIndex = 7;
             this.cbKeepFileTree.Text = "保持目录结构";
             this.cbKeepFileTree.UseVisualStyleBackColor = true;
@@ -665,20 +636,18 @@
             this.cblCompeteAction.Items.AddRange(new object[] {
             "拷贝到",
             "剪切到"});
-            this.cblCompeteAction.Location = new System.Drawing.Point(155, 351);
-            this.cblCompeteAction.Margin = new System.Windows.Forms.Padding(4);
+            this.cblCompeteAction.Location = new System.Drawing.Point(116, 255);
             this.cblCompeteAction.Name = "cblCompeteAction";
-            this.cblCompeteAction.Size = new System.Drawing.Size(93, 24);
+            this.cblCompeteAction.Size = new System.Drawing.Size(71, 20);
             this.cblCompeteAction.TabIndex = 14;
             // 
             // cbCompleteDo
             // 
             this.cbCompleteDo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbCompleteDo.AutoSize = true;
-            this.cbCompleteDo.Location = new System.Drawing.Point(67, 354);
-            this.cbCompleteDo.Margin = new System.Windows.Forms.Padding(4);
+            this.cbCompleteDo.Location = new System.Drawing.Point(50, 257);
             this.cbCompleteDo.Name = "cbCompleteDo";
-            this.cbCompleteDo.Size = new System.Drawing.Size(72, 21);
+            this.cbCompleteDo.Size = new System.Drawing.Size(60, 16);
             this.cbCompleteDo.TabIndex = 13;
             this.cbCompleteDo.Text = "完成后";
             this.cbCompleteDo.UseVisualStyleBackColor = true;
@@ -686,10 +655,9 @@
             // btnClearList
             // 
             this.btnClearList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClearList.Location = new System.Drawing.Point(643, 259);
-            this.btnClearList.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClearList.Location = new System.Drawing.Point(482, 186);
             this.btnClearList.Name = "btnClearList";
-            this.btnClearList.Size = new System.Drawing.Size(100, 31);
+            this.btnClearList.Size = new System.Drawing.Size(75, 23);
             this.btnClearList.TabIndex = 11;
             this.btnClearList.Text = "清空列表";
             this.btnClearList.UseVisualStyleBackColor = true;
@@ -698,10 +666,9 @@
             // btnOutputPath
             // 
             this.btnOutputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOutputPath.Location = new System.Drawing.Point(643, 298);
-            this.btnOutputPath.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOutputPath.Location = new System.Drawing.Point(482, 216);
             this.btnOutputPath.Name = "btnOutputPath";
-            this.btnOutputPath.Size = new System.Drawing.Size(100, 31);
+            this.btnOutputPath.Size = new System.Drawing.Size(75, 23);
             this.btnOutputPath.TabIndex = 3;
             this.btnOutputPath.Text = "输出";
             this.btnOutputPath.UseVisualStyleBackColor = true;
@@ -711,10 +678,9 @@
             // 
             this.textBox1.AllowDrop = true;
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox1.Location = new System.Drawing.Point(29, 301);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.Location = new System.Drawing.Point(22, 218);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(565, 22);
+            this.textBox1.Size = new System.Drawing.Size(425, 21);
             this.textBox1.TabIndex = 2;
             this.textBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox1_DragDrop);
             this.textBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox1_DragEnter);
@@ -722,10 +688,9 @@
             // btnAddtoTasklist
             // 
             this.btnAddtoTasklist.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddtoTasklist.Location = new System.Drawing.Point(667, 679);
-            this.btnAddtoTasklist.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAddtoTasklist.Location = new System.Drawing.Point(500, 501);
             this.btnAddtoTasklist.Name = "btnAddtoTasklist";
-            this.btnAddtoTasklist.Size = new System.Drawing.Size(100, 31);
+            this.btnAddtoTasklist.Size = new System.Drawing.Size(75, 23);
             this.btnAddtoTasklist.TabIndex = 1;
             this.btnAddtoTasklist.Text = "添加任务";
             this.btnAddtoTasklist.UseVisualStyleBackColor = true;
@@ -741,10 +706,11 @@
             this.columnHeader1,
             this.FullName,
             this.FilePath});
-            this.listView1.Location = new System.Drawing.Point(11, 8);
-            this.listView1.Margin = new System.Windows.Forms.Padding(4);
+            this.listView1.ContextMenuStrip = this.inputfileMenuStrip;
+            this.listView1.FullRowSelect = true;
+            this.listView1.Location = new System.Drawing.Point(8, 6);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(788, 234);
+            this.listView1.Size = new System.Drawing.Size(592, 168);
             this.listView1.TabIndex = 0;
             this.toolTip1.SetToolTip(this.listView1, "可以把文件拖进来哦");
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -777,10 +743,9 @@
             this.tbAvs.Controls.Add(this.label14);
             this.tbAvs.Controls.Add(this.txtAudioInput);
             this.tbAvs.Controls.Add(this.txtAvsFile);
-            this.tbAvs.Location = new System.Drawing.Point(4, 25);
-            this.tbAvs.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAvs.Location = new System.Drawing.Point(4, 22);
             this.tbAvs.Name = "tbAvs";
-            this.tbAvs.Size = new System.Drawing.Size(811, 764);
+            this.tbAvs.Size = new System.Drawing.Size(606, 569);
             this.tbAvs.TabIndex = 3;
             this.tbAvs.Text = "AVS添加";
             this.tbAvs.UseVisualStyleBackColor = true;
@@ -789,9 +754,10 @@
             // 
             this.cbloadSub.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbloadSub.AutoSize = true;
-            this.cbloadSub.Location = new System.Drawing.Point(14, 718);
+            this.cbloadSub.Location = new System.Drawing.Point(10, 538);
+            this.cbloadSub.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbloadSub.Name = "cbloadSub";
-            this.cbloadSub.Size = new System.Drawing.Size(114, 21);
+            this.cbloadSub.Size = new System.Drawing.Size(96, 16);
             this.cbloadSub.TabIndex = 26;
             this.cbloadSub.Text = "自动加载字幕";
             this.cbloadSub.UseVisualStyleBackColor = true;
@@ -799,10 +765,9 @@
             // cbAvsTemplate
             // 
             this.cbAvsTemplate.FormattingEnabled = true;
-            this.cbAvsTemplate.Location = new System.Drawing.Point(33, 248);
-            this.cbAvsTemplate.Margin = new System.Windows.Forms.Padding(4);
+            this.cbAvsTemplate.Location = new System.Drawing.Point(25, 186);
             this.cbAvsTemplate.Name = "cbAvsTemplate";
-            this.cbAvsTemplate.Size = new System.Drawing.Size(491, 24);
+            this.cbAvsTemplate.Size = new System.Drawing.Size(369, 20);
             this.cbAvsTemplate.TabIndex = 9;
             this.cbAvsTemplate.SelectedValueChanged += new System.EventHandler(this.cbAvsTemplate_SelectedValueChanged);
             // 
@@ -811,31 +776,28 @@
             this.txtAvsScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAvsScript.Location = new System.Drawing.Point(33, 285);
-            this.txtAvsScript.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAvsScript.Location = new System.Drawing.Point(25, 214);
             this.txtAvsScript.Multiline = true;
             this.txtAvsScript.Name = "txtAvsScript";
             this.txtAvsScript.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtAvsScript.Size = new System.Drawing.Size(711, 414);
+            this.txtAvsScript.Size = new System.Drawing.Size(534, 312);
             this.txtAvsScript.TabIndex = 6;
             // 
             // cbUseAvsTemplete
             // 
             this.cbUseAvsTemplete.AutoSize = true;
-            this.cbUseAvsTemplete.Location = new System.Drawing.Point(13, 219);
-            this.cbUseAvsTemplete.Margin = new System.Windows.Forms.Padding(4);
+            this.cbUseAvsTemplete.Location = new System.Drawing.Point(10, 164);
             this.cbUseAvsTemplete.Name = "cbUseAvsTemplete";
-            this.cbUseAvsTemplete.Size = new System.Drawing.Size(385, 21);
+            this.cbUseAvsTemplete.Size = new System.Drawing.Size(342, 16);
             this.cbUseAvsTemplete.TabIndex = 5;
             this.cbUseAvsTemplete.Text = "使用AVS模版添加任务(视频文件在第一个“添加视频”添加)";
             this.cbUseAvsTemplete.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(621, 135);
-            this.button5.Margin = new System.Windows.Forms.Padding(4);
+            this.button5.Location = new System.Drawing.Point(466, 101);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 31);
+            this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 4;
             this.button5.Text = "添加任务";
             this.button5.UseVisualStyleBackColor = true;
@@ -844,30 +806,27 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(11, 88);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Location = new System.Drawing.Point(8, 66);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(106, 17);
+            this.label15.Size = new System.Drawing.Size(89, 12);
             this.label15.TabIndex = 3;
             this.label15.Text = "音频输入文件：";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(11, 28);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Location = new System.Drawing.Point(8, 21);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(77, 17);
+            this.label14.Size = new System.Drawing.Size(59, 12);
             this.label14.TabIndex = 2;
             this.label14.Text = "AVS文件：";
             // 
             // txtAudioInput
             // 
             this.txtAudioInput.AllowDrop = true;
-            this.txtAudioInput.Location = new System.Drawing.Point(127, 84);
-            this.txtAudioInput.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAudioInput.Location = new System.Drawing.Point(95, 63);
             this.txtAudioInput.Name = "txtAudioInput";
-            this.txtAudioInput.Size = new System.Drawing.Size(593, 22);
+            this.txtAudioInput.Size = new System.Drawing.Size(446, 21);
             this.txtAudioInput.TabIndex = 1;
             this.txtAudioInput.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBoxFile_DragDrop);
             this.txtAudioInput.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox1_DragEnter);
@@ -875,10 +834,9 @@
             // txtAvsFile
             // 
             this.txtAvsFile.AllowDrop = true;
-            this.txtAvsFile.Location = new System.Drawing.Point(127, 24);
-            this.txtAvsFile.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAvsFile.Location = new System.Drawing.Point(95, 18);
             this.txtAvsFile.Name = "txtAvsFile";
-            this.txtAvsFile.Size = new System.Drawing.Size(593, 22);
+            this.txtAvsFile.Size = new System.Drawing.Size(446, 21);
             this.txtAvsFile.TabIndex = 0;
             this.txtAvsFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBoxFile_DragDrop);
             this.txtAvsFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox1_DragEnter);
@@ -888,10 +846,11 @@
             this.tabVS.Controls.Add(this.combVSTemplate);
             this.tabVS.Controls.Add(this.txtVsScript);
             this.tabVS.Controls.Add(this.cbUseVSTemplete);
-            this.tabVS.Location = new System.Drawing.Point(4, 25);
+            this.tabVS.Location = new System.Drawing.Point(4, 22);
+            this.tabVS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabVS.Name = "tabVS";
-            this.tabVS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVS.Size = new System.Drawing.Size(811, 764);
+            this.tabVS.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabVS.Size = new System.Drawing.Size(606, 569);
             this.tabVS.TabIndex = 4;
             this.tabVS.Text = "Vapoursynth";
             this.tabVS.UseVisualStyleBackColor = true;
@@ -899,10 +858,9 @@
             // combVSTemplate
             // 
             this.combVSTemplate.FormattingEnabled = true;
-            this.combVSTemplate.Location = new System.Drawing.Point(41, 53);
-            this.combVSTemplate.Margin = new System.Windows.Forms.Padding(4);
+            this.combVSTemplate.Location = new System.Drawing.Point(31, 40);
             this.combVSTemplate.Name = "combVSTemplate";
-            this.combVSTemplate.Size = new System.Drawing.Size(512, 24);
+            this.combVSTemplate.Size = new System.Drawing.Size(385, 20);
             this.combVSTemplate.TabIndex = 12;
             this.combVSTemplate.SelectedValueChanged += new System.EventHandler(this.combVSTemplate_SelectedValueChanged);
             // 
@@ -911,21 +869,19 @@
             this.txtVsScript.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtVsScript.Location = new System.Drawing.Point(41, 90);
-            this.txtVsScript.Margin = new System.Windows.Forms.Padding(4);
+            this.txtVsScript.Location = new System.Drawing.Point(31, 68);
             this.txtVsScript.Multiline = true;
             this.txtVsScript.Name = "txtVsScript";
             this.txtVsScript.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtVsScript.Size = new System.Drawing.Size(732, 648);
+            this.txtVsScript.Size = new System.Drawing.Size(550, 487);
             this.txtVsScript.TabIndex = 11;
             // 
             // cbUseVSTemplete
             // 
             this.cbUseVSTemplete.AutoSize = true;
-            this.cbUseVSTemplete.Location = new System.Drawing.Point(21, 24);
-            this.cbUseVSTemplete.Margin = new System.Windows.Forms.Padding(4);
+            this.cbUseVSTemplete.Location = new System.Drawing.Point(16, 18);
             this.cbUseVSTemplete.Name = "cbUseVSTemplete";
-            this.cbUseVSTemplete.Size = new System.Drawing.Size(376, 21);
+            this.cbUseVSTemplete.Size = new System.Drawing.Size(336, 16);
             this.cbUseVSTemplete.TabIndex = 10;
             this.cbUseVSTemplete.Text = "使用VS模版添加任务(视频文件在第一个“添加视频”添加)";
             this.cbUseVSTemplete.UseVisualStyleBackColor = true;
@@ -936,20 +892,18 @@
             this.TaskList.Controls.Add(this.label3);
             this.TaskList.Controls.Add(this.txtTaskCount);
             this.TaskList.Controls.Add(this.listView2);
-            this.TaskList.Location = new System.Drawing.Point(4, 25);
-            this.TaskList.Margin = new System.Windows.Forms.Padding(4);
+            this.TaskList.Location = new System.Drawing.Point(4, 22);
             this.TaskList.Name = "TaskList";
-            this.TaskList.Size = new System.Drawing.Size(811, 764);
+            this.TaskList.Size = new System.Drawing.Size(606, 561);
             this.TaskList.TabIndex = 2;
             this.TaskList.Text = "任务列表";
             this.TaskList.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(497, 679);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Location = new System.Drawing.Point(373, 509);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 31);
+            this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 12;
             this.button3.Text = "开始转码";
             this.button3.UseVisualStyleBackColor = true;
@@ -958,19 +912,17 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(197, 687);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(148, 515);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 17);
+            this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 11;
             this.label3.Text = "任务数：";
             // 
             // txtTaskCount
             // 
-            this.txtTaskCount.Location = new System.Drawing.Point(295, 683);
-            this.txtTaskCount.Margin = new System.Windows.Forms.Padding(4);
+            this.txtTaskCount.Location = new System.Drawing.Point(221, 512);
             this.txtTaskCount.Name = "txtTaskCount";
-            this.txtTaskCount.Size = new System.Drawing.Size(35, 22);
+            this.txtTaskCount.Size = new System.Drawing.Size(27, 21);
             this.txtTaskCount.TabIndex = 10;
             this.txtTaskCount.Text = "1";
             // 
@@ -986,10 +938,9 @@
             this.columnHeader5});
             this.listView2.ContextMenuStrip = this.contextMenuStrip1;
             this.listView2.FullRowSelect = true;
-            this.listView2.Location = new System.Drawing.Point(4, 4);
-            this.listView2.Margin = new System.Windows.Forms.Padding(4);
+            this.listView2.Location = new System.Drawing.Point(3, 3);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(768, 652);
+            this.listView2.Size = new System.Drawing.Size(577, 490);
             this.listView2.TabIndex = 1;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
@@ -1018,12 +969,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.删除此任务ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(160, 30);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 26);
             // 
             // 删除此任务ToolStripMenuItem
             // 
             this.删除此任务ToolStripMenuItem.Name = "删除此任务ToolStripMenuItem";
-            this.删除此任务ToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
+            this.删除此任务ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.删除此任务ToolStripMenuItem.Text = "删除此任务";
             this.删除此任务ToolStripMenuItem.Click += new System.EventHandler(this.删除此任务ToolStripMenuItem_Click);
             // 
@@ -1031,24 +982,29 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // txtAudioTracker
+            // inputfileMenuStrip
             // 
-            this.txtAudioTracker.Location = new System.Drawing.Point(564, 29);
-            this.txtAudioTracker.Name = "txtAudioTracker";
-            this.txtAudioTracker.Size = new System.Drawing.Size(24, 22);
-            this.txtAudioTracker.TabIndex = 14;
-            this.txtAudioTracker.Text = "2";
+            this.inputfileMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除toolStripMenuItem});
+            this.inputfileMenuStrip.Name = "inputfileMenuStrip";
+            this.inputfileMenuStrip.Size = new System.Drawing.Size(101, 26);
+            // 
+            // 删除toolStripMenuItem
+            // 
+            this.删除toolStripMenuItem.Name = "删除toolStripMenuItem";
+            this.删除toolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.删除toolStripMenuItem.Text = "删除";
+            this.删除toolStripMenuItem.Click += new System.EventHandler(this.删除inputfileStripMenuItem_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(819, 845);
+            this.ClientSize = new System.Drawing.Size(614, 634);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "简单批量x264转码";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -1068,6 +1024,7 @@
             this.TaskList.ResumeLayout(false);
             this.TaskList.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.inputfileMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1157,6 +1114,8 @@
         private System.Windows.Forms.CheckBox cbUseVSTemplete;
         private System.Windows.Forms.CheckBox cbUseEac3to;
         private System.Windows.Forms.TextBox txtAudioTracker;
+        private System.Windows.Forms.ContextMenuStrip inputfileMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem 删除toolStripMenuItem;
     }
 }
 

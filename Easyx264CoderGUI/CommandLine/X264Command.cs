@@ -347,5 +347,34 @@ namespace Easyx264CoderGUI.CommandLine
             avsx264mod.Dispose();
             return outputpath;
         }
+
+        internal static string RunVSx265(FileConfig fileConfig)
+        {
+            var vedioConfig = fileConfig.VedioConfig;
+            string x264exe = GetX264exeFullName(vedioConfig);
+            string fileExtension = "." + fileConfig.Muxer;
+            var outputpath = string.Empty;
+            if (fileConfig.AudioConfig.CopyStream || !fileConfig.AudioConfig.Enabled)
+            {
+                outputpath = fileConfig.OutputFile + fileExtension;
+            }
+            else
+            {//临时目录
+                outputpath = FileUtility.RandomName(Config.Temp) + ".mkv";
+            }
+
+            var x265args = "";
+            Getx264Line(fileConfig, 0, out x265args, out outputpath);
+            ProcessStartInfo processinfo = new ProcessStartInfo();
+            var bat = string.Format("\"{0}\" --y4m \"{1}\" - | \"{2}\" --y4m {3} - ", Config.VspipePath, fileConfig.VapoursynthFileFullName, x264exe, x265args);
+            var batfile = FileUtility.RandomName(Config.Temp) + ".bat";
+            File.WriteAllText(batfile, bat, Encoding.Default);
+            processinfo.FileName = batfile;
+            Process run = new Process();
+            run.StartInfo = processinfo;
+            run.Start();
+            run.WaitForExit();
+            return outputpath;
+        }
     }
 }
