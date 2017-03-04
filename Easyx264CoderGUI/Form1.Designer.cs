@@ -64,6 +64,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbUseOpus = new System.Windows.Forms.CheckBox();
             this.txtAudioTracker = new System.Windows.Forms.TextBox();
             this.cbUseEac3to = new System.Windows.Forms.CheckBox();
             this.cbcopuaudio = new System.Windows.Forms.CheckBox();
@@ -84,6 +85,8 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FullName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FilePath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.inputfileMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.删除toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbAvs = new System.Windows.Forms.TabPage();
             this.cbloadSub = new System.Windows.Forms.CheckBox();
             this.cbAvsTemplate = new System.Windows.Forms.ComboBox();
@@ -112,18 +115,17 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.inputfileMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.删除toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtAudioLine = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.AddTask.SuspendLayout();
             this.gbVedio.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.inputfileMenuStrip.SuspendLayout();
             this.tbAvs.SuspendLayout();
             this.tabVS.SuspendLayout();
             this.TaskList.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.inputfileMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -133,7 +135,7 @@
             this.文件ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(614, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(615, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -155,9 +157,9 @@
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(0, 612);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 660);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(614, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(615, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -172,7 +174,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 25);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(614, 587);
+            this.tabControl1.Size = new System.Drawing.Size(615, 635);
             this.tabControl1.TabIndex = 5;
             // 
             // AddTask
@@ -197,8 +199,8 @@
             this.AddTask.Controls.Add(this.listView1);
             this.AddTask.Location = new System.Drawing.Point(4, 22);
             this.AddTask.Name = "AddTask";
-            this.AddTask.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.AddTask.Size = new System.Drawing.Size(606, 561);
+            this.AddTask.Padding = new System.Windows.Forms.Padding(3);
+            this.AddTask.Size = new System.Drawing.Size(607, 609);
             this.AddTask.TabIndex = 1;
             this.AddTask.Text = "添加视频";
             this.AddTask.UseVisualStyleBackColor = true;
@@ -207,7 +209,7 @@
             // 
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(16, 531);
+            this.label16.Location = new System.Drawing.Point(16, 579);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(65, 12);
             this.label16.TabIndex = 24;
@@ -224,7 +226,7 @@
             "flv",
             "战渣浪后黑",
             "战渣浪前黑"});
-            this.cbMuxer.Location = new System.Drawing.Point(87, 528);
+            this.cbMuxer.Location = new System.Drawing.Point(87, 576);
             this.cbMuxer.Name = "cbMuxer";
             this.cbMuxer.Size = new System.Drawing.Size(99, 20);
             this.cbMuxer.TabIndex = 23;
@@ -233,7 +235,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(151, 300);
+            this.label10.Location = new System.Drawing.Point(158, 320);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(89, 12);
             this.label10.TabIndex = 22;
@@ -249,7 +251,7 @@
             "高清视频",
             "战渣浪",
             "高保真游戏视频"});
-            this.cbVedioConfigTemplete.Location = new System.Drawing.Point(244, 296);
+            this.cbVedioConfigTemplete.Location = new System.Drawing.Point(251, 316);
             this.cbVedioConfigTemplete.Name = "cbVedioConfigTemplete";
             this.cbVedioConfigTemplete.Size = new System.Drawing.Size(121, 20);
             this.cbVedioConfigTemplete.TabIndex = 21;
@@ -258,7 +260,7 @@
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button4.Location = new System.Drawing.Point(388, 186);
+            this.button4.Location = new System.Drawing.Point(395, 206);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 20;
@@ -269,7 +271,7 @@
             // btnOneclickStart
             // 
             this.btnOneclickStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOneclickStart.Location = new System.Drawing.Point(500, 531);
+            this.btnOneclickStart.Location = new System.Drawing.Point(496, 576);
             this.btnOneclickStart.Name = "btnOneclickStart";
             this.btnOneclickStart.Size = new System.Drawing.Size(75, 23);
             this.btnOneclickStart.TabIndex = 19;
@@ -300,7 +302,7 @@
             this.gbVedio.Controls.Add(this.label5);
             this.gbVedio.Controls.Add(this.textBox3);
             this.gbVedio.Controls.Add(this.label4);
-            this.gbVedio.Location = new System.Drawing.Point(16, 318);
+            this.gbVedio.Location = new System.Drawing.Point(23, 338);
             this.gbVedio.Name = "gbVedio";
             this.gbVedio.Size = new System.Drawing.Size(555, 139);
             this.gbVedio.TabIndex = 18;
@@ -514,6 +516,8 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.txtAudioLine);
+            this.groupBox1.Controls.Add(this.cbUseOpus);
             this.groupBox1.Controls.Add(this.txtAudioTracker);
             this.groupBox1.Controls.Add(this.cbUseEac3to);
             this.groupBox1.Controls.Add(this.cbcopuaudio);
@@ -521,17 +525,27 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtQuality);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(15, 464);
+            this.groupBox1.Location = new System.Drawing.Point(24, 483);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(466, 58);
+            this.groupBox1.Size = new System.Drawing.Size(554, 75);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "音频参数";
             // 
+            // cbUseOpus
+            // 
+            this.cbUseOpus.AutoSize = true;
+            this.cbUseOpus.Location = new System.Drawing.Point(14, 53);
+            this.cbUseOpus.Name = "cbUseOpus";
+            this.cbUseOpus.Size = new System.Drawing.Size(48, 16);
+            this.cbUseOpus.TabIndex = 15;
+            this.cbUseOpus.Text = "opus";
+            this.cbUseOpus.UseVisualStyleBackColor = true;
+            // 
             // txtAudioTracker
             // 
-            this.txtAudioTracker.Location = new System.Drawing.Point(423, 22);
-            this.txtAudioTracker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAudioTracker.Location = new System.Drawing.Point(430, 18);
+            this.txtAudioTracker.Margin = new System.Windows.Forms.Padding(2);
             this.txtAudioTracker.Name = "txtAudioTracker";
             this.txtAudioTracker.Size = new System.Drawing.Size(19, 21);
             this.txtAudioTracker.TabIndex = 14;
@@ -540,8 +554,8 @@
             // cbUseEac3to
             // 
             this.cbUseEac3to.AutoSize = true;
-            this.cbUseEac3to.Location = new System.Drawing.Point(355, 22);
-            this.cbUseEac3to.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbUseEac3to.Location = new System.Drawing.Point(368, 20);
+            this.cbUseEac3to.Margin = new System.Windows.Forms.Padding(2);
             this.cbUseEac3to.Name = "cbUseEac3to";
             this.cbUseEac3to.Size = new System.Drawing.Size(60, 16);
             this.cbUseEac3to.TabIndex = 13;
@@ -551,7 +565,7 @@
             // cbcopuaudio
             // 
             this.cbcopuaudio.AutoSize = true;
-            this.cbcopuaudio.Location = new System.Drawing.Point(274, 22);
+            this.cbcopuaudio.Location = new System.Drawing.Point(285, 21);
             this.cbcopuaudio.Name = "cbcopuaudio";
             this.cbcopuaudio.Size = new System.Drawing.Size(84, 16);
             this.cbcopuaudio.TabIndex = 12;
@@ -599,7 +613,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(482, 254);
+            this.button2.Location = new System.Drawing.Point(489, 274);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 16;
@@ -611,7 +625,7 @@
             // 
             this.textBox2.AllowDrop = true;
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox2.Location = new System.Drawing.Point(202, 255);
+            this.textBox2.Location = new System.Drawing.Point(209, 275);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(239, 21);
             this.textBox2.TabIndex = 15;
@@ -621,7 +635,7 @@
             // 
             this.cbKeepFileTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbKeepFileTree.AutoSize = true;
-            this.cbKeepFileTree.Location = new System.Drawing.Point(50, 281);
+            this.cbKeepFileTree.Location = new System.Drawing.Point(57, 301);
             this.cbKeepFileTree.Name = "cbKeepFileTree";
             this.cbKeepFileTree.Size = new System.Drawing.Size(96, 16);
             this.cbKeepFileTree.TabIndex = 7;
@@ -636,7 +650,7 @@
             this.cblCompeteAction.Items.AddRange(new object[] {
             "拷贝到",
             "剪切到"});
-            this.cblCompeteAction.Location = new System.Drawing.Point(116, 255);
+            this.cblCompeteAction.Location = new System.Drawing.Point(123, 275);
             this.cblCompeteAction.Name = "cblCompeteAction";
             this.cblCompeteAction.Size = new System.Drawing.Size(71, 20);
             this.cblCompeteAction.TabIndex = 14;
@@ -645,7 +659,7 @@
             // 
             this.cbCompleteDo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbCompleteDo.AutoSize = true;
-            this.cbCompleteDo.Location = new System.Drawing.Point(50, 257);
+            this.cbCompleteDo.Location = new System.Drawing.Point(57, 277);
             this.cbCompleteDo.Name = "cbCompleteDo";
             this.cbCompleteDo.Size = new System.Drawing.Size(60, 16);
             this.cbCompleteDo.TabIndex = 13;
@@ -655,7 +669,7 @@
             // btnClearList
             // 
             this.btnClearList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClearList.Location = new System.Drawing.Point(482, 186);
+            this.btnClearList.Location = new System.Drawing.Point(489, 206);
             this.btnClearList.Name = "btnClearList";
             this.btnClearList.Size = new System.Drawing.Size(75, 23);
             this.btnClearList.TabIndex = 11;
@@ -666,7 +680,7 @@
             // btnOutputPath
             // 
             this.btnOutputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOutputPath.Location = new System.Drawing.Point(482, 216);
+            this.btnOutputPath.Location = new System.Drawing.Point(489, 236);
             this.btnOutputPath.Name = "btnOutputPath";
             this.btnOutputPath.Size = new System.Drawing.Size(75, 23);
             this.btnOutputPath.TabIndex = 3;
@@ -678,7 +692,7 @@
             // 
             this.textBox1.AllowDrop = true;
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox1.Location = new System.Drawing.Point(22, 218);
+            this.textBox1.Location = new System.Drawing.Point(29, 238);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(425, 21);
             this.textBox1.TabIndex = 2;
@@ -688,7 +702,7 @@
             // btnAddtoTasklist
             // 
             this.btnAddtoTasklist.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddtoTasklist.Location = new System.Drawing.Point(500, 501);
+            this.btnAddtoTasklist.Location = new System.Drawing.Point(415, 576);
             this.btnAddtoTasklist.Name = "btnAddtoTasklist";
             this.btnAddtoTasklist.Size = new System.Drawing.Size(75, 23);
             this.btnAddtoTasklist.TabIndex = 1;
@@ -710,7 +724,7 @@
             this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(8, 6);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(592, 168);
+            this.listView1.Size = new System.Drawing.Size(593, 194);
             this.listView1.TabIndex = 0;
             this.toolTip1.SetToolTip(this.listView1, "可以把文件拖进来哦");
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -732,6 +746,20 @@
             this.FilePath.Text = "路径";
             this.FilePath.Width = 268;
             // 
+            // inputfileMenuStrip
+            // 
+            this.inputfileMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除toolStripMenuItem});
+            this.inputfileMenuStrip.Name = "inputfileMenuStrip";
+            this.inputfileMenuStrip.Size = new System.Drawing.Size(101, 26);
+            // 
+            // 删除toolStripMenuItem
+            // 
+            this.删除toolStripMenuItem.Name = "删除toolStripMenuItem";
+            this.删除toolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.删除toolStripMenuItem.Text = "删除";
+            this.删除toolStripMenuItem.Click += new System.EventHandler(this.删除inputfileStripMenuItem_Click);
+            // 
             // tbAvs
             // 
             this.tbAvs.Controls.Add(this.cbloadSub);
@@ -745,7 +773,7 @@
             this.tbAvs.Controls.Add(this.txtAvsFile);
             this.tbAvs.Location = new System.Drawing.Point(4, 22);
             this.tbAvs.Name = "tbAvs";
-            this.tbAvs.Size = new System.Drawing.Size(606, 569);
+            this.tbAvs.Size = new System.Drawing.Size(607, 609);
             this.tbAvs.TabIndex = 3;
             this.tbAvs.Text = "AVS添加";
             this.tbAvs.UseVisualStyleBackColor = true;
@@ -755,7 +783,7 @@
             this.cbloadSub.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbloadSub.AutoSize = true;
             this.cbloadSub.Location = new System.Drawing.Point(10, 538);
-            this.cbloadSub.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbloadSub.Margin = new System.Windows.Forms.Padding(2);
             this.cbloadSub.Name = "cbloadSub";
             this.cbloadSub.Size = new System.Drawing.Size(96, 16);
             this.cbloadSub.TabIndex = 26;
@@ -847,10 +875,10 @@
             this.tabVS.Controls.Add(this.txtVsScript);
             this.tabVS.Controls.Add(this.cbUseVSTemplete);
             this.tabVS.Location = new System.Drawing.Point(4, 22);
-            this.tabVS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabVS.Margin = new System.Windows.Forms.Padding(2);
             this.tabVS.Name = "tabVS";
-            this.tabVS.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tabVS.Size = new System.Drawing.Size(606, 569);
+            this.tabVS.Padding = new System.Windows.Forms.Padding(2);
+            this.tabVS.Size = new System.Drawing.Size(607, 609);
             this.tabVS.TabIndex = 4;
             this.tabVS.Text = "Vapoursynth";
             this.tabVS.UseVisualStyleBackColor = true;
@@ -894,7 +922,7 @@
             this.TaskList.Controls.Add(this.listView2);
             this.TaskList.Location = new System.Drawing.Point(4, 22);
             this.TaskList.Name = "TaskList";
-            this.TaskList.Size = new System.Drawing.Size(606, 561);
+            this.TaskList.Size = new System.Drawing.Size(607, 609);
             this.TaskList.TabIndex = 2;
             this.TaskList.Text = "任务列表";
             this.TaskList.UseVisualStyleBackColor = true;
@@ -982,25 +1010,19 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // inputfileMenuStrip
+            // txtAudioLine
             // 
-            this.inputfileMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.删除toolStripMenuItem});
-            this.inputfileMenuStrip.Name = "inputfileMenuStrip";
-            this.inputfileMenuStrip.Size = new System.Drawing.Size(101, 26);
-            // 
-            // 删除toolStripMenuItem
-            // 
-            this.删除toolStripMenuItem.Name = "删除toolStripMenuItem";
-            this.删除toolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.删除toolStripMenuItem.Text = "删除";
-            this.删除toolStripMenuItem.Click += new System.EventHandler(this.删除inputfileStripMenuItem_Click);
+            this.txtAudioLine.Location = new System.Drawing.Point(455, 18);
+            this.txtAudioLine.Name = "txtAudioLine";
+            this.txtAudioLine.Size = new System.Drawing.Size(53, 21);
+            this.txtAudioLine.TabIndex = 16;
+            this.txtAudioLine.Text = "+3dB";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(614, 634);
+            this.ClientSize = new System.Drawing.Size(615, 682);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -1017,6 +1039,7 @@
             this.gbVedio.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.inputfileMenuStrip.ResumeLayout(false);
             this.tbAvs.ResumeLayout(false);
             this.tbAvs.PerformLayout();
             this.tabVS.ResumeLayout(false);
@@ -1024,7 +1047,6 @@
             this.TaskList.ResumeLayout(false);
             this.TaskList.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.inputfileMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1116,6 +1138,8 @@
         private System.Windows.Forms.TextBox txtAudioTracker;
         private System.Windows.Forms.ContextMenuStrip inputfileMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem 删除toolStripMenuItem;
+        private System.Windows.Forms.CheckBox cbUseOpus;
+        private System.Windows.Forms.TextBox txtAudioLine;
     }
 }
 

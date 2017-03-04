@@ -25,7 +25,7 @@ namespace Easyx264CoderGUI
             string bat = string.Empty;
             if (fileConfig.InputType == InputType.AvisynthScriptFile)
             {
-                bat = getAudiobat(fileConfig.AudioInputFile, audiofile, audioConfig);
+                return null;
             }
             else
             {
@@ -51,12 +51,42 @@ namespace Easyx264CoderGUI
             return audiofile;
         }
 
+        public static string RunFFmpegToOpus(FileConfig fileConfig)
+        {
+            AudioConfig audioConfig = fileConfig.AudioConfig;
+            ProcessStartInfo processinfo = new ProcessStartInfo();
+            string tmp = Config.Temp;
+            string audiofile = FileUtility.RandomName(tmp) + ".opus";
+
+            string bat = string.Empty;
+            if (fileConfig.InputType == InputType.AvisynthScriptFile)
+            {
+                return null;
+            }
+            else
+            {
+                bat = getAudioOpus(fileConfig.AudioInputFile, audiofile, audioConfig);
+
+            }
+            ProcessCmd.RunBat(bat, Config.Temp);
+
+            return audiofile;
+        }
+
         private static string getAudiobat(string input, string output, AudioConfig audioconfig)
         {
             string ffmpegfile = Path.Combine(Application.StartupPath, "tools\\ffmpeg.exe");
             string neroAacEncfile = Path.Combine(Application.StartupPath, "tools\\neroAacEnc.exe");
             return string.Format("tools\\ffmpeg.exe -vn -i \"{0}\" -f  wav pipe:| tools\\neroAacEnc -ignorelength -q {2} -lc -if - -of \"{1}\"",
                 input, output, audioconfig.Quality);
+        }
+
+        private static string getAudioOpus(string input, string output, AudioConfig audioconfig)
+        {
+            string ffmpegfile = Path.Combine(Application.StartupPath, "tools\\ffmpeg");
+            string neroAacEncfile = Path.Combine(Application.StartupPath, "tools\\opusenc");
+            return string.Format("tools\\ffmpeg.exe -vn -i \"{0}\" -f  wav pipe:| tools\\opusenc -ignorelength -  \"{1}\"",
+                input, output);
         }
 
 

@@ -94,6 +94,12 @@
   <ItemGroup>
     <Content Include="backup.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Easyx264CoderGUI\Easyx265CoderGUI.csproj">
+      <Project>{33127000-74C1-4CDF-B0AE-006BB3076EE2}</Project>
+      <Name>Easyx265CoderGUI</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

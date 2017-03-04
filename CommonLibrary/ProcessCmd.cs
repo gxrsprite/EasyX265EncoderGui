@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace ToolSet
+namespace CommonLibrary
 {
     public class ProcessCmd
     {

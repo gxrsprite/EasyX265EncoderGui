@@ -47,6 +47,7 @@ namespace Easyx264CoderGUI
         [NonSerialized]
         public EncoderTaskInfo EncoderTaskInfo = null;
 
+        public bool UseBat = false;
         /// <summary>
         /// 使用MediaInfo填充FileConfig里需要填充的数据
         /// </summary>

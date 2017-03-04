@@ -40,9 +40,9 @@ namespace Easyx264CoderGUI
             {
                 args += string.Format("-s {0}x{1}", vedioConfig.Width, vedioConfig.Height);
             }
-            string.Format(ffmpegPipex265Args, fileconfig.VedioFileFullName.Maohao(), args);
+            var result = string.Format(ffmpegPipex265Args, fileconfig.VedioFileFullName.Maohao(), args);
 
-            return "";
+            return result;
         }
     }
 }

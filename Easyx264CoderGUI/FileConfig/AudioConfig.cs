@@ -13,5 +13,13 @@ namespace Easyx264CoderGUI
         public float Quality = 0.65f;
         public bool CopyStream = false;
         public int Tracker = 2;
+        public AudioEncoder Encoder = AudioEncoder.aac;
+        public string CommandLineArgs = "";
+    }
+
+    public enum AudioEncoder
+    {
+        aac,
+        opus
     }
 }
