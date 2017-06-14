@@ -68,5 +68,10 @@ namespace CommonLibrary
         {
             return Path.Combine(path, Guid.NewGuid().ToString("N"));
         }
+
+        public static string AppendRandomName(string path, string filename)
+        {
+            return GetNoSameNameFile(Path.Combine(path, filename));
+        }
     }
 }

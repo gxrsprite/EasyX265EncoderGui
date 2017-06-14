@@ -73,7 +73,7 @@ namespace Easyx264CoderGUI
 #if X265
             this.toolTip1.SetToolTip(this.cbColorDepth, "x265推荐10bit");
             cbColorDepth.Text = "10";
-            txtUserArgs.Text = "  --no-sao --no-strong-intra-smoothing --no-open-gop --no-rect --weightb --aq-mode 2 --min-keyint 1  --qcomp 0.7 --range limited --pools 4 --vbv-bufsize 18000 --vbv-maxrate 18000 ";
+            txtUserArgs.Text = "  --no-sao --no-strong-intra-smoothing --no-open-gop --no-rect --weightb --limit-tu=4 --aq-mode 2 --min-keyint 1 --keyint 1200 --colorprim bt709  --qcomp 0.7 --range limited --pools 4 --vbv-bufsize 18000 --vbv-maxrate 18000 ";
             cbpreset.Text = "medium";
             this.Text = "简单批量x265转码";
 #else
@@ -552,7 +552,10 @@ namespace Easyx264CoderGUI
                             if (fileConfig.InputType == InputType.Vedio)
                             {
                                 fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
-                                vedioOutputFile = X265Command.RunX265Command(fileConfig);
+                                //vedioOutputFile = X265Command.RunX265Command(fileConfig);
+                                fileConfig.UseBat = true;
+                                vedioOutputFile = X265Command.ffmpegPipeX265(fileConfig);
+
                             }
                             else if (fileConfig.InputType == InputType.AvisynthScriptFile)
                             {
@@ -602,14 +605,18 @@ namespace Easyx264CoderGUI
                         continue;
                     }
 
-                    if (fileConfig.AudioConfig.Enabled && fileConfig.state != 10)
+                    if (fileConfig.AudioConfig.Enabled && fileConfig.state != -10)
                     {
-                        if (fileConfig.InputType == InputType.Vedio && fileConfig.AudioConfig.CopyStream)
+                        //if (fileConfig.InputType == InputType.Vedio && fileConfig.AudioConfig.CopyStream)
+                        //{
+                        //    //直接由x264处理掉了
+                        //}
+                        //else
                         {
-                            //直接由x264处理掉了
-                        }
-                        else
-                        {
+                            if (isHandling >= listView2.Items.Count)
+                            {
+                                return;
+                            }
                             this.Invoke((Action)delegate ()
                             {
                                 item = listView2.Items[isHandling];
@@ -648,7 +655,10 @@ namespace Easyx264CoderGUI
                                 }
                             }
 
-
+                            if (isHandling >= listView2.Items.Count)
+                            {
+                                return;
+                            }
                             this.Invoke((Action)delegate ()
                             {
                                 item = listView2.Items[isHandling];
@@ -690,7 +700,7 @@ namespace Easyx264CoderGUI
 
                     }
 
-                    if (fileConfig.CompleteDo && fileConfig.state != 10)
+                    if (fileConfig.CompleteDo && fileConfig.state != -10)
                     {
                         try
                         {
@@ -815,7 +825,6 @@ namespace Easyx264CoderGUI
                 txtUserArgs.AppendText(" --input-depth 10");
 #if X265
                 cbpreset.Text = "medium";
-                txtUserArgs.Text += " --range limited";
 #else
                 txtUserArgs.Text = Resource1.TempleteGamei444;
 #endif
@@ -823,6 +832,15 @@ namespace Easyx264CoderGUI
                 cbpreset.Text = "slow";
                 cbMuxer.Text = "mp4";
                 cbUseAvsTemplete.Checked = false;
+            }
+            else if (cbVedioConfigTemplete.Text == "爱情动作")
+            {
+#if X265
+                textBox3.Text = "25";
+                cbColorDepth.Text = "8";
+                cbpreset.Text = "medium";
+                txtUserArgs.Text = "  --no-open-gop --weightb --aq-mode 2 --me-range 27 --limit-tu=4 --min-keyint 1 --keyint 2800 --colorprim bt709  --qcomp 0.7 --range limited --pools 4 --vbv-bufsize 12000 --vbv-maxrate 12000 ";
+#endif
             }
 
         }

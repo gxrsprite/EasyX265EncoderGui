@@ -85,8 +85,10 @@ namespace Easyx264CoderGUI
         {
             string ffmpegfile = Path.Combine(Application.StartupPath, "tools\\ffmpeg");
             string neroAacEncfile = Path.Combine(Application.StartupPath, "tools\\opusenc");
-            return string.Format("tools\\ffmpeg.exe -vn -i \"{0}\" -f  wav pipe:| tools\\opusenc -ignorelength -  \"{1}\"",
-                input, output);
+            //return string.Format("tools\\ffmpeg.exe -vn -i \"{0}\" -f  wav pipe:| tools\\opusenc -ignorelength -  \"{1}\"",
+            //    input, output);
+            var ffmpegpath = Path.Combine(Application.StartupPath, "tools\\ffmpeg");
+            return $"{ffmpegpath} -i {input.Maohao()} -c:a libopus -vn -vbr on { output.Maohao()}";
         }
 
 

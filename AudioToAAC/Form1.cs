@@ -21,7 +21,7 @@ namespace AudioToAAC
         public Form1()
         {
             InitializeComponent();
-            Process.EnterDebugMode();
+            //Process.EnterDebugMode();
         }
 
         private void 文件ToolStripMenuItem_Click(object sender, EventArgs e)

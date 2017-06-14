@@ -64,6 +64,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtAudioLine = new System.Windows.Forms.TextBox();
             this.cbUseOpus = new System.Windows.Forms.CheckBox();
             this.txtAudioTracker = new System.Windows.Forms.TextBox();
             this.cbUseEac3to = new System.Windows.Forms.CheckBox();
@@ -115,7 +116,6 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.txtAudioLine = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.AddTask.SuspendLayout();
@@ -247,8 +247,9 @@
             this.cbVedioConfigTemplete.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbVedioConfigTemplete.FormattingEnabled = true;
             this.cbVedioConfigTemplete.Items.AddRange(new object[] {
-            "网络视频",
             "高清视频",
+            "爱情动作",
+            "网络视频",
             "战渣浪",
             "高保真游戏视频"});
             this.cbVedioConfigTemplete.Location = new System.Drawing.Point(251, 316);
@@ -531,6 +532,14 @@
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "音频参数";
+            // 
+            // txtAudioLine
+            // 
+            this.txtAudioLine.Location = new System.Drawing.Point(455, 18);
+            this.txtAudioLine.Name = "txtAudioLine";
+            this.txtAudioLine.Size = new System.Drawing.Size(53, 21);
+            this.txtAudioLine.TabIndex = 16;
+            this.txtAudioLine.Text = "+3dB";
             // 
             // cbUseOpus
             // 
@@ -1009,14 +1018,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // txtAudioLine
-            // 
-            this.txtAudioLine.Location = new System.Drawing.Point(455, 18);
-            this.txtAudioLine.Name = "txtAudioLine";
-            this.txtAudioLine.Size = new System.Drawing.Size(53, 21);
-            this.txtAudioLine.TabIndex = 16;
-            this.txtAudioLine.Text = "+3dB";
             // 
             // Form1
             // 

@@ -10,7 +10,7 @@ namespace Easyx264CoderGUI
     public class FFmpegCommand
     {
         public static string FFmpegExecute = "tools" + Path.DirectorySeparatorChar + "ffmpeg.exe";
-        public static string ffmpegPipex265Args = "  -i \"{0}\" -f yuv4mpegpipe -an -v 0 {1} -|";//-deinterlace
+        public static string ffmpegPipex265Args = "  -i {0} -f yuv4mpegpipe  {1} -|";//-deinterlace
 
         public static string GetFfmpegArgs(FileConfig fileconfig)
         {

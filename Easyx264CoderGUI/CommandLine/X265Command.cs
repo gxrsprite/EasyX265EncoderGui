@@ -172,16 +172,20 @@ namespace Easyx264CoderGUI
             {
                 finalX265Path = x265Excute10lite;
             }
+
+            finalX265Path = Path.Combine(Application.StartupPath, finalX265Path);
+
             if (!File.Exists(finalX265Path))
             {
                 throw new EncoderException("找不到指定程序：" + finalX265Path);
             }
-            processinfo.FileName = Environment.GetEnvironmentVariable("ComSpec");
+
             string x264Line;
             string outputpath = "";
             Getx265Line(fileConfig, 1, out x264Line, out outputpath);
-            string ffmpegline = TextManager.Mh + FFmpegCommand.FFmpegExecute + TextManager.Mh + FFmpegCommand.GetFfmpegArgs(fileConfig);
-            var bat = ffmpegline + finalX265Path + " " + x264Line + " -";
+            string ffmpegline = Path.Combine(Application.StartupPath, FFmpegCommand.FFmpegExecute).Maohao() + FFmpegCommand.GetFfmpegArgs(fileConfig);
+            var bat = ffmpegline + finalX265Path.Maohao() + " " + x264Line;
+            //bat += "\r\npause";
             //processinfo.UseShellExecute = false;    //输出信息重定向
             //processinfo.CreateNoWindow = true;
             //processinfo.RedirectStandardInput = true;
@@ -257,15 +261,15 @@ namespace Easyx264CoderGUI
             string fileExtension = "." + fileConfig.Muxer;
 
             string inputArg = "";
-            if (fileConfig.AudioConfig.CopyStream || !fileConfig.AudioConfig.Enabled)
-            {
-                outputpath = fileConfig.OutputFile + fileExtension;
-            }
-            else
-            {//临时目录
-                outputpath = FileUtility.RandomName(Config.Temp) + ".h265";
+            //if (fileConfig.AudioConfig.CopyStream || !fileConfig.AudioConfig.Enabled)
+            //{
+            //    outputpath = fileConfig.OutputFile + fileExtension;
+            //}
+            //else
+            //{//临时目录
+            outputpath = FileUtility.AppendRandomName(Config.Temp, Path.GetFileNameWithoutExtension(fileConfig.VedioFileFullName) + ".h265");
 
-            }
+            //}
             if (fileConfig.InputType == InputType.AvisynthScriptFile)
             {
                 x264Line = x264Line.Replace("$input$", fileConfig.AvsFileFullName.Maohao());
@@ -288,7 +292,7 @@ namespace Easyx264CoderGUI
 
             }
 
-            x264Line = x264Line.Replace("$outputfile$", FileUtility.GetNoSameNameFile(outputpath));
+            x264Line = x264Line.Replace("$outputfile$", outputpath);
             if (fileConfig.UseBat)
             {
                 x264Line = x264Line.Replace("$userargs$", vedioConfig.UserArgs + inputArg);
@@ -296,7 +300,7 @@ namespace Easyx264CoderGUI
             else
             {
                 x264Line = x264Line.Replace("$userargs$", vedioConfig.UserArgs);
-            }   
+            }
         }
 
 
@@ -332,7 +336,7 @@ namespace Easyx264CoderGUI
             }
             else
             {//临时目录
-                outputpath = FileUtility.RandomName(Config.Temp) + ".mkv";
+                outputpath = FileUtility.AppendRandomName(Config.Temp, Path.GetFileNameWithoutExtension(fileConfig.FullName) + ".h265");
             }
 
             var x265args = "";
