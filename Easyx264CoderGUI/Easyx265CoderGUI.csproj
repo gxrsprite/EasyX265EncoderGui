@@ -35,7 +35,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>F:\简单x265批量转码\</OutputPath>
+    <OutputPath>F:\Easyx265Gui\</OutputPath>
     <DefineConstants>TRACE;DEBUG;X265</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

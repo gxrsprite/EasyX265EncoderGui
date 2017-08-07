@@ -21,6 +21,10 @@ namespace CommonLibrary
         }
         public static string Maohao(this string src)
         {
+            if (string.IsNullOrEmpty(src))
+            {
+                return string.Empty;
+            }
             if (!src.StartsWith("\"") && !src.EndsWith("\""))
             {
                 return src.Wrap("\"");

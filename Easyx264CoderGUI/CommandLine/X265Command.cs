@@ -330,14 +330,14 @@ namespace Easyx264CoderGUI
             //}
             string fileExtension = "." + fileConfig.Muxer;
             var outputpath = string.Empty;
-            if (fileConfig.AudioConfig.CopyStream || !fileConfig.AudioConfig.Enabled)
-            {
-                outputpath = fileConfig.OutputFile + fileExtension;
-            }
-            else
-            {//临时目录
-                outputpath = FileUtility.AppendRandomName(Config.Temp, Path.GetFileNameWithoutExtension(fileConfig.FullName) + ".h265");
-            }
+            //if (!fileConfig.AudioConfig.Enabled)
+            //{
+            //    outputpath = fileConfig.OutputFile + fileExtension;
+            //}
+            //else
+            //{//临时目录
+            outputpath = FileUtility.AppendRandomName(Config.Temp, Path.GetFileNameWithoutExtension(fileConfig.FullName) + ".h265");
+            //}
 
             var x265args = "";
             Getx265Line(fileConfig, 0, out x265args, out outputpath);

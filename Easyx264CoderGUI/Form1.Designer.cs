@@ -535,11 +535,11 @@
             // 
             // txtAudioLine
             // 
-            this.txtAudioLine.Location = new System.Drawing.Point(455, 18);
+            this.txtAudioLine.Location = new System.Drawing.Point(368, 43);
             this.txtAudioLine.Name = "txtAudioLine";
-            this.txtAudioLine.Size = new System.Drawing.Size(53, 21);
+            this.txtAudioLine.Size = new System.Drawing.Size(151, 21);
             this.txtAudioLine.TabIndex = 16;
-            this.txtAudioLine.Text = "+3dB";
+            this.txtAudioLine.Text = "+3dB -mixlfe ";
             // 
             // cbUseOpus
             // 

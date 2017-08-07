@@ -84,11 +84,15 @@ namespace Easyx264CoderGUI
         private static string getAudioOpus(string input, string output, AudioConfig audioconfig)
         {
             string ffmpegfile = Path.Combine(Application.StartupPath, "tools\\ffmpeg");
-            string neroAacEncfile = Path.Combine(Application.StartupPath, "tools\\opusenc");
-            //return string.Format("tools\\ffmpeg.exe -vn -i \"{0}\" -f  wav pipe:| tools\\opusenc -ignorelength -  \"{1}\"",
-            //    input, output);
+            //string neroAacEncfile = Path.Combine(Application.StartupPath, "tools\\opusenc");
+            //return $"{ffmpegfile.Maohao()} -i {input.Maohao()} -f  wav pipe:| {neroAacEncfile.Maohao()} -ignorelength -  {output.Maohao()}";
             var ffmpegpath = Path.Combine(Application.StartupPath, "tools\\ffmpeg");
-            return $"{ffmpegpath} -i {input.Maohao()} -c:a libopus -vn -vbr on { output.Maohao()}";
+            var audioargs = audioconfig.CommandLineArgs;
+            if (audioargs.Contains("mixlfe") || audioargs.Contains("dB"))
+            {
+                audioargs = "";
+            }
+            return $"{ffmpegpath.Maohao()} -i {input.Maohao()} -c:a libopus -vn -vbr {audioargs} on { output.Maohao()}";
         }
 
 
@@ -96,10 +100,14 @@ namespace Easyx264CoderGUI
         public static string MKVmergin(FileConfig fileConfig, string vedio, string audio, int delay = 0)
         {
             string outfile = FileUtility.GetNoSameNameFile(fileConfig.OutputFile + ".mkv");
+            if (string.IsNullOrEmpty(audio))
+            {
+                outfile = FileUtility.GetNoSameNameFile(fileConfig.OutputFile + ".h265.mkv");
+            }
             ProcessStartInfo processinfo = new ProcessStartInfo();
             processinfo.FileName = Path.Combine(Application.StartupPath, "tools\\mkvmerge.exe");
-            processinfo.Arguments = string.Format(" -o \"{0}\" \"{1}\" {3} \"{2}\"",
-                outfile, vedio, audio, delay == 0 ? "" : ("--sync 0:" + delay)
+            processinfo.Arguments = string.Format(" -o \"{0}\" \"{1}\" {3} {2}",
+                outfile, vedio, audio.Maohao(), delay == 0 ? "" : ("--sync 0:" + delay)
                 );
             processinfo.UseShellExecute = false;    //输出信息重定向
             processinfo.CreateNoWindow = true;

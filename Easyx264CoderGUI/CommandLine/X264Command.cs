@@ -266,16 +266,16 @@ namespace Easyx264CoderGUI.CommandLine
 
             string fileExtension = "." + fileConfig.Muxer;
 
-            if (fileConfig.AudioConfig.CopyStream || !fileConfig.AudioConfig.Enabled)
-            {
-                outputpath = fileConfig.OutputFile + fileExtension;
-                outputpath = FileUtility.GetNoSameNameFile(outputpath);
-            }
-            else
-            {//临时目录
-                outputpath = FileUtility.RandomName(Config.Temp) + ".mp4";
+            //if (fileConfig.AudioConfig.CopyStream || !fileConfig.AudioConfig.Enabled)
+            //{
+            //    outputpath = fileConfig.OutputFile + fileExtension;
+            //    outputpath = FileUtility.GetNoSameNameFile(outputpath);
+            //}
+            //else
+            //临时目录
+                outputpath = FileUtility.AppendRandomName(Config.Temp, Path.GetFileNameWithoutExtension(fileConfig.VedioFileFullName) + ".h264");
 
-            }
+            
             if (fileConfig.InputType == InputType.AvisynthScriptFile)
             {
                 x264Line = x264Line.Replace("$input$", fileConfig.AvsFileFullName);

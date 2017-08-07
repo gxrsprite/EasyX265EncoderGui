@@ -56,7 +56,7 @@ namespace Easyx264CoderGUI
         private void Form1_Load(object sender, EventArgs e)
         {
             cblCompeteAction.SelectedIndex = 0;
-            cbVedioConfigTemplete.SelectedIndex = 1;
+            cbVedioConfigTemplete.SelectedIndex = 0;
             cbMuxer.SelectedIndex = 0;
             //txtAvsScript.Text = Resource1.AvsAlmostFilterTemplete.Replace("$avisynth_plugin$", Path.Combine(Application.StartupPath, "tools\\avsplugin"));
             if (Directory.Exists("Template\\avs"))
@@ -71,9 +71,9 @@ namespace Easyx264CoderGUI
                 combVSTemplate.Items.AddRange(files.Select(f => Path.GetFileName(f)).ToArray());
             }
 #if X265
-            this.toolTip1.SetToolTip(this.cbColorDepth, "x265推荐10bit");
+            //this.toolTip1.SetToolTip(this.cbColorDepth, "x265推荐10bit");
             cbColorDepth.Text = "10";
-            txtUserArgs.Text = "  --no-sao --no-strong-intra-smoothing --no-open-gop --no-rect --weightb --limit-tu=4 --aq-mode 2 --min-keyint 1 --keyint 1200 --colorprim bt709  --qcomp 0.7 --range limited --pools 4 --vbv-bufsize 18000 --vbv-maxrate 18000 ";
+            txtUserArgs.Text = "  --no-sao --no-strong-intra-smoothing --no-open-gop --no-rect --no-amp --weightb --limit-tu=4 --aq-mode 2 --min-keyint 1 --merange 38  --keyint 1200 --colorprim bt709  --qcomp 0.7 --range limited --pools 4 --vbv-bufsize 18000 --vbv-maxrate 18000 ";
             cbpreset.Text = "medium";
             this.Text = "简单批量x265转码";
 #else
@@ -552,9 +552,9 @@ namespace Easyx264CoderGUI
                             if (fileConfig.InputType == InputType.Vedio)
                             {
                                 fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
-                                //vedioOutputFile = X265Command.RunX265Command(fileConfig);
-                                fileConfig.UseBat = true;
-                                vedioOutputFile = X265Command.ffmpegPipeX265(fileConfig);
+                                vedioOutputFile = X265Command.RunX265Command(fileConfig);
+                                //fileConfig.UseBat = true;
+                                //vedioOutputFile = X265Command.ffmpegPipeX265(fileConfig);
 
                             }
                             else if (fileConfig.InputType == InputType.AvisynthScriptFile)
@@ -605,11 +605,11 @@ namespace Easyx264CoderGUI
                         continue;
                     }
 
-                    if (fileConfig.AudioConfig.Enabled && fileConfig.state != -10)
+                    if ((fileConfig.AudioConfig.Enabled || fileConfig.VedioConfig.Encoder == Encoder.x265) && fileConfig.state != -10)
                     {
                         //if (fileConfig.InputType == InputType.Vedio && fileConfig.AudioConfig.CopyStream)
                         //{
-                        //    //直接由x264处理掉了
+                        //    //直接由x264处理掉了 //改为分开处理
                         //}
                         //else
                         {
@@ -624,6 +624,11 @@ namespace Easyx264CoderGUI
                             });
 
                             string audiofile = string.Empty;
+                            if (!fileConfig.AudioConfig.Enabled)
+                            {
+
+                            }
+                            else
                             if (fileConfig.AudioConfig.CopyStream)
                             {
                                 audiofile = CommandHelper.DemuxAudio(fileConfig);
@@ -668,7 +673,7 @@ namespace Easyx264CoderGUI
                             if (fileConfig.mediaInfo != null)
                             {
                                 delay = fileConfig.mediaInfo.DelayRelativeToVideo;
-                                delay = delay - 67;
+                                //delay = delay - 67;
                             }
                             if (fileConfig.Muxer == "mkv")
                             {
@@ -793,7 +798,7 @@ namespace Easyx264CoderGUI
                 cbcsp.SelectedIndex = 0;
                 txtUserArgs.Text = txtUserArgs.Text.Replace("--input-depth 10", "");
 #if X265
-
+                cbMuxer.Text = "mkv";
 #else
                 txtUserArgs.Text = Resource1.TempleteOnline;
 #endif
@@ -809,11 +814,14 @@ namespace Easyx264CoderGUI
                 cbcsp.SelectedIndex = 0;
 #if X265
                 cbpreset.Text = "medium";
+                cbMuxer.Text = "mkv";
+                txtUserArgs.Text = "--no-sao --no-strong-intra-smoothing --no-open-gop --no-rect --no-amp --weightb --limit-tu=4 --aq-mode 2 --min-keyint 1 --merange 36  --keyint 1600 --colorprim bt709  --qcomp 0.7 --range limited --pools 4 --vbv-bufsize 18000 --vbv-maxrate 18000 ";
 #else
+                cbpreset.Text = "slow";
                 txtUserArgs.Text = Resource1.TempleteHDi420;
 #endif
                 textBox3.Text = "22";
-                cbpreset.Text = "slow";
+
                 cbMuxer.Text = "mp4";
                 txtbitrate.Text = "";
                 cbUseAvsTemplete.Checked = false;
@@ -825,11 +833,13 @@ namespace Easyx264CoderGUI
                 txtUserArgs.AppendText(" --input-depth 10");
 #if X265
                 cbpreset.Text = "medium";
+                cbMuxer.Text = "mkv";
 #else
+                 cbpreset.Text = "slow";
                 txtUserArgs.Text = Resource1.TempleteGamei444;
 #endif
                 textBox3.Text = "24";
-                cbpreset.Text = "slow";
+
                 cbMuxer.Text = "mp4";
                 cbUseAvsTemplete.Checked = false;
             }
@@ -839,7 +849,8 @@ namespace Easyx264CoderGUI
                 textBox3.Text = "25";
                 cbColorDepth.Text = "8";
                 cbpreset.Text = "medium";
-                txtUserArgs.Text = "  --no-open-gop --weightb --aq-mode 2 --me-range 27 --limit-tu=4 --min-keyint 1 --keyint 2800 --colorprim bt709  --qcomp 0.7 --range limited --pools 4 --vbv-bufsize 12000 --vbv-maxrate 12000 ";
+                txtUserArgs.Text = "  --no-open-gop --no-rect --weightb --aq-mode 2 --merange 30 --limit-tu=4 --min-keyint 1 --keyint 2800 --colorprim bt709  --qcomp 0.7 --range limited --pools 4 --vbv-bufsize 12000 --vbv-maxrate 12000 ";
+                cbMuxer.Text = "mkv";
 #endif
             }
 

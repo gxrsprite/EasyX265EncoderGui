@@ -19,7 +19,8 @@ namespace Easyx264CoderGUI.CommandLine
             AudioConfig audioConfig = fileConfig.AudioConfig;
             string tmp = Config.Temp;
             string audiofile = FileUtility.RandomName(tmp) + ".m4a";
-            string bat = $"{Eac3toExecute.Maohao()} {fileConfig.VedioFileFullName.Maohao()} {audioConfig.Tracker}: {audiofile.Maohao()}  -quality={audioConfig.Quality} {audioConfig.CommandLineArgs}";
+            var eac3to = Path.Combine(Environment.CurrentDirectory, Eac3toExecute);
+            string bat = $"{eac3to.Maohao()} {fileConfig.VedioFileFullName.Maohao()} {audioConfig.Tracker}: {audiofile.Maohao()}  -quality={audioConfig.Quality} {audioConfig.CommandLineArgs}";
             ProcessCmd.RunBat(bat, Config.Temp);
             return audiofile;
         }
@@ -29,7 +30,18 @@ namespace Easyx264CoderGUI.CommandLine
             AudioConfig audioConfig = fileConfig.AudioConfig;
             string tmp = Config.Temp;
             string audiofile = FileUtility.RandomName(tmp) + ".opus";
-            string bat = $"{Eac3toExecute.Maohao()} {fileConfig.VedioFileFullName.Maohao()}  {audioConfig.Tracker}: stdout.wav | {OpusEnc.Maohao()} --ignorelength -  {audiofile.Maohao()}";
+            int bitrat = 0;
+            if (audioConfig.Quality < 1)
+            {
+                bitrat = (int)(audioConfig.Quality * 400);
+            }
+            else
+            {
+                bitrat = (int)audioConfig.Quality;
+            }
+            var eac3to = Path.Combine(Environment.CurrentDirectory, Eac3toExecute);
+            var opusenc = Path.Combine(Environment.CurrentDirectory, OpusEnc);
+            string bat = $"{eac3to.Maohao()} {fileConfig.VedioFileFullName.Maohao()}  {audioConfig.Tracker}: {audioConfig.CommandLineArgs} stdout.wav | {opusenc.Maohao()} --ignorelength --bitrate {bitrat} --vbr -  {audiofile.Maohao()}";
             ProcessCmd.RunBat(bat, Config.Temp);
             return audiofile;
         }
