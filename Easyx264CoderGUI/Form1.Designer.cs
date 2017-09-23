@@ -539,7 +539,7 @@
             this.txtAudioLine.Name = "txtAudioLine";
             this.txtAudioLine.Size = new System.Drawing.Size(151, 21);
             this.txtAudioLine.TabIndex = 16;
-            this.txtAudioLine.Text = "+3dB -mixlfe ";
+            this.txtAudioLine.Text = "-af volume=+3dB";
             // 
             // cbUseOpus
             // 
@@ -570,6 +570,7 @@
             this.cbUseEac3to.TabIndex = 13;
             this.cbUseEac3to.Text = "Eac3to";
             this.cbUseEac3to.UseVisualStyleBackColor = true;
+            this.cbUseEac3to.CheckedChanged += new System.EventHandler(this.cbUseEac3to_CheckedChanged);
             // 
             // cbcopuaudio
             // 

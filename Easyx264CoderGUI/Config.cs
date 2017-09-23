@@ -10,5 +10,7 @@ namespace Easyx264CoderGUI
         public static string Temp { set; get; }
         public static string VspipePath { set; get; }
         public static string VsPluginPath { set; get; }
+
+        public static bool IsWindows = true;
     }
 }

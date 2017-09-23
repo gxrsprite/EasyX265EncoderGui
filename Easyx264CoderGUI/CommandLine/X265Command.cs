@@ -12,10 +12,10 @@ namespace Easyx264CoderGUI
 {
     public class X265Command
     {
-        public static string x265Excute8 = "tools" + Path.DirectorySeparatorChar + "x265-8bit-full.exe";
-        public static string x265Excute8lite = "tools" + Path.DirectorySeparatorChar + "x265.exe";
-        public static string x265Excute10 = "tools" + Path.DirectorySeparatorChar + "x265-10bit-full.exe";
-        public static string x265Excute10lite = "tools" + Path.DirectorySeparatorChar + "x265-10b.exe";
+        public static string x265Excute8 = "x265-8bit-full";
+        public static string x265Excute8lite = "x265";
+        public static string x265Excute10 = "x265-10bit-full";
+        public static string x265Excute10lite = "x265-10b";
         public static string avs4x265 = "tools" + Path.DirectorySeparatorChar + "avs4x265.exe";
         public static string x265Args = " $crf$ $profile$  --preset $preset$  $tune$  $userargs$   -o  \"$outputfile$\"  $input$";
 
@@ -36,19 +36,10 @@ namespace Easyx264CoderGUI
             {
                 throw new EncoderException("找不到指定程序：" + processinfo.FileName);
             }
-            if (vedioConfig.depth == 8)
-            {
-                finalX265Path = x265Excute8lite;
-            }
-            else if (vedioConfig.depth == 10)
-            {
-                finalX265Path = x265Excute10lite;
-            }
 
-            if (!File.Exists(finalX265Path))
-            {
-                throw new EncoderException("找不到指定程序：" + finalX265Path);
-            }
+            finalX265Path = GetX265LiteFullName(vedioConfig);
+
+
             string x264Line;
             string outputpath = "";
             Process avsx264mod = new Process();
@@ -95,14 +86,75 @@ namespace Easyx264CoderGUI
         private static string GetX265exeFullName(VedioConfig vedioConfig)
         {
             string x265exe = "";
-            if (vedioConfig.depth == 10)
+
+            if (Config.IsWindows)
             {
-                x265exe = x265Excute10;
+                if (vedioConfig.depth == 10)
+                {
+                    x265exe = "tools" + Path.DirectorySeparatorChar + x265Excute10 + ".exe";
+                }
+                else
+                {
+                    x265exe = "tools" + Path.DirectorySeparatorChar + x265Excute8 + ".exe";
+                }
+
+
+                if (!File.Exists(x265exe))
+                {
+                    throw new EncoderException("找不到指定程序：" + x265exe);
+                }
             }
             else
             {
-                x265exe = x265Excute8;
+                if (vedioConfig.depth == 10)
+                {
+                    x265exe = x265Excute10;
+                }
+                else
+                {
+                    x265exe = x265Excute8;
+                }
             }
+
+            return x265exe;
+        }
+
+        private static string GetX265LiteFullName(VedioConfig vedioConfig)
+        {
+            string x265exe = "";
+
+
+            if (Config.IsWindows)
+            {
+                if (vedioConfig.depth == 10)
+                {
+                    x265exe = "tools" + Path.DirectorySeparatorChar + x265Excute10lite + ".exe";
+                }
+                else
+                {
+                    x265exe = "tools" + Path.DirectorySeparatorChar + x265Excute8lite + ".exe";
+                }
+
+                if (!File.Exists(x265exe))
+                {
+                    throw new EncoderException("找不到指定程序：" + x265exe);
+                }
+            }
+            else
+            {
+                if (vedioConfig.depth == 10)
+                {
+                    x265exe = x265Excute10lite;
+                }
+                else
+                {
+                    x265exe = x265Excute8lite;
+                }
+            }
+
+
+
+
             return x265exe;
         }
 
@@ -112,10 +164,6 @@ namespace Easyx264CoderGUI
             ProcessStartInfo processinfo = new ProcessStartInfo();
 
             string x264exe = GetX265exeFullName(vedioConfig);
-            if (!File.Exists(x264exe))
-            {
-                throw new EncoderException("找不到指定程序：" + x264exe);
-            }
 
             processinfo.FileName = x264exe;
             //processinfo.FileName = Environment.GetEnvironmentVariable("ComSpec");
@@ -164,20 +212,11 @@ namespace Easyx264CoderGUI
             VedioConfig vedioConfig = fileConfig.VedioConfig;
             ProcessStartInfo processinfo = new ProcessStartInfo();
             string finalX265Path = "";
-            if (vedioConfig.depth == 8)
-            {
-                finalX265Path = x265Excute8lite;
-            }
-            else if (vedioConfig.depth == 10)
-            {
-                finalX265Path = x265Excute10lite;
-            }
 
-            finalX265Path = Path.Combine(Application.StartupPath, finalX265Path);
-
-            if (!File.Exists(finalX265Path))
+            finalX265Path = GetX265LiteFullName(vedioConfig);
+            if (Config.IsWindows)
             {
-                throw new EncoderException("找不到指定程序：" + finalX265Path);
+                finalX265Path = Path.Combine(Application.StartupPath, finalX265Path);
             }
 
             string x264Line;
@@ -309,25 +348,13 @@ namespace Easyx264CoderGUI
         {
             var vedioConfig = fileConfig.VedioConfig;
             var finalX265Path = "";
-            if (vedioConfig.depth == 8)
+
+            finalX265Path = GetX265LiteFullName(vedioConfig);
+            if (Config.IsWindows)
             {
-                finalX265Path = x265Excute8lite;
-            }
-            else if (vedioConfig.depth == 10)
-            {
-                finalX265Path = x265Excute10lite;
+                finalX265Path = Path.Combine(Environment.CurrentDirectory, finalX265Path);
             }
 
-            finalX265Path = Path.Combine(Environment.CurrentDirectory, finalX265Path);
-            if (!File.Exists(finalX265Path))
-            {
-                throw new EncoderException("找不到指定程序：" + finalX265Path);
-            }
-
-            //if (!File.Exists(Config.VspipePath) && !File.Exists(Config.VspipePath + ".exe"))
-            //{
-            //    throw new EncoderException("找不到指定程序：" + Config.VspipePath);
-            //}
             string fileExtension = "." + fileConfig.Muxer;
             var outputpath = string.Empty;
             //if (!fileConfig.AudioConfig.Enabled)

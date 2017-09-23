@@ -6,14 +6,14 @@ using System.Text;
 
 namespace CommonLibrary
 {
-    public static class NativeWrappers
-    {
-        public enum ChangeWindowMessageFilterFlags : uint { Add = 1, Remove = 2 };
-        [DllImport("user32")]
-        public static extern bool ChangeWindowMessageFilter(uint msg, ChangeWindowMessageFilterFlags flags);
+    //public static class NativeWrappers
+    //{
+    //    public enum ChangeWindowMessageFilterFlags : uint { Add = 1, Remove = 2 };
+    //    [DllImport("user32")]
+    //    public static extern bool ChangeWindowMessageFilter(uint msg, ChangeWindowMessageFilterFlags flags);
 
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        public static extern uint RegisterWindowMessage(string lpString);
-    }
+    //    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+    //    public static extern uint RegisterWindowMessage(string lpString);
+    //}
 }

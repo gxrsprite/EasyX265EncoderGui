@@ -18,10 +18,15 @@ namespace Easyx264CoderGUI
         public Form1()
         {
             InitializeComponent();
-            uint _message = NativeWrappers.RegisterWindowMessage("BALL");
-            if (_message != 0)
+            //uint _message = NativeWrappers.RegisterWindowMessage("BALL");
+            //if (_message != 0)
+            //{
+            //    NativeWrappers.ChangeWindowMessageFilter(_message, NativeWrappers.ChangeWindowMessageFilterFlags.Add);
+            //}
+            int p = (int)Environment.OSVersion.Platform;
+            if ((p == 4) || (p == 128) || (p == 6))
             {
-                NativeWrappers.ChangeWindowMessageFilter(_message, NativeWrappers.ChangeWindowMessageFilterFlags.Add);
+                Config.IsWindows = false;
             }
         }
 
@@ -339,7 +344,7 @@ namespace Easyx264CoderGUI
                 fileConfig.InputType = InputType.VapoursynthScript;
                 string avsscript = txtVsScript.Text;
                 avsscript = avsscript.Replace("$InputVedio$", fileConfig.VedioFileFullName)
-                    .Replace("$vapoursynth_plugin$", Path.Combine(Application.StartupPath, Config.VsPluginPath));
+                    .Replace("$vapoursynth_plugin$", Config.VsPluginPath);
                 vedioConfig.VapoursynthScript = avsscript;
             }
         }
@@ -474,10 +479,21 @@ namespace Easyx264CoderGUI
                     string copyto = string.Empty;
                     string ralative = string.Empty;
                     //仅输出视频部分
+                    if (!Directory.Exists(fileConfig.OutputPath))
+                    {
+                        Directory.CreateDirectory(fileConfig.OutputPath);
+                    }
+
                     if (fileConfig.KeepDirection)
                     {//保持目录树结构
                         ralative = FileUtility.MakeRelativePath(fileConfig.DirPath + "/", Path.GetDirectoryName(fileConfig.FullName));
                         string outpath = Path.Combine(fileConfig.OutputPath, ralative);
+
+                        if (!Directory.Exists(outpath))
+                        {
+                            Directory.CreateDirectory(outpath);
+                        }
+
                         outputfile = Path.Combine(outpath, Path.GetFileNameWithoutExtension(fileConfig.FullName));
                     }
                     else if (fileConfig.OutputPath != "")
@@ -918,6 +934,18 @@ namespace Easyx264CoderGUI
                 txtUserArgs.Text = txtUserArgs.Text.Replace("--input-depth 10", "");
             }
 
+        }
+
+        private void cbUseEac3to_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbUseEac3to.Checked)
+            {
+                txtAudioLine.Text = "+3dB -mixlfe ";
+            }
+            else
+            {
+                txtAudioLine.Text = "-af volume=+3dB ";
+            }
         }
     }
 }

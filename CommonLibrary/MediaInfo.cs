@@ -16,7 +16,7 @@ namespace CommonLibrary
         public MediaInfo(string filename)
         {
             ProcessStartInfo processinfo = new ProcessStartInfo();
-            string mediainfofile = Path.Combine(Application.StartupPath, "tools\\mediainfo.exe");
+            string mediainfofile = Path.Combine(Application.StartupPath, "tools\\mediainfo");
             processinfo.FileName = mediainfofile;
             processinfo.Arguments = "\"" + filename + "\"";
             processinfo.UseShellExecute = false;    //输出信息重定向

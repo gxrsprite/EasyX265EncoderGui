@@ -75,7 +75,16 @@ namespace Easyx264CoderGUI
 
         private static string getAudiobat(string input, string output, AudioConfig audioconfig)
         {
-            string ffmpegfile = Path.Combine(Application.StartupPath, "tools\\ffmpeg.exe");
+            string ffmpegfile = "";
+            if (Config.IsWindows)
+            {
+                ffmpegfile = Path.Combine(Application.StartupPath, "tools\\ffmpeg.exe");
+            }
+            else
+            {
+                ffmpegfile = "ffmpeg";
+            }
+
             string neroAacEncfile = Path.Combine(Application.StartupPath, "tools\\neroAacEnc.exe");
             return string.Format("tools\\ffmpeg.exe -vn -i \"{0}\" -f  wav pipe:| tools\\neroAacEnc -ignorelength -q {2} -lc -if - -of \"{1}\"",
                 input, output, audioconfig.Quality);
@@ -83,29 +92,45 @@ namespace Easyx264CoderGUI
 
         private static string getAudioOpus(string input, string output, AudioConfig audioconfig)
         {
-            string ffmpegfile = Path.Combine(Application.StartupPath, "tools\\ffmpeg");
+            string ffmpegfile = "";
+            if (Config.IsWindows)
+            {
+                ffmpegfile = Path.Combine(Application.StartupPath, "tools\\ffmpeg.exe");
+            }
+            else
+            {
+                ffmpegfile = "ffmpeg";
+            }
             //string neroAacEncfile = Path.Combine(Application.StartupPath, "tools\\opusenc");
             //return $"{ffmpegfile.Maohao()} -i {input.Maohao()} -f  wav pipe:| {neroAacEncfile.Maohao()} -ignorelength -  {output.Maohao()}";
-            var ffmpegpath = Path.Combine(Application.StartupPath, "tools\\ffmpeg");
             var audioargs = audioconfig.CommandLineArgs;
             if (audioargs.Contains("mixlfe") || audioargs.Contains("dB"))
             {
                 audioargs = "";
             }
-            return $"{ffmpegpath.Maohao()} -i {input.Maohao()} -c:a libopus -vn -vbr {audioargs} on { output.Maohao()}";
+            return $"{ffmpegfile.Maohao()} -i {input.Maohao()}  {audioargs} -c:a libopus -vn -vbr on { output.Maohao()}";
         }
 
 
 
         public static string MKVmergin(FileConfig fileConfig, string vedio, string audio, int delay = 0)
         {
+
             string outfile = FileUtility.GetNoSameNameFile(fileConfig.OutputFile + ".mkv");
             if (string.IsNullOrEmpty(audio))
             {
                 outfile = FileUtility.GetNoSameNameFile(fileConfig.OutputFile + ".h265.mkv");
             }
             ProcessStartInfo processinfo = new ProcessStartInfo();
-            processinfo.FileName = Path.Combine(Application.StartupPath, "tools\\mkvmerge.exe");
+            if (Config.IsWindows)
+            {
+                processinfo.FileName = Path.Combine(Application.StartupPath, "tools\\mkvmerge");
+            }
+            else
+            {
+                processinfo.FileName = Path.Combine(Application.StartupPath, "mkvmerge");
+            }
+
             processinfo.Arguments = string.Format(" -o \"{0}\" \"{1}\" {3} {2}",
                 outfile, vedio, audio.Maohao(), delay == 0 ? "" : ("--sync 0:" + delay)
                 );
@@ -130,7 +155,14 @@ namespace Easyx264CoderGUI
         {
             string outfile = FileUtility.GetNoSameNameFile(fileConfig.OutputFile + "." + extension);
             ProcessStartInfo processinfo = new ProcessStartInfo();
-            processinfo.FileName = Path.Combine(Application.StartupPath, "tools\\ffmpeg.exe");
+            if (Config.IsWindows)
+            {
+                processinfo.FileName = Path.Combine(Application.StartupPath, "tools\\ffmpeg.exe");
+            }
+            else
+            {
+                processinfo.FileName = "ffmpeg";
+            }
             processinfo.Arguments = string.Format("-y -i \"{1}\" -i \"{2}\" -vcodec copy -acodec copy \"{0}\"",
                 outfile, vedio, audio
                 );
@@ -157,7 +189,14 @@ namespace Easyx264CoderGUI
             string tmp = Path.GetRandomFileName();
             string audiofile = Path.Combine(Path.GetDirectoryName(tmp), Path.ChangeExtension(tmp, ".mp4"));
             ProcessStartInfo processinfo = new ProcessStartInfo();
-            processinfo.FileName = Path.Combine(Application.StartupPath, "tools\\ffmpeg.exe");
+            if (Config.IsWindows)
+            {
+                processinfo.FileName = Path.Combine(Application.StartupPath, "tools\\ffmpeg.exe");
+            }
+            else
+            {
+                processinfo.FileName = "ffmpeg";
+            }
             processinfo.Arguments = string.Format(" -i \"{0}\" -vn -acodec copy \"{1}\"",
                 fileConfig.AudioInputFile, audiofile
                 );
@@ -180,7 +219,14 @@ namespace Easyx264CoderGUI
         {
             string outfile = FileUtility.GetNoSameNameFile(fileConfig.OutputFile + ".mp4");
             ProcessStartInfo processinfo = new ProcessStartInfo();
-            processinfo.FileName = Path.Combine(Application.StartupPath, "tools\\mp4box.exe");
+            if (Config.IsWindows)
+            {
+                processinfo.FileName = Path.Combine(Application.StartupPath, "tools\\mp4box.exe");
+            }
+            else
+            {
+                processinfo.FileName = "mp4box";
+            }
             processinfo.Arguments = string.Format("-add \"{1}\" -add \"{2}\" {3} \"{0}\"",
                 outfile, vedio, audio, audiodelay == 0 ? "" : ("-delay 2=" + audiodelay)
                 );
