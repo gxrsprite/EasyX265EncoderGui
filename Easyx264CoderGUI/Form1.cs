@@ -87,7 +87,9 @@ namespace Easyx264CoderGUI
             var encoders = Enum.GetNames(typeof(Encoder));
             comboBox2.Items.Clear();
             comboBox2.Items.AddRange(encoders);
+            comboBox2.SelectedIndex = 0;
 
+            cbdecoderMode.SelectedIndex = 0;
 
             if (File.Exists("config.xml"))
             {
@@ -331,7 +333,7 @@ namespace Easyx264CoderGUI
             //if (cbEnableX265.Checked)
 
             //vedioConfig.ffmpeg4x265Args = txtffmpeg4x265.Text;
-            vedioConfig.Encoder = (Encoder)Enum.Parse(typeof(Encoder), comboBox2.SelectedItem.ToString());
+            vedioConfig.Encoder = (Encoder)Enum.Parse(typeof(Encoder), comboBox2.Text);
 
             vedioConfig.UserArgs = txtUserArgs.Text;
             vedioConfig.depth = int.Parse(cbColorDepth.Text);
@@ -630,7 +632,15 @@ namespace Easyx264CoderGUI
                             if (fileConfig.InputType == InputType.Vedio)
                             {
                                 fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
-                                vedioOutputFile = NvEncCommand.NvEncSelf(fileConfig);
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr || fileConfig.VedioConfig.decoderMode == DecoderMode.self)
+                                {
+                                    vedioOutputFile = NvEncCommand.NvEncSelf(fileConfig);
+                                }
+                                else
+                                {
+                                    vedioOutputFile = NvEncCommand.ffmpegPipeNvEnc(fileConfig);
+                                }
+
                             }
                             else if (fileConfig.InputType == InputType.VapoursynthScript)
                             {

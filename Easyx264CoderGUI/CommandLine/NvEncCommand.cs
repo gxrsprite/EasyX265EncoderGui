@@ -64,7 +64,7 @@ namespace Easyx264CoderGUI.CommandLine
                 cqp = "";
             }
             string codec = vedioConfig.Encoder == Encoder.NvEnc_H265 ? "-c hevc" : "-c h264";
-            var bat = $"{nvencexe.Maohao()} --y4m {cqp} {codec} --output-depth {vedioConfig.depth} {vedioConfig.UserArgs} -i {fileConfig.VedioFileFullName} -o {outfile.Maohao()}";
+            var bat = $"{nvencexe.Maohao()} {cqp} {codec} --output-depth {vedioConfig.depth} {vedioConfig.UserArgs} -i {fileConfig.VedioFileFullName.Maohao()} -o {outfile.Maohao()}";
 
             if (vedioConfig.BitType == EncoderBitrateType.crf || vedioConfig.BitType == EncoderBitrateType.qp)
             {
