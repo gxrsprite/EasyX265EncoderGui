@@ -45,7 +45,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>F:\Easyx265Gui\</OutputPath>
     <DefineConstants>TRACE;X265</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -87,6 +87,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CommandLine\FFmpegCommand.cs" />
+    <Compile Include="CommandLine\NvEncCommand.cs" />
     <Compile Include="CommandLine\X264Command.cs" />
     <Compile Include="ColorMatrix.cs" />
     <Compile Include="CommandLine\CommandHelper.cs" />
@@ -140,7 +141,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\app.manifest">
       <SubType>Designer</SubType>
     </None>

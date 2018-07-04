@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using CommonLibrary;
 
 namespace Easyx264CoderGUI.CommandLine
 {
@@ -33,7 +32,7 @@ namespace Easyx264CoderGUI.CommandLine
             int bitrat = 0;
             if (audioConfig.Quality < 1)
             {
-                bitrat = (int)(audioConfig.Quality * 400);
+                bitrat = (int)(audioConfig.Quality * 500);
             }
             else
             {
@@ -42,6 +41,18 @@ namespace Easyx264CoderGUI.CommandLine
             var eac3to = Path.Combine(Environment.CurrentDirectory, Eac3toExecute);
             var opusenc = Path.Combine(Environment.CurrentDirectory, OpusEnc);
             string bat = $"{eac3to.Maohao()} {fileConfig.VedioFileFullName.Maohao()}  {audioConfig.Tracker}: {audioConfig.CommandLineArgs} stdout.wav | {opusenc.Maohao()} --ignorelength --bitrate {bitrat} --vbr -  {audiofile.Maohao()}";
+            ProcessCmd.RunBat(bat, Config.Temp);
+            return audiofile;
+        }
+
+        public static string ConvertAudioToFlac(FileConfig fileConfig)
+        {
+            AudioConfig audioConfig = fileConfig.AudioConfig;
+            string tmp = Config.Temp;
+            string audiofile = FileUtility.RandomName(tmp) + ".flac";
+            var eac3to = Path.Combine(Environment.CurrentDirectory, Eac3toExecute);
+            var opusenc = Path.Combine(Environment.CurrentDirectory, OpusEnc);
+            string bat = $"{eac3to.Maohao()} {fileConfig.VedioFileFullName.Maohao()} {audioConfig.Tracker}: {audiofile.Maohao()} ";
             ProcessCmd.RunBat(bat, Config.Temp);
             return audiofile;
         }

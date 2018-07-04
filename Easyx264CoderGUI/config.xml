@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <config>
-  <Temp></Temp>
+  <Temp>d:\temp\</Temp>
   <vspipe>D:\Program Files (x86)\VapourSynth\core64\vspipe</vspipe>
   <VsPluginPath>J:\vspipe\filters</VsPluginPath>
 </config>

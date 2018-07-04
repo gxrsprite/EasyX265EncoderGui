@@ -78,12 +78,17 @@ namespace Easyx264CoderGUI
 #if X265
             //this.toolTip1.SetToolTip(this.cbColorDepth, "x265推荐10bit");
             cbColorDepth.Text = "10";
-            txtUserArgs.Text = "  --no-sao --no-strong-intra-smoothing --no-open-gop --no-rect --no-amp --weightb --limit-tu=4 --aq-mode 2 --min-keyint 1 --merange 38  --keyint 1200 --colorprim bt709  --qcomp 0.7 --range limited --pools 4 --vbv-bufsize 18000 --vbv-maxrate 18000 ";
-            cbpreset.Text = "medium";
+            txtUserArgs.Text = "  --no-sao --strong-intra-smoothing   --no-open-gop --no-rect --no-amp --weightb --qpmax 28  --limit-tu=4 --aq-mode 3 --aq-strength 0.8 --min-keyint 1 --merange 44  --keyint 600 --colorprim bt709  --qcomp 0.65 --range limited --pools 16 --vbv-bufsize 27000 --vbv-maxrate 27000 --psy-rd 3 --psy-rdoq 2 --bframes 6 --rdoq-level 2 --weightb --rd 4";
+            cbpreset.Text = "slow";
             this.Text = "简单批量x265转码";
 #else
 
 #endif
+            var encoders = Enum.GetNames(typeof(Encoder));
+            comboBox2.Items.Clear();
+            comboBox2.Items.AddRange(encoders);
+
+
             if (File.Exists("config.xml"))
             {
                 XElement config = XElement.Load("config.xml");
@@ -292,9 +297,17 @@ namespace Easyx264CoderGUI
             audioConfig.UseEac3to = cbUseEac3to.Checked;
             audioConfig.Tracker = int.Parse(txtAudioTracker.Text);
             audioConfig.CommandLineArgs = txtAudioLine.Text;
-            if (cbUseOpus.Checked)
+            if (cbAudioEncoder.SelectedItem.ToString() == "Opus")
             {
                 audioConfig.Encoder = AudioEncoder.opus;
+            }
+            else if (cbAudioEncoder.SelectedItem.ToString() == "AAC")
+            {
+                audioConfig.Encoder = AudioEncoder.aac;
+            }
+            else if (cbAudioEncoder.SelectedItem.ToString() == "FLAC")
+            {
+                audioConfig.Encoder = AudioEncoder.flac;
             }
         }
 
@@ -318,11 +331,8 @@ namespace Easyx264CoderGUI
             //if (cbEnableX265.Checked)
 
             //vedioConfig.ffmpeg4x265Args = txtffmpeg4x265.Text;
-#if X265
-            vedioConfig.Encoder = Encoder.x265;
-#else
-             
-#endif
+            vedioConfig.Encoder = (Encoder)Enum.Parse(typeof(Encoder), comboBox2.SelectedItem.ToString());
+
             vedioConfig.UserArgs = txtUserArgs.Text;
             vedioConfig.depth = int.Parse(cbColorDepth.Text);
             vedioConfig.preset = cbpreset.Text;
@@ -340,13 +350,19 @@ namespace Easyx264CoderGUI
                 vedioConfig.AvsScript = avsscript;
             }
             else if (cbUseVSTemplete.Checked)
-            {//处理自定义avs模板
+            {//处理自定义vs模板
                 fileConfig.InputType = InputType.VapoursynthScript;
                 string avsscript = txtVsScript.Text;
                 avsscript = avsscript.Replace("$InputVedio$", fileConfig.VedioFileFullName)
-                    .Replace("$vapoursynth_plugin$", Config.VsPluginPath);
+                    .Replace("$vapoursynth_plugin$", Config.VsPluginPath)
+                    .Replace("$InputVedioWithoutExtension$", FileUtility.GetFullNameWithoutExtension(fileConfig.VedioFileFullName));
+
+
+                var dgipath = Path.ChangeExtension(fileConfig.VedioFileFullName, ".dgi");
+                avsscript = avsscript.Replace("$InputDgi$", dgipath);
                 vedioConfig.VapoursynthScript = avsscript;
             }
+            vedioConfig.decoderMode = cbdecoderMode.SelectedItem.ToString();
         }
 
         private void AddToTaskList(FileConfig fileConfig)
@@ -373,6 +389,10 @@ namespace Easyx264CoderGUI
                 {
                     var fileconfig = (item.Tag as FileConfig);
                     if (fileconfig.state != -1)
+                    {
+
+                    }
+                    if (item.Index <= hasHandle)
                     {
                         hasHandle--;
                     }
@@ -448,7 +468,7 @@ namespace Easyx264CoderGUI
                             {
                                 thisstate = -10;
                             }
-                            listView2.Items[isHandling].SubItems["States"].Text = "视频转码中";
+                            item.SubItems["States"].Text = "视频转码中";
 
                             fileConfig.state++;
 
@@ -556,7 +576,7 @@ namespace Easyx264CoderGUI
                             else if (fileConfig.InputType == InputType.VapoursynthScript)
                             {
                                 fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
-                                string avsfilename = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), ".vpy"));
+                                string avsfilename = Path.Combine(Config.Temp, Path.ChangeExtension(Path.GetRandomFileName(), ".vpy"));
                                 File.WriteAllText(avsfilename, vedioconfig.VapoursynthScript, System.Text.Encoding.UTF8);
                                 fileConfig.VapoursynthFileFullName = avsfilename;
                                 fileConfig.InputType = InputType.VapoursynthScriptFile;
@@ -568,9 +588,14 @@ namespace Easyx264CoderGUI
                             if (fileConfig.InputType == InputType.Vedio)
                             {
                                 fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
-                                vedioOutputFile = X265Command.RunX265Command(fileConfig);
-                                //fileConfig.UseBat = true;
-                                //vedioOutputFile = X265Command.ffmpegPipeX265(fileConfig);
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr || fileConfig.VedioConfig.decoderMode == DecoderMode.pipe)
+                                {
+                                    vedioOutputFile = X265Command.ffmpegPipeX265(fileConfig);
+                                }
+                                else
+                                {
+                                    vedioOutputFile = X265Command.RunX265Command(fileConfig);
+                                }
 
                             }
                             else if (fileConfig.InputType == InputType.AvisynthScriptFile)
@@ -580,7 +605,7 @@ namespace Easyx264CoderGUI
                             else if (fileConfig.InputType == InputType.AvisynthScript)
                             {
                                 fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
-                                string avsfilename = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), ".avs"));
+                                string avsfilename = Path.Combine(Config.Temp, Path.ChangeExtension(Path.GetRandomFileName(), ".avs"));
                                 File.WriteAllText(avsfilename, vedioconfig.AvsScript, System.Text.Encoding.Default);
                                 fileConfig.AvsFileFullName = avsfilename;
                                 fileConfig.InputType = InputType.AvisynthScriptFile;
@@ -593,19 +618,69 @@ namespace Easyx264CoderGUI
                             else if (fileConfig.InputType == InputType.VapoursynthScript)
                             {
                                 fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
-                                string avsfilename = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), ".vpy"));
+                                string avsfilename = Path.Combine(Config.Temp, Path.ChangeExtension(Path.GetRandomFileName(), ".vpy"));
                                 File.WriteAllText(avsfilename, vedioconfig.VapoursynthScript, System.Text.Encoding.UTF8);
                                 fileConfig.VapoursynthFileFullName = avsfilename;
                                 fileConfig.InputType = InputType.VapoursynthScriptFile;
                                 vedioOutputFile = X265Command.RunVSx265(fileConfig);
                             }
                         }
+                        else if (vedioconfig.Encoder == Encoder.NvEnc_H265 || vedioconfig.Encoder == Encoder.NvEnc_H264)
+                        {
+                            if (fileConfig.InputType == InputType.Vedio)
+                            {
+                                fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
+                                vedioOutputFile = NvEncCommand.NvEncSelf(fileConfig);
+                            }
+                            else if (fileConfig.InputType == InputType.VapoursynthScript)
+                            {
+                                fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
+                                string avsfilename = Path.Combine(Config.Temp, Path.ChangeExtension(Path.GetRandomFileName(), ".vpy"));
+                                File.WriteAllText(avsfilename, vedioconfig.VapoursynthScript, System.Text.Encoding.UTF8);
+                                fileConfig.VapoursynthFileFullName = avsfilename;
+                                fileConfig.InputType = InputType.VapoursynthScriptFile;
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr || fileConfig.VedioConfig.decoderMode == DecoderMode.self)
+                                {
+                                    vedioOutputFile = NvEncCommand.NvEncUseVs(fileConfig);
+                                }
+                                else
+                                {
+                                    vedioOutputFile = NvEncCommand.VspipeNvEnc(fileConfig);
+                                }
+
+                            }
+                            else if (fileConfig.InputType == InputType.AvisynthScript)
+                            {
+                                fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
+                                string avsfilename = Path.Combine(Config.Temp, Path.ChangeExtension(Path.GetRandomFileName(), ".avs"));
+                                File.WriteAllText(avsfilename, vedioconfig.AvsScript, System.Text.Encoding.Default);
+                                fileConfig.AvsFileFullName = avsfilename;
+                                fileConfig.InputType = InputType.AvisynthScriptFile;
+                                vedioOutputFile = NvEncCommand.NvEncUseVs(fileConfig);
+                            }
+                            else if (fileConfig.InputType == InputType.VapoursynthScriptFile)
+                            {
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr || fileConfig.VedioConfig.decoderMode == DecoderMode.self)
+                                {
+                                    vedioOutputFile = NvEncCommand.NvEncUseVs(fileConfig);
+                                }
+                                else
+                                {
+                                    vedioOutputFile = NvEncCommand.VspipeNvEnc(fileConfig);
+                                }
+                            }
+                            else if (fileConfig.InputType == InputType.AvisynthScriptFile)
+                            {
+                                vedioOutputFile = NvEncCommand.NvEncUseVs(fileConfig);
+                            }
+
+                        }
                     }
                     catch (EncoderException e)
                     {
                         this.Invoke((Action)delegate ()
                         {
-                            listView2.Items[isHandling].SubItems["States"].Text = e.Message;
+                            item.SubItems["States"].Text = e.Message;
                         });
                         fileConfig.state = -10;
                         continue;
@@ -615,19 +690,19 @@ namespace Easyx264CoderGUI
                     {
                         this.Invoke((Action)delegate ()
                         {
-                            listView2.Items[isHandling].SubItems["States"].Text = "视频编码失败";
+                            item.SubItems["States"].Text = "视频编码失败";
                         });
                         fileConfig.state = -10;
                         continue;
                     }
 
-                    if ((fileConfig.AudioConfig.Enabled || fileConfig.VedioConfig.Encoder == Encoder.x265) && fileConfig.state != -10)
+                    if (fileConfig.AudioConfig.Enabled && fileConfig.state != -10)
                     {
-                        //if (fileConfig.InputType == InputType.Vedio && fileConfig.AudioConfig.CopyStream)
-                        //{
-                        //    //直接由x264处理掉了 //改为分开处理
-                        //}
-                        //else
+                        if (fileConfig.InputType == InputType.Vedio && fileConfig.AudioConfig.CopyStream && fileConfig.VedioConfig.Encoder == Encoder.x264)
+                        {
+                            //直接由x264处理掉
+                        }
+                        else
                         {
                             if (isHandling >= listView2.Items.Count)
                             {
@@ -657,9 +732,13 @@ namespace Easyx264CoderGUI
                                     {
                                         audiofile = Eac3toCommand.ConvertMusic(fileConfig);
                                     }
-                                    else
+                                    else if (fileConfig.AudioConfig.Encoder == AudioEncoder.opus)
                                     {
                                         audiofile = Eac3toCommand.ConvertAudioTOpus(fileConfig);
+                                    }
+                                    else if (fileConfig.AudioConfig.Encoder == AudioEncoder.flac)
+                                    {
+                                        audiofile = Eac3toCommand.ConvertAudioToFlac(fileConfig);
                                     }
 
                                 }
@@ -669,9 +748,13 @@ namespace Easyx264CoderGUI
                                     {
                                         audiofile = CommandHelper.RunFFmpegToAAC(fileConfig);
                                     }
-                                    else
+                                    else if (fileConfig.AudioConfig.Encoder == AudioEncoder.opus)
                                     {
                                         audiofile = CommandHelper.RunFFmpegToOpus(fileConfig);
+                                    }
+                                    else if (fileConfig.AudioConfig.Encoder == AudioEncoder.flac)
+                                    {
+                                        audiofile = FFmpegCommand.RunFFmpegToFlac(fileConfig);
                                     }
                                 }
                             }
@@ -682,7 +765,6 @@ namespace Easyx264CoderGUI
                             }
                             this.Invoke((Action)delegate ()
                             {
-                                item = listView2.Items[isHandling];
                                 item.SubItems["States"].Text = "封装中";
                             });
                             int delay = 0;
@@ -731,7 +813,7 @@ namespace Easyx264CoderGUI
                             {
                                 this.Invoke((Action)delegate ()
                                 {
-                                    listView2.Items[isHandling].SubItems["States"].Text = "拷贝中";
+                                    item.SubItems["States"].Text = "拷贝中";
                                 });
 
                                 File.Copy(vedioOutputFile, copyto, true);
@@ -741,7 +823,7 @@ namespace Easyx264CoderGUI
                             {
                                 this.Invoke((Action)delegate ()
                                 {
-                                    listView2.Items[isHandling].SubItems["States"].Text = "剪切中";
+                                    item.SubItems["States"].Text = "剪切中";
                                 });
 
                                 File.Move(vedioOutputFile, copyto);
@@ -754,11 +836,11 @@ namespace Easyx264CoderGUI
                     {
                         if (fileConfig.state == -10)
                         {
-                            listView2.Items[isHandling].SubItems["States"].Text = "失败";
+                            item.SubItems["States"].Text = "失败";
                         }
                         else
                         {
-                            listView2.Items[isHandling].SubItems["States"].Text = "完成";
+                            item.SubItems["States"].Text = "完成";
                         }
 
                     });
@@ -767,7 +849,7 @@ namespace Easyx264CoderGUI
                 {
                     this.Invoke((Action)delegate ()
                     {
-                        listView2.Items[isHandling].SubItems["States"].Text = "失败：" + ex.Message;
+                        item.SubItems["States"].Text = "失败：" + ex.Message;
                     });
                 }
 
@@ -829,16 +911,17 @@ namespace Easyx264CoderGUI
                 cbColorDepth.Text = "8";
                 cbcsp.SelectedIndex = 0;
 #if X265
-                cbpreset.Text = "medium";
+                cbpreset.Text = "slow";
                 cbMuxer.Text = "mkv";
-                txtUserArgs.Text = "--no-sao --no-strong-intra-smoothing --no-open-gop --no-rect --no-amp --weightb --limit-tu=4 --aq-mode 2 --min-keyint 1 --merange 36  --keyint 1600 --colorprim bt709  --qcomp 0.7 --range limited --pools 4 --vbv-bufsize 18000 --vbv-maxrate 18000 ";
+                txtUserArgs.Text = "  --no-sao --strong-intra-smoothing  --no-open-gop --no-rect --no-amp  --qpmax 28 --weightb --limit-tu=4 --aq-mode 3 --aq-strength 0.8 --min-keyint 1 --merange 44  --keyint 600 --colorprim bt709  --qcomp 0.7 --range limited --pools 16 --vbv-bufsize 27000 --vbv-maxrate 27000 --psy-rd 3 --psy-rdoq 2 --bframes 6 --rdoq-level 2 --weightb --rd 4";
 #else
                 cbpreset.Text = "slow";
                 txtUserArgs.Text = Resource1.TempleteHDi420;
-#endif
-                textBox3.Text = "22";
-
+                
                 cbMuxer.Text = "mp4";
+#endif
+                textBox3.Text = "21";
+
                 txtbitrate.Text = "";
                 cbUseAvsTemplete.Checked = false;
             }
@@ -853,19 +936,20 @@ namespace Easyx264CoderGUI
 #else
                  cbpreset.Text = "slow";
                 txtUserArgs.Text = Resource1.TempleteGamei444;
+                
+                cbMuxer.Text = "mp4";
 #endif
                 textBox3.Text = "24";
 
-                cbMuxer.Text = "mp4";
                 cbUseAvsTemplete.Checked = false;
             }
             else if (cbVedioConfigTemplete.Text == "爱情动作")
             {
 #if X265
-                textBox3.Text = "25";
-                cbColorDepth.Text = "8";
+                textBox3.Text = "26";
+                cbColorDepth.Text = "10";
                 cbpreset.Text = "medium";
-                txtUserArgs.Text = "  --no-open-gop --no-rect --weightb --aq-mode 2 --merange 30 --limit-tu=4 --min-keyint 1 --keyint 2800 --colorprim bt709  --qcomp 0.7 --range limited --pools 4 --vbv-bufsize 12000 --vbv-maxrate 12000 ";
+                txtUserArgs.Text = "  --no-open-gop --no-rect --weightb --aq-mode 3 --merange 40 --min-keyint 1 --qpmax 33 --keyint 1800 --colorprim bt709  --qcomp 0.65 --range limited --pools 16 --vbv-bufsize 12000 --vbv-maxrate 12000 --psy-rd 1.4";
                 cbMuxer.Text = "mkv";
 #endif
             }
@@ -940,11 +1024,19 @@ namespace Easyx264CoderGUI
         {
             if (cbUseEac3to.Checked)
             {
-                txtAudioLine.Text = "+3dB -mixlfe ";
+                txtAudioLine.Text = "+4dB -mixlfe ";
             }
             else
             {
-                txtAudioLine.Text = "-af volume=+3dB ";
+                txtAudioLine.Text = "-af volume=+4dB ";
+            }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedItem.ToString().Equals(Encoder.NvEnc_H265.ToString()))
+            {
+                txtUserArgs.Text = "--max-bitrate 27000";
             }
         }
     }

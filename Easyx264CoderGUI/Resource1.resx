@@ -199,6 +199,6 @@ Down10($depth$,stack=false, dither=-1, tvrange=$tvrange$)</value>
     <value>--demuxer lavf  --no-mbtree</value>
   </data>
   <data name="x264Line" xml:space="preserve">
-    <value>--acodec $acodec$ --output-csp $csp$ $profile$   $crf$  --preset $preset$  $tune$  $resize$    $userargs$   -o  "$outputfile$" "$input$"</value>
+    <value>--output-csp $csp$ $profile$   $crf$  --preset $preset$  $tune$  $resize$    $userargs$   -o  $outputfile$ $input$</value>
   </data>
 </root>

@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CommonLibrary;
 
 namespace AudioToAAC
 {
@@ -80,12 +81,12 @@ namespace AudioToAAC
         {
             btnClearList.Enabled = false;
             threadcount = Convert.ToInt32(txtTaskCount.Text);
-            Task.Factory.StartNew(delegate()
+            Task.Factory.StartNew(delegate ()
               {
                   List<Task> tasks = new List<Task>();
                   for (int i = 0; i < threadcount; i++)
                   {
-                      var t = Task.Factory.StartNew(delegate()
+                      var t = Task.Factory.StartNew(delegate ()
                        {
                            StartOneThread();
                        });
@@ -94,7 +95,7 @@ namespace AudioToAAC
                   Task.WaitAll(tasks.ToArray());
                   hasHandle = -1;
 
-                  Invoke((Action)delegate()
+                  Invoke((Action)delegate ()
                   {
                       btnClearList.Enabled = true;
                   });
@@ -118,7 +119,7 @@ namespace AudioToAAC
                 }
                 ListViewItem item = null;
 
-                this.Invoke((Action)delegate()
+                this.Invoke((Action)delegate ()
                 {
                     item = listView1.Items[isHandling];
                     listView1.Items[isHandling].SubItems["States"].Text = "转码中";
@@ -150,26 +151,20 @@ namespace AudioToAAC
                     copyto = Path.Combine(textBox2.Text, Path.GetFileNameWithoutExtension(info.FullName) + ".m4a");
                 }
 
-                string bat = getbat(info.FullName, output);
-                ProcessStartInfo processinfo = new ProcessStartInfo();
-                processinfo.FileName = Environment.GetEnvironmentVariable("ComSpec");
-                processinfo.Arguments = "/c " + bat;
-                processinfo.UseShellExecute = false;    //输出信息重定向
-                processinfo.CreateNoWindow = true;
-                processinfo.RedirectStandardInput = true;
-                processinfo.RedirectStandardOutput = true;
-                processinfo.RedirectStandardError = false;
-                processinfo.WindowStyle = ProcessWindowStyle.Hidden;
-                Process ffmpeg = new Process();
-                ffmpeg.StartInfo = processinfo;
-                ffmpeg.Start();
+                AudioConfig ac = new AudioConfig();
+                ac.Encoder = AudioEncoder.aac;
+                ac.Input = info.FullName;
+                ac.Quality = float.Parse(txtQuality.Text);
+                int.TryParse(txtCh.Text, out ac.Channel);
+                if (string.IsNullOrEmpty(output))
+                {
+                    output = Path.GetFileNameWithoutExtension(ac.Input) + ".m4a";
+                }
+                ac.Output = output;
 
-                var result = ffmpeg.StandardOutput.ReadToEnd();
-                ffmpeg.WaitForExit();
-                //ffmpeg.Kill();//等待进程结束
-                ffmpeg.Dispose();
+                CommandHelper.RunFFmpegToAAC(ac);
 
-                if (cbCopyID3.Checked == true)
+                if (cbCopyID3.Checked == true && ac.Encoder == AudioEncoder.aac)
                 {
                     try
                     {
@@ -196,7 +191,7 @@ namespace AudioToAAC
                     {
                         if (cblCompeteAction.SelectedIndex == 0)
                         {
-                            this.Invoke((Action)delegate()
+                            this.Invoke((Action)delegate ()
                             {
                                 listView1.Items[isHandling].SubItems["States"].Text = "拷贝中";
                             });
@@ -206,7 +201,7 @@ namespace AudioToAAC
                         }
                         else if (cblCompeteAction.SelectedIndex == 1)
                         {
-                            this.Invoke((Action)delegate()
+                            this.Invoke((Action)delegate ()
                             {
                                 listView1.Items[isHandling].SubItems["States"].Text = "剪切中";
                             });
@@ -220,7 +215,7 @@ namespace AudioToAAC
                     catch { }
                 }
 
-                this.Invoke((Action)delegate()
+                this.Invoke((Action)delegate ()
                 {
                     listView1.Items[isHandling].SubItems["States"].Text = "完成";
                 });
@@ -229,28 +224,9 @@ namespace AudioToAAC
 
         }
 
-
-
-        private string getbat(string input)
-        {
-            return getbat(input, "");
-        }
-
-        private string getbat(string input, string output)
-        {
-            if (string.IsNullOrEmpty(output))
-            {
-                output = Path.GetFileNameWithoutExtension(input) + ".m4a";
-            }
-            string ac = string.IsNullOrEmpty(txtCh.Text) ? "" : ("-ac " + txtCh.Text);
-
-            return string.Format("tools\\ffmpeg.exe -vn -i \"{0}\" -f {3}  wav pipe:| tools\\neroAacEnc -ignorelength -q {2} -lc -if - -of \"{1}\"",
-                input, output, txtQuality.Text, ac);
-        }
-
         private void btnOutputPath_Click(object sender, EventArgs e)
         {
-            var result = folderBrowserDialog1.ShowDialog();
+            var result = folderBrowserDialog1.ShowDialog(this);
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 textBox1.Text = folderBrowserDialog1.SelectedPath;

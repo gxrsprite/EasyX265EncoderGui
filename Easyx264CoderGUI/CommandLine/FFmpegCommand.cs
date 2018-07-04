@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using CommonLibrary;
 
 namespace Easyx264CoderGUI
@@ -43,6 +45,43 @@ namespace Easyx264CoderGUI
             var result = string.Format(ffmpegPipex265Args, fileconfig.VedioFileFullName.Maohao(), args);
 
             return result;
+        }
+
+        public static string RunFFmpegToFlac(FileConfig fileConfig)
+        {
+            AudioConfig audioConfig = fileConfig.AudioConfig;
+            ProcessStartInfo processinfo = new ProcessStartInfo();
+            string tmp = Config.Temp;
+            string audiofile = FileUtility.RandomName(tmp) + ".flac";
+
+            string bat = string.Empty;
+            if (fileConfig.InputType == InputType.AvisynthScriptFile)
+            {
+                return null;
+            }
+            else
+            {
+                bat = getAudioFlacBat(fileConfig.AudioInputFile, audiofile, audioConfig);
+            }
+            ProcessCmd.RunBat(bat, Config.Temp);
+
+            return audiofile;
+        }
+
+        private static string getAudioFlacBat(string input, string output, AudioConfig audioconfig)
+        {
+            string ffmpegfile = "";
+            if (Config.IsWindows)
+            {
+                ffmpegfile = Path.Combine(Application.StartupPath, "tools\\ffmpeg.exe");
+            }
+            else
+            {
+                ffmpegfile = "ffmpeg";
+            }
+            
+            return $"{ffmpegfile.Maohao()} -i {input.Maohao()} -c:a flac -compression_level 9  {output.Maohao()}";
+            //return $"{ffmpegfile.Maohao()} -i {input.Maohao()}  {audioargs} -c:a libopus -vn -vbr on { output.Maohao()}";
         }
     }
 }

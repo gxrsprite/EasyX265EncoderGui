@@ -34,6 +34,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.AudioPage = new System.Windows.Forms.TabPage();
+            this.lbch = new System.Windows.Forms.Label();
+            this.txtCh = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.cblCompeteAction = new System.Windows.Forms.ComboBox();
@@ -54,9 +56,9 @@
             this.FullName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.States = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FilePath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.txtCh = new System.Windows.Forms.TextBox();
-            this.lbch = new System.Windows.Forms.Label();
+            this.folderBrowserDialog1 = new System.Windows.Forms.MyFolderBrowserDialog();
+            this.cbAudioEncoder = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.AudioPage.SuspendLayout();
@@ -108,6 +110,8 @@
             // 
             // AudioPage
             // 
+            this.AudioPage.Controls.Add(this.label4);
+            this.AudioPage.Controls.Add(this.cbAudioEncoder);
             this.AudioPage.Controls.Add(this.lbch);
             this.AudioPage.Controls.Add(this.txtCh);
             this.AudioPage.Controls.Add(this.button2);
@@ -133,6 +137,22 @@
             this.AudioPage.TabIndex = 1;
             this.AudioPage.Text = "音频转码";
             this.AudioPage.UseVisualStyleBackColor = true;
+            // 
+            // lbch
+            // 
+            this.lbch.AutoSize = true;
+            this.lbch.Location = new System.Drawing.Point(420, 266);
+            this.lbch.Name = "lbch";
+            this.lbch.Size = new System.Drawing.Size(41, 12);
+            this.lbch.TabIndex = 18;
+            this.lbch.Text = "声道：";
+            // 
+            // txtCh
+            // 
+            this.txtCh.Location = new System.Drawing.Point(467, 262);
+            this.txtCh.Name = "txtCh";
+            this.txtCh.Size = new System.Drawing.Size(31, 21);
+            this.txtCh.TabIndex = 17;
             // 
             // button2
             // 
@@ -188,7 +208,7 @@
             this.cbCopyID3.AutoSize = true;
             this.cbCopyID3.Checked = true;
             this.cbCopyID3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCopyID3.Location = new System.Drawing.Point(10, 303);
+            this.cbCopyID3.Location = new System.Drawing.Point(9, 311);
             this.cbCopyID3.Name = "cbCopyID3";
             this.cbCopyID3.Size = new System.Drawing.Size(66, 16);
             this.cbCopyID3.TabIndex = 10;
@@ -206,7 +226,7 @@
             // 
             // txtTaskCount
             // 
-            this.txtTaskCount.Location = new System.Drawing.Point(317, 295);
+            this.txtTaskCount.Location = new System.Drawing.Point(327, 294);
             this.txtTaskCount.Name = "txtTaskCount";
             this.txtTaskCount.Size = new System.Drawing.Size(27, 21);
             this.txtTaskCount.TabIndex = 8;
@@ -215,7 +235,7 @@
             // cbKeepFileTree
             // 
             this.cbKeepFileTree.AutoSize = true;
-            this.cbKeepFileTree.Location = new System.Drawing.Point(10, 280);
+            this.cbKeepFileTree.Location = new System.Drawing.Point(9, 288);
             this.cbKeepFileTree.Name = "cbKeepFileTree";
             this.cbKeepFileTree.Size = new System.Drawing.Size(96, 16);
             this.cbKeepFileTree.TabIndex = 7;
@@ -225,7 +245,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(100, 264);
+            this.label2.Location = new System.Drawing.Point(286, 266);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(95, 12);
             this.label2.TabIndex = 6;
@@ -233,7 +253,7 @@
             // 
             // txtQuality
             // 
-            this.txtQuality.Location = new System.Drawing.Point(54, 261);
+            this.txtQuality.Location = new System.Drawing.Point(240, 263);
             this.txtQuality.Name = "txtQuality";
             this.txtQuality.Size = new System.Drawing.Size(40, 21);
             this.txtQuality.TabIndex = 5;
@@ -242,7 +262,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 264);
+            this.label1.Location = new System.Drawing.Point(193, 266);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 4;
@@ -312,21 +332,31 @@
             this.FilePath.Text = "路径";
             this.FilePath.Width = 268;
             // 
-            // txtCh
+            // folderBrowserDialog1
             // 
-            this.txtCh.Location = new System.Drawing.Point(281, 260);
-            this.txtCh.Name = "txtCh";
-            this.txtCh.Size = new System.Drawing.Size(31, 21);
-            this.txtCh.TabIndex = 17;
+            this.folderBrowserDialog1.SelectedPath = null;
             // 
-            // lbch
+            // cbAudioEncoder
             // 
-            this.lbch.AutoSize = true;
-            this.lbch.Location = new System.Drawing.Point(234, 264);
-            this.lbch.Name = "lbch";
-            this.lbch.Size = new System.Drawing.Size(41, 12);
-            this.lbch.TabIndex = 18;
-            this.lbch.Text = "声道：";
+            this.cbAudioEncoder.FormattingEnabled = true;
+            this.cbAudioEncoder.Items.AddRange(new object[] {
+            "AAC",
+            "Opus",
+            "FLAC"});
+            this.cbAudioEncoder.Location = new System.Drawing.Point(79, 258);
+            this.cbAudioEncoder.Name = "cbAudioEncoder";
+            this.cbAudioEncoder.Size = new System.Drawing.Size(55, 20);
+            this.cbAudioEncoder.TabIndex = 19;
+            this.cbAudioEncoder.Text = "AAC";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 265);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 12);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "类型：";
             // 
             // Form1
             // 
@@ -365,7 +395,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnOutputPath;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.MyFolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.ColumnHeader States;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtQuality;
@@ -381,6 +411,8 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label lbch;
         private System.Windows.Forms.TextBox txtCh;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cbAudioEncoder;
     }
 }
 

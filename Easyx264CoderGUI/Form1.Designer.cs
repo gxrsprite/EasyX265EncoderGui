@@ -43,6 +43,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.btnOneclickStart = new System.Windows.Forms.Button();
             this.gbVedio = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.cbEnableQpmod = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.txtbitrate = new System.Windows.Forms.TextBox();
@@ -64,8 +66,8 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbAudioEncoder = new System.Windows.Forms.ComboBox();
             this.txtAudioLine = new System.Windows.Forms.TextBox();
-            this.cbUseOpus = new System.Windows.Forms.CheckBox();
             this.txtAudioTracker = new System.Windows.Forms.TextBox();
             this.cbUseEac3to = new System.Windows.Forms.CheckBox();
             this.cbcopuaudio = new System.Windows.Forms.CheckBox();
@@ -113,9 +115,11 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除此任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.folderBrowserDialog1 = new System.Windows.Forms.MyFolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label18 = new System.Windows.Forms.Label();
+            this.cbdecoderMode = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.AddTask.SuspendLayout();
@@ -135,7 +139,7 @@
             this.文件ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(615, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(617, 25);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -157,9 +161,9 @@
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(0, 660);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 707);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(615, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(617, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -174,7 +178,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 25);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(615, 635);
+            this.tabControl1.Size = new System.Drawing.Size(617, 682);
             this.tabControl1.TabIndex = 5;
             // 
             // AddTask
@@ -200,7 +204,7 @@
             this.AddTask.Location = new System.Drawing.Point(4, 22);
             this.AddTask.Name = "AddTask";
             this.AddTask.Padding = new System.Windows.Forms.Padding(3);
-            this.AddTask.Size = new System.Drawing.Size(607, 609);
+            this.AddTask.Size = new System.Drawing.Size(609, 656);
             this.AddTask.TabIndex = 1;
             this.AddTask.Text = "添加视频";
             this.AddTask.UseVisualStyleBackColor = true;
@@ -209,7 +213,7 @@
             // 
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(16, 579);
+            this.label16.Location = new System.Drawing.Point(16, 626);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(65, 12);
             this.label16.TabIndex = 24;
@@ -226,7 +230,7 @@
             "flv",
             "战渣浪后黑",
             "战渣浪前黑"});
-            this.cbMuxer.Location = new System.Drawing.Point(87, 576);
+            this.cbMuxer.Location = new System.Drawing.Point(87, 623);
             this.cbMuxer.Name = "cbMuxer";
             this.cbMuxer.Size = new System.Drawing.Size(99, 20);
             this.cbMuxer.TabIndex = 23;
@@ -235,7 +239,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(158, 320);
+            this.label10.Location = new System.Drawing.Point(155, 330);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(89, 12);
             this.label10.TabIndex = 22;
@@ -252,7 +256,7 @@
             "网络视频",
             "战渣浪",
             "高保真游戏视频"});
-            this.cbVedioConfigTemplete.Location = new System.Drawing.Point(251, 316);
+            this.cbVedioConfigTemplete.Location = new System.Drawing.Point(248, 326);
             this.cbVedioConfigTemplete.Name = "cbVedioConfigTemplete";
             this.cbVedioConfigTemplete.Size = new System.Drawing.Size(121, 20);
             this.cbVedioConfigTemplete.TabIndex = 21;
@@ -261,7 +265,7 @@
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button4.Location = new System.Drawing.Point(395, 206);
+            this.button4.Location = new System.Drawing.Point(392, 216);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 20;
@@ -272,7 +276,7 @@
             // btnOneclickStart
             // 
             this.btnOneclickStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOneclickStart.Location = new System.Drawing.Point(496, 576);
+            this.btnOneclickStart.Location = new System.Drawing.Point(496, 623);
             this.btnOneclickStart.Name = "btnOneclickStart";
             this.btnOneclickStart.Size = new System.Drawing.Size(75, 23);
             this.btnOneclickStart.TabIndex = 19;
@@ -283,6 +287,10 @@
             // gbVedio
             // 
             this.gbVedio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbVedio.Controls.Add(this.label18);
+            this.gbVedio.Controls.Add(this.cbdecoderMode);
+            this.gbVedio.Controls.Add(this.label17);
+            this.gbVedio.Controls.Add(this.comboBox2);
             this.gbVedio.Controls.Add(this.cbEnableQpmod);
             this.gbVedio.Controls.Add(this.label13);
             this.gbVedio.Controls.Add(this.txtbitrate);
@@ -303,17 +311,41 @@
             this.gbVedio.Controls.Add(this.label5);
             this.gbVedio.Controls.Add(this.textBox3);
             this.gbVedio.Controls.Add(this.label4);
-            this.gbVedio.Location = new System.Drawing.Point(23, 338);
+            this.gbVedio.Location = new System.Drawing.Point(23, 352);
             this.gbVedio.Name = "gbVedio";
-            this.gbVedio.Size = new System.Drawing.Size(555, 139);
+            this.gbVedio.Size = new System.Drawing.Size(555, 172);
             this.gbVedio.TabIndex = 18;
             this.gbVedio.TabStop = false;
             this.gbVedio.Text = "视频参数";
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(25, 19);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(41, 12);
+            this.label17.TabIndex = 23;
+            this.label17.Text = "编码器";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "x264",
+            "x265",
+            "NVEnc_H265",
+            "NVEnc_H264"});
+            this.comboBox2.Location = new System.Drawing.Point(82, 12);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 20);
+            this.comboBox2.TabIndex = 22;
+            this.comboBox2.Text = "x265";
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            // 
             // cbEnableQpmod
             // 
             this.cbEnableQpmod.AutoSize = true;
-            this.cbEnableQpmod.Location = new System.Drawing.Point(131, 15);
+            this.cbEnableQpmod.Location = new System.Drawing.Point(129, 45);
             this.cbEnableQpmod.Name = "cbEnableQpmod";
             this.cbEnableQpmod.Size = new System.Drawing.Size(15, 14);
             this.cbEnableQpmod.TabIndex = 21;
@@ -324,7 +356,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(153, 49);
+            this.label13.Location = new System.Drawing.Point(151, 79);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(17, 12);
             this.label13.TabIndex = 20;
@@ -332,7 +364,7 @@
             // 
             // txtbitrate
             // 
-            this.txtbitrate.Location = new System.Drawing.Point(84, 44);
+            this.txtbitrate.Location = new System.Drawing.Point(82, 74);
             this.txtbitrate.Name = "txtbitrate";
             this.txtbitrate.Size = new System.Drawing.Size(63, 21);
             this.txtbitrate.TabIndex = 19;
@@ -340,7 +372,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(25, 49);
+            this.label12.Location = new System.Drawing.Point(23, 79);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(53, 12);
             this.label12.TabIndex = 18;
@@ -354,7 +386,7 @@
             "i422",
             "i444",
             "rgb"});
-            this.cbcsp.Location = new System.Drawing.Point(348, 13);
+            this.cbcsp.Location = new System.Drawing.Point(346, 43);
             this.cbcsp.Name = "cbcsp";
             this.cbcsp.Size = new System.Drawing.Size(51, 20);
             this.cbcsp.TabIndex = 17;
@@ -364,7 +396,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(290, 16);
+            this.label11.Location = new System.Drawing.Point(288, 46);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(65, 12);
             this.label11.TabIndex = 16;
@@ -373,7 +405,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(13, 77);
+            this.label9.Location = new System.Drawing.Point(11, 107);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 12);
             this.label9.TabIndex = 13;
@@ -381,7 +413,7 @@
             // 
             // txtUserArgs
             // 
-            this.txtUserArgs.Location = new System.Drawing.Point(72, 77);
+            this.txtUserArgs.Location = new System.Drawing.Point(70, 107);
             this.txtUserArgs.Multiline = true;
             this.txtUserArgs.Name = "txtUserArgs";
             this.txtUserArgs.Size = new System.Drawing.Size(448, 56);
@@ -390,7 +422,7 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(484, 47);
+            this.textBox5.Location = new System.Drawing.Point(482, 77);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(51, 21);
             this.textBox5.TabIndex = 11;
@@ -398,7 +430,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(422, 47);
+            this.textBox4.Location = new System.Drawing.Point(420, 77);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(56, 21);
             this.textBox4.TabIndex = 10;
@@ -407,7 +439,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(332, 49);
+            this.checkBox1.Location = new System.Drawing.Point(330, 79);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(84, 16);
             this.checkBox1.TabIndex = 9;
@@ -417,7 +449,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(205, 49);
+            this.label8.Location = new System.Drawing.Point(203, 79);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(29, 12);
             this.label8.TabIndex = 8;
@@ -433,7 +465,7 @@
             "animation",
             "lp",
             "lp++"});
-            this.comboBox1.Location = new System.Drawing.Point(248, 46);
+            this.comboBox1.Location = new System.Drawing.Point(246, 76);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(56, 20);
             this.comboBox1.TabIndex = 7;
@@ -441,7 +473,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(438, 17);
+            this.label7.Location = new System.Drawing.Point(436, 47);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(29, 12);
             this.label7.TabIndex = 6;
@@ -459,7 +491,7 @@
             "slower",
             "veryslow",
             "placebo"});
-            this.cbpreset.Location = new System.Drawing.Point(473, 16);
+            this.cbpreset.Location = new System.Drawing.Point(471, 46);
             this.cbpreset.Name = "cbpreset";
             this.cbpreset.Size = new System.Drawing.Size(71, 20);
             this.cbpreset.TabIndex = 3;
@@ -468,7 +500,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(260, 17);
+            this.label6.Location = new System.Drawing.Point(258, 47);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(23, 12);
             this.label6.TabIndex = 4;
@@ -480,7 +512,7 @@
             this.cbColorDepth.Items.AddRange(new object[] {
             "8",
             "10"});
-            this.cbColorDepth.Location = new System.Drawing.Point(214, 14);
+            this.cbColorDepth.Location = new System.Drawing.Point(212, 44);
             this.cbColorDepth.Name = "cbColorDepth";
             this.cbColorDepth.Size = new System.Drawing.Size(40, 20);
             this.cbColorDepth.TabIndex = 3;
@@ -491,7 +523,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(184, 19);
+            this.label5.Location = new System.Drawing.Point(182, 49);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 2;
@@ -499,16 +531,16 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(84, 14);
+            this.textBox3.Location = new System.Drawing.Point(82, 44);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(41, 21);
             this.textBox3.TabIndex = 1;
-            this.textBox3.Text = "26";
+            this.textBox3.Text = "21";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 19);
+            this.label4.Location = new System.Drawing.Point(23, 49);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 0;
@@ -517,8 +549,8 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.cbAudioEncoder);
             this.groupBox1.Controls.Add(this.txtAudioLine);
-            this.groupBox1.Controls.Add(this.cbUseOpus);
             this.groupBox1.Controls.Add(this.txtAudioTracker);
             this.groupBox1.Controls.Add(this.cbUseEac3to);
             this.groupBox1.Controls.Add(this.cbcopuaudio);
@@ -526,12 +558,25 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtQuality);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(24, 483);
+            this.groupBox1.Location = new System.Drawing.Point(24, 530);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(554, 75);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "音频参数";
+            // 
+            // cbAudioEncoder
+            // 
+            this.cbAudioEncoder.FormattingEnabled = true;
+            this.cbAudioEncoder.Items.AddRange(new object[] {
+            "Opus",
+            "AAC",
+            "FLAC"});
+            this.cbAudioEncoder.Location = new System.Drawing.Point(24, 43);
+            this.cbAudioEncoder.Name = "cbAudioEncoder";
+            this.cbAudioEncoder.Size = new System.Drawing.Size(55, 20);
+            this.cbAudioEncoder.TabIndex = 17;
+            this.cbAudioEncoder.Text = "Opus";
             // 
             // txtAudioLine
             // 
@@ -539,17 +584,7 @@
             this.txtAudioLine.Name = "txtAudioLine";
             this.txtAudioLine.Size = new System.Drawing.Size(151, 21);
             this.txtAudioLine.TabIndex = 16;
-            this.txtAudioLine.Text = "-af volume=+3dB";
-            // 
-            // cbUseOpus
-            // 
-            this.cbUseOpus.AutoSize = true;
-            this.cbUseOpus.Location = new System.Drawing.Point(14, 53);
-            this.cbUseOpus.Name = "cbUseOpus";
-            this.cbUseOpus.Size = new System.Drawing.Size(48, 16);
-            this.cbUseOpus.TabIndex = 15;
-            this.cbUseOpus.Text = "opus";
-            this.cbUseOpus.UseVisualStyleBackColor = true;
+            this.txtAudioLine.Text = "-af volume=+4dB";
             // 
             // txtAudioTracker
             // 
@@ -609,7 +644,7 @@
             this.txtQuality.Name = "txtQuality";
             this.txtQuality.Size = new System.Drawing.Size(40, 21);
             this.txtQuality.TabIndex = 5;
-            this.txtQuality.Text = "0.65";
+            this.txtQuality.Text = "0.7";
             // 
             // label2
             // 
@@ -623,7 +658,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(489, 274);
+            this.button2.Location = new System.Drawing.Point(486, 284);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 16;
@@ -635,7 +670,7 @@
             // 
             this.textBox2.AllowDrop = true;
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox2.Location = new System.Drawing.Point(209, 275);
+            this.textBox2.Location = new System.Drawing.Point(206, 285);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(239, 21);
             this.textBox2.TabIndex = 15;
@@ -645,7 +680,7 @@
             // 
             this.cbKeepFileTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbKeepFileTree.AutoSize = true;
-            this.cbKeepFileTree.Location = new System.Drawing.Point(57, 301);
+            this.cbKeepFileTree.Location = new System.Drawing.Point(54, 311);
             this.cbKeepFileTree.Name = "cbKeepFileTree";
             this.cbKeepFileTree.Size = new System.Drawing.Size(96, 16);
             this.cbKeepFileTree.TabIndex = 7;
@@ -660,7 +695,7 @@
             this.cblCompeteAction.Items.AddRange(new object[] {
             "拷贝到",
             "剪切到"});
-            this.cblCompeteAction.Location = new System.Drawing.Point(123, 275);
+            this.cblCompeteAction.Location = new System.Drawing.Point(120, 285);
             this.cblCompeteAction.Name = "cblCompeteAction";
             this.cblCompeteAction.Size = new System.Drawing.Size(71, 20);
             this.cblCompeteAction.TabIndex = 14;
@@ -669,7 +704,7 @@
             // 
             this.cbCompleteDo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbCompleteDo.AutoSize = true;
-            this.cbCompleteDo.Location = new System.Drawing.Point(57, 277);
+            this.cbCompleteDo.Location = new System.Drawing.Point(54, 287);
             this.cbCompleteDo.Name = "cbCompleteDo";
             this.cbCompleteDo.Size = new System.Drawing.Size(60, 16);
             this.cbCompleteDo.TabIndex = 13;
@@ -679,7 +714,7 @@
             // btnClearList
             // 
             this.btnClearList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClearList.Location = new System.Drawing.Point(489, 206);
+            this.btnClearList.Location = new System.Drawing.Point(486, 216);
             this.btnClearList.Name = "btnClearList";
             this.btnClearList.Size = new System.Drawing.Size(75, 23);
             this.btnClearList.TabIndex = 11;
@@ -690,7 +725,7 @@
             // btnOutputPath
             // 
             this.btnOutputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOutputPath.Location = new System.Drawing.Point(489, 236);
+            this.btnOutputPath.Location = new System.Drawing.Point(486, 246);
             this.btnOutputPath.Name = "btnOutputPath";
             this.btnOutputPath.Size = new System.Drawing.Size(75, 23);
             this.btnOutputPath.TabIndex = 3;
@@ -702,7 +737,7 @@
             // 
             this.textBox1.AllowDrop = true;
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox1.Location = new System.Drawing.Point(29, 238);
+            this.textBox1.Location = new System.Drawing.Point(26, 248);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(425, 21);
             this.textBox1.TabIndex = 2;
@@ -712,7 +747,7 @@
             // btnAddtoTasklist
             // 
             this.btnAddtoTasklist.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddtoTasklist.Location = new System.Drawing.Point(415, 576);
+            this.btnAddtoTasklist.Location = new System.Drawing.Point(415, 623);
             this.btnAddtoTasklist.Name = "btnAddtoTasklist";
             this.btnAddtoTasklist.Size = new System.Drawing.Size(75, 23);
             this.btnAddtoTasklist.TabIndex = 1;
@@ -734,7 +769,7 @@
             this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(8, 6);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(593, 194);
+            this.listView1.Size = new System.Drawing.Size(595, 191);
             this.listView1.TabIndex = 0;
             this.toolTip1.SetToolTip(this.listView1, "可以把文件拖进来哦");
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -783,7 +818,7 @@
             this.tbAvs.Controls.Add(this.txtAvsFile);
             this.tbAvs.Location = new System.Drawing.Point(4, 22);
             this.tbAvs.Name = "tbAvs";
-            this.tbAvs.Size = new System.Drawing.Size(607, 609);
+            this.tbAvs.Size = new System.Drawing.Size(609, 656);
             this.tbAvs.TabIndex = 3;
             this.tbAvs.Text = "AVS添加";
             this.tbAvs.UseVisualStyleBackColor = true;
@@ -888,7 +923,7 @@
             this.tabVS.Margin = new System.Windows.Forms.Padding(2);
             this.tabVS.Name = "tabVS";
             this.tabVS.Padding = new System.Windows.Forms.Padding(2);
-            this.tabVS.Size = new System.Drawing.Size(607, 609);
+            this.tabVS.Size = new System.Drawing.Size(609, 656);
             this.tabVS.TabIndex = 4;
             this.tabVS.Text = "Vapoursynth";
             this.tabVS.UseVisualStyleBackColor = true;
@@ -932,7 +967,7 @@
             this.TaskList.Controls.Add(this.listView2);
             this.TaskList.Location = new System.Drawing.Point(4, 22);
             this.TaskList.Name = "TaskList";
-            this.TaskList.Size = new System.Drawing.Size(607, 609);
+            this.TaskList.Size = new System.Drawing.Size(609, 656);
             this.TaskList.TabIndex = 2;
             this.TaskList.Text = "任务列表";
             this.TaskList.UseVisualStyleBackColor = true;
@@ -1016,15 +1051,42 @@
             this.删除此任务ToolStripMenuItem.Text = "删除此任务";
             this.删除此任务ToolStripMenuItem.Click += new System.EventHandler(this.删除此任务ToolStripMenuItem_Click);
             // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.SelectedPath = null;
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(239, 17);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(53, 12);
+            this.label18.TabIndex = 25;
+            this.label18.Text = "解码设定";
+            // 
+            // cbdecoderMode
+            // 
+            this.cbdecoderMode.FormattingEnabled = true;
+            this.cbdecoderMode.Items.AddRange(new object[] {
+            "default",
+            "pipe",
+            "self"});
+            this.cbdecoderMode.Location = new System.Drawing.Point(294, 13);
+            this.cbdecoderMode.Name = "cbdecoderMode";
+            this.cbdecoderMode.Size = new System.Drawing.Size(121, 20);
+            this.cbdecoderMode.TabIndex = 24;
+            this.cbdecoderMode.Text = "default";
+            this.toolTip1.SetToolTip(this.cbdecoderMode, "倾向于使用pipe传送还是编码器本体直接处理");
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 682);
+            this.ClientSize = new System.Drawing.Size(617, 729);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -1094,7 +1156,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.MyFolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.CheckBox checkBox1;
@@ -1140,8 +1202,12 @@
         private System.Windows.Forms.TextBox txtAudioTracker;
         private System.Windows.Forms.ContextMenuStrip inputfileMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem 删除toolStripMenuItem;
-        private System.Windows.Forms.CheckBox cbUseOpus;
         private System.Windows.Forms.TextBox txtAudioLine;
+        private System.Windows.Forms.ComboBox cbAudioEncoder;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox cbdecoderMode;
     }
 }
 

@@ -6,14 +6,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using CommonLibrary;
 
 namespace Easyx264CoderGUI
 {
     public class X265Command
     {
         public static string x265Excute8 = "x265-8bit-full";
-        public static string x265Excute8lite = "x265";
+        public static string x265Excute8lite = "x265-8b";
         public static string x265Excute10 = "x265-10bit-full";
         public static string x265Excute10lite = "x265-10b";
         public static string avs4x265 = "tools" + Path.DirectorySeparatorChar + "avs4x265.exe";
@@ -91,11 +90,11 @@ namespace Easyx264CoderGUI
             {
                 if (vedioConfig.depth == 10)
                 {
-                    x265exe = "tools" + Path.DirectorySeparatorChar + x265Excute10 + ".exe";
+                    x265exe = "tools" + Path.DirectorySeparatorChar + "yuuki" + Path.DirectorySeparatorChar + x265Excute10 + ".exe";
                 }
                 else
                 {
-                    x265exe = "tools" + Path.DirectorySeparatorChar + x265Excute8 + ".exe";
+                    x265exe = "tools" + Path.DirectorySeparatorChar + "yuuki" + Path.DirectorySeparatorChar + x265Excute8 + ".exe";
                 }
 
 

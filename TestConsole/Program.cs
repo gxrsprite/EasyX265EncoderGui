@@ -21,7 +21,7 @@ namespace TestConsole
             ProcessStartInfo processinfo = new ProcessStartInfo();
             processinfo.FileName = "tools\\x264_64_tMod-8bit-all.exe";
 
-            processinfo.Arguments = " --demuxer lavf --acodec none -o output1.mp4 \"E:\\BaiduYunDownload\\[13.10.28] 2013 한류드림콘서트 티아라 [ Number 9 + 빛(All the cast) ]-io.ts\"";
+            processinfo.Arguments = " --demuxer lavf  -o output1.mp4 \"E:\\BaiduYunDownload\\[13.10.28] 2013 한류드림콘서트 티아라 [ Number 9 + 빛(All the cast) ]-io.ts\"";
             processinfo.UseShellExecute = false;    //输出信息重定向
             processinfo.CreateNoWindow = false;
             processinfo.RedirectStandardInput = false;

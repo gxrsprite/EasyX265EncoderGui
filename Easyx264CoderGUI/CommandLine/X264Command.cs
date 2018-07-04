@@ -81,11 +81,11 @@ namespace Easyx264CoderGUI.CommandLine
         }
         private static void OutputToText(FileConfig fileConfig, Process avsx264mod)
         {
-            avsx264mod.OutputDataReceived += new DataReceivedEventHandler(delegate(object sender, DataReceivedEventArgs e)
+            avsx264mod.OutputDataReceived += new DataReceivedEventHandler(delegate (object sender, DataReceivedEventArgs e)
             {
                 fileConfig.EncoderTaskInfo.AppendOutput(e.Data);
             });
-            avsx264mod.ErrorDataReceived += new DataReceivedEventHandler(delegate(object sender, DataReceivedEventArgs e)
+            avsx264mod.ErrorDataReceived += new DataReceivedEventHandler(delegate (object sender, DataReceivedEventArgs e)
             {
                 //fileConfig.state = -10;
                 //fileConfig.EncoderTaskInfo.AppendOutput("[简单批量x264编码]avs转码错误");
@@ -231,7 +231,7 @@ namespace Easyx264CoderGUI.CommandLine
                 x264Line = x264Line.Replace("$crf$", "--qp " + vedioConfig.crf.ToString());
             }
 
-            if (fileConfig.AudioConfig.Enabled && fileConfig.AudioConfig.CopyStream)
+            if (fileConfig.AudioConfig.Enabled && fileConfig.AudioConfig.CopyStream && fileConfig.UseBat)
             {
                 x264Line = x264Line.Replace("$acodec$", "copy");
             }
@@ -265,7 +265,7 @@ namespace Easyx264CoderGUI.CommandLine
             outputpath = string.Empty;
 
             string fileExtension = "." + fileConfig.Muxer;
-
+            string inputArg = "";
             //if (fileConfig.AudioConfig.CopyStream || !fileConfig.AudioConfig.Enabled)
             //{
             //    outputpath = fileConfig.OutputFile + fileExtension;
@@ -273,30 +273,47 @@ namespace Easyx264CoderGUI.CommandLine
             //}
             //else
             //临时目录
-                outputpath = FileUtility.AppendRandomName(Config.Temp, Path.GetFileNameWithoutExtension(fileConfig.VedioFileFullName) + ".h264");
+            outputpath = FileUtility.AppendRandomName(Config.Temp, Path.GetFileNameWithoutExtension(fileConfig.VedioFileFullName) + ".h264");
 
-            
+            //}
             if (fileConfig.InputType == InputType.AvisynthScriptFile)
             {
-                x264Line = x264Line.Replace("$input$", fileConfig.AvsFileFullName);
+                x264Line = x264Line.Replace("$input$", fileConfig.AvsFileFullName.Maohao());
             }
-            else if (fileConfig.InputType == InputType.AvisynthScript)
+            else if (fileConfig.InputType == InputType.AvisynthScript || fileConfig.InputType == InputType.VapoursynthScriptFile)
             {
-                x264Line = x264Line.Replace("\"$input$\"", "");
+                x264Line = x264Line.Replace("$input$", "");
             }
             else
             {
-                x264Line = x264Line.Replace("$input$", fileConfig.VedioFileFullName);
-            }
-            x264Line = x264Line.Replace("$outputfile$", outputpath);
+                if (fileConfig.UseBat)
+                {
+                    x264Line = x264Line.Replace("$input$", "");
+                    inputArg = " --input - --y4m ";
+                }
+                else
+                {
+                    x264Line = x264Line.Replace("$input$", "--input " + fileConfig.VedioFileFullName.Maohao());
+                }
 
-            string log = "--log-file \"" + Path.GetFileNameWithoutExtension(fileConfig.FullName) + "_x264.log\" --log-file-level info ";
+            }
+
+            x264Line = x264Line.Replace("$outputfile$", outputpath.Maohao());
+
+            //string log = "--log-file \"" + Path.GetFileNameWithoutExtension(fileConfig.FullName) + "_x264.log\" --log-file-level info ";
             if (fileConfig.InputType == InputType.AvisynthScriptFile || fileConfig.InputType == InputType.AvisynthScript ||
                fileConfig.VedioConfig.BitType == EncoderBitrateType.twopass)
             {
                 vedioConfig.UserArgs = vedioConfig.UserArgs.Replace("--demuxer lavf", "");
             }
-            x264Line = x264Line.Replace("$userargs$", log + vedioConfig.UserArgs);
+            if (fileConfig.UseBat)
+            {
+                x264Line = x264Line.Replace("$userargs$", vedioConfig.UserArgs + inputArg);
+            }
+            else
+            {
+                x264Line = x264Line.Replace("$userargs$", vedioConfig.UserArgs);
+            }
         }
 
 
@@ -366,7 +383,7 @@ namespace Easyx264CoderGUI.CommandLine
             var x265args = "";
             Getx264Line(fileConfig, 0, out x265args, out outputpath);
             ProcessStartInfo processinfo = new ProcessStartInfo();
-            var bat = string.Format("\"{0}\" --y4m \"{1}\" - | \"{2}\" --y4m {3} - ", Config.VspipePath, fileConfig.VapoursynthFileFullName, x264exe, x265args);
+            var bat = string.Format("\"{0}\" --y4m \"{1}\" - | \"{2}\"  --demuxer y4m {3} - ", Config.VspipePath, fileConfig.VapoursynthFileFullName, x264exe, x265args);
             var batfile = FileUtility.RandomName(Config.Temp) + ".bat";
             File.WriteAllText(batfile, bat, Encoding.Default);
             processinfo.FileName = batfile;

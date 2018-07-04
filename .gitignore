@@ -187,3 +187,8 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/.vs/Easyx265CoderGUI/v15/Server/sqlite3/storage.ide-wal
+/.vs/Easyx265CoderGUI/v15/Server/sqlite3/storage.ide-shm
+/.vs/Easyx265CoderGUI/v15/Server/sqlite3/storage.ide
+/.vs/Easyx265CoderGUI/v15/Server/sqlite3/db.lock
+/.vs/Easyx265CoderGUI/v15/sqlite3/storage.ide

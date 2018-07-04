@@ -29,6 +29,12 @@ namespace ToolSet
             FileDragEnter(e);
         }
 
+
+        private void lvMkvFileList_DragEnter(object sender, DragEventArgs e)
+        {
+            FileDragEnter(e);
+        }
+
         private static void FileDragEnter(DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -88,7 +94,7 @@ namespace ToolSet
             ChangeMux(extension);
         }
 
-        private void ChangeMux(string extension)
+        private void ChangeMux(string extension, int method = 0)
         {
             List<string> filenames = new List<string>();
             foreach (ListViewItem item in listBoxffmpeg.Items)
@@ -101,8 +107,34 @@ namespace ToolSet
                 {
                     string dir = Path.GetDirectoryName(filename);
                     string name = Path.GetFileNameWithoutExtension(filename);
+                    if (method == 0)
+                    {
+                        ffmpegCommand.ChangeMux(filename, FileUtility.GetNoSameNameFile(Path.Combine(dir, name + extension)));
+                    }
+                    if (method == 1 && extension == ".mkv")
+                    {
+                        MkvMergeCommand.MkvMux(filename, FileUtility.GetNoSameNameFile(Path.Combine(dir, name + extension)));
+                    }
 
-                    ffmpegCommand.ChangeMux(filename, FileUtility.GetNoSameNameFile(Path.Combine(dir, name + extension)));
+                }
+            });
+        }
+
+        private void ChangeToMkvMux()
+        {
+            List<string> filenames = new List<string>();
+            foreach (ListViewItem item in lvMkvFileList.Items)
+            {
+                filenames.Add(item.Text);
+            }
+            Task.Factory.StartNew(() =>
+            {
+                foreach (string filename in filenames)
+                {
+                    string dir = Path.GetDirectoryName(filename);
+                    string name = Path.GetFileNameWithoutExtension(filename);
+                    MkvMergeCommand.MkvMux(filename, FileUtility.GetNoSameNameFile(Path.Combine(dir, name + ".mkv")));
+
                 }
             });
         }
@@ -156,7 +188,7 @@ namespace ToolSet
             {
                 MediaInfo info = new MediaInfo(fullname);
                 string text = info.MediaInfoText;
-                this.Invoke((Action)delegate()
+                this.Invoke((Action)delegate ()
                 {
                     txtMediaInfo.Text = text;
                 });
@@ -234,6 +266,26 @@ namespace ToolSet
                 string dir = Path.GetDirectoryName(filename);
                 Eac3toCommand.ConvertMusic(filename, FileUtility.GetNoSameNameFile(Path.Combine(dir, output + ".m4a")), q, tracker);
             });
+        }
+
+        private void btnAddtoMkvlist_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "视频文件|*.mp4;*.mkv;*.avi;*.ts;*.tp;*.ts;*.tp;*.m2ts|所有文件|*";
+            var result = ofd.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                foreach (string fullname in ofd.FileNames)
+                {
+                    lvMkvFileList.Items.Add(fullname);
+                }
+            }
+        }
+
+
+        private void btnmkvmergeRun1_Click(object sender, EventArgs e)
+        {
+            ChangeToMkvMux();
         }
     }
 }

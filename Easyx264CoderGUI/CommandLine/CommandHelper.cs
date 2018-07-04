@@ -17,10 +17,8 @@ namespace Easyx264CoderGUI
         public static string RunFFmpegToAAC(FileConfig fileConfig)
         {
             AudioConfig audioConfig = fileConfig.AudioConfig;
-            ProcessStartInfo processinfo = new ProcessStartInfo();
             string tmp = Config.Temp;
             string audiofile = FileUtility.RandomName(tmp) + ".aac";
-            processinfo.FileName = Environment.GetEnvironmentVariable("ComSpec");
 
             string bat = string.Empty;
             if (fileConfig.InputType == InputType.AvisynthScriptFile)
@@ -32,21 +30,7 @@ namespace Easyx264CoderGUI
                 bat = getAudiobat(fileConfig.AudioInputFile, audiofile, audioConfig);
             }
 
-            processinfo.Arguments = "/c " + bat;
-            processinfo.UseShellExecute = false;    //输出信息重定向
-            processinfo.CreateNoWindow = true;
-            processinfo.RedirectStandardInput = true;
-            processinfo.RedirectStandardOutput = true;
-            processinfo.RedirectStandardError = false;
-            processinfo.WindowStyle = ProcessWindowStyle.Hidden;
-            Process ffmpeg = new Process();
-            ffmpeg.StartInfo = processinfo;
-            ffmpeg.Start();
-
-            var result = ffmpeg.StandardOutput.ReadToEnd();
-            ffmpeg.WaitForExit();
-            //ffmpeg.Kill();//等待进程结束
-            ffmpeg.Dispose();
+            ProcessCmd.RunBat(bat, Config.Temp);
 
             return audiofile;
         }
@@ -84,10 +68,9 @@ namespace Easyx264CoderGUI
             {
                 ffmpegfile = "ffmpeg";
             }
-
+            var audioargs = audioconfig.CommandLineArgs;
             string neroAacEncfile = Path.Combine(Application.StartupPath, "tools\\neroAacEnc.exe");
-            return string.Format("tools\\ffmpeg.exe -vn -i \"{0}\" -f  wav pipe:| tools\\neroAacEnc -ignorelength -q {2} -lc -if - -of \"{1}\"",
-                input, output, audioconfig.Quality);
+            return $"{ffmpegfile.Maohao()} -vn -i {input.Maohao()} {audioargs} -f  wav pipe:| {neroAacEncfile.Maohao()} -ignorelength -q {audioconfig.Quality} -lc -if - -of {output.Maohao()}";
         }
 
         private static string getAudioOpus(string input, string output, AudioConfig audioconfig)
@@ -101,14 +84,29 @@ namespace Easyx264CoderGUI
             {
                 ffmpegfile = "ffmpeg";
             }
-            //string neroAacEncfile = Path.Combine(Application.StartupPath, "tools\\opusenc");
-            //return $"{ffmpegfile.Maohao()} -i {input.Maohao()} -f  wav pipe:| {neroAacEncfile.Maohao()} -ignorelength -  {output.Maohao()}";
+
+           
             var audioargs = audioconfig.CommandLineArgs;
-            if (audioargs.Contains("mixlfe") || audioargs.Contains("dB"))
+            if (audioargs.Contains("mixlfe"))
             {
                 audioargs = "";
             }
-            return $"{ffmpegfile.Maohao()} -i {input.Maohao()}  {audioargs} -c:a libopus -vn -vbr on { output.Maohao()}";
+            int bitrat = 0;
+            if (audioconfig.Quality != 0)
+            {
+                if (audioconfig.Quality < 20)
+                {
+                    bitrat = (int)(audioconfig.Quality * 500);
+                }
+                else
+                {
+                    bitrat = (int)audioconfig.Quality;
+                }
+                audioargs += " -ab " + bitrat.ToString();
+            }
+            string neroAacEncfile = Path.Combine(Application.StartupPath, "tools\\opusenc");
+            return $"{ffmpegfile.Maohao()} -i {input.Maohao()} {audioargs} -f  wav pipe:| {neroAacEncfile.Maohao()} --quiet --ignorelength --vbr --bitrate {bitrat}k  -  {output.Maohao()}";
+            //return $"{ffmpegfile.Maohao()} -i {input.Maohao()}  {audioargs} -c:a libopus -vn -vbr on { output.Maohao()}";
         }
 
 
@@ -187,7 +185,7 @@ namespace Easyx264CoderGUI
         internal static string DemuxAudio(FileConfig fileConfig)
         {
             string tmp = Path.GetRandomFileName();
-            string audiofile = Path.Combine(Path.GetDirectoryName(tmp), Path.ChangeExtension(tmp, ".mp4"));
+            string audiofile = Path.Combine(Config.Temp, Path.GetDirectoryName(tmp), Path.ChangeExtension(tmp, ".mp4"));
             ProcessStartInfo processinfo = new ProcessStartInfo();
             if (Config.IsWindows)
             {

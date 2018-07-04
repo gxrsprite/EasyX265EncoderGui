@@ -25,6 +25,7 @@ namespace Easyx264CoderGUI
         public bool deinterlace = false;
         public bool scanorder = true;
         public string ffmpeg4x265Args = "";
+        public string decoderMode = DecoderMode.defaultStr;
     }
 
     public enum EncoderBitrateType
@@ -36,7 +37,9 @@ namespace Easyx264CoderGUI
     public enum Encoder
     {
         x264,
-        x265
+        x265,
+        NvEnc_H265,
+        NvEnc_H264
     }
 
 }

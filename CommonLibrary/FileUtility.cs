@@ -73,5 +73,10 @@ namespace CommonLibrary
         {
             return GetNoSameNameFile(Path.Combine(path, filename));
         }
+
+        public static string GetFullNameWithoutExtension(string filefullname)
+        {
+            return Path.Combine(Path.GetFullPath(filefullname), Path.GetFileNameWithoutExtension(filefullname));
+        }
     }
 }
