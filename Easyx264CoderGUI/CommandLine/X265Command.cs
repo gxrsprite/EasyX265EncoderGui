@@ -318,7 +318,7 @@ namespace Easyx264CoderGUI
             }
             else
             {
-                if (fileConfig.UseBat)
+                if (fileConfig.VedioConfig.decoderMode == "pipe")
                 {
                     x264Line = x264Line.Replace("$input$", "");
                     inputArg = " --input - --y4m ";
@@ -331,7 +331,7 @@ namespace Easyx264CoderGUI
             }
 
             x264Line = x264Line.Replace("$outputfile$", outputpath);
-            if (fileConfig.UseBat)
+            if (fileConfig.VedioConfig.decoderMode == "pipe")
             {
                 x264Line = x264Line.Replace("$userargs$", vedioConfig.UserArgs + inputArg);
             }

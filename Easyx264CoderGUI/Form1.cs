@@ -78,7 +78,7 @@ namespace Easyx264CoderGUI
 #if X265
             //this.toolTip1.SetToolTip(this.cbColorDepth, "x265推荐10bit");
             cbColorDepth.Text = "10";
-            txtUserArgs.Text = "  --no-sao --strong-intra-smoothing   --no-open-gop --no-rect --no-amp --weightb --qpmax 28  --limit-tu=4 --aq-mode 3 --aq-strength 0.8 --min-keyint 1 --merange 44  --keyint 600 --colorprim bt709  --qcomp 0.65 --range limited --pools 16 --vbv-bufsize 27000 --vbv-maxrate 27000 --psy-rd 3 --psy-rdoq 2 --bframes 6 --rdoq-level 2 --weightb --rd 4";
+            txtUserArgs.Text = "  --no-sao --strong-intra-smoothing   --no-open-gop --no-rect --no-amp  --ctu 32 --weightb --qpmax 28  --limit-tu=4 --aq-mode 3 --aq-strength 0.8 --min-keyint 1 --merange 44  --keyint 600 --colorprim bt709  --qcomp 0.65 --range limited --pools 16 --vbv-bufsize 27000 --vbv-maxrate 27000 --psy-rd 3 --psy-rdoq 2 --bframes 6 --rdoq-level 2 --weightb --rd 4";
             cbpreset.Text = "slow";
             this.Text = "简单批量x265转码";
 #else
@@ -87,7 +87,7 @@ namespace Easyx264CoderGUI
             var encoders = Enum.GetNames(typeof(Encoder));
             comboBox2.Items.Clear();
             comboBox2.Items.AddRange(encoders);
-            comboBox2.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 1;
 
             cbdecoderMode.SelectedIndex = 0;
 
@@ -460,6 +460,10 @@ namespace Easyx264CoderGUI
                             return;
                         }
                         hasHandle++;
+                        if (hasHandle > listView2.Items.Count - 1)
+                        {
+                            return;
+                        }
                         isHandling = hasHandle;
 
                         this.Invoke((Action)delegate ()
@@ -549,6 +553,9 @@ namespace Easyx264CoderGUI
 
                     VedioConfig vedioconfig = fileConfig.VedioConfig;
                     string vedioOutputFile = string.Empty;
+
+                    //vedioOutputFile = "D:\\temp\\" + Path.GetFileNameWithoutExtension(fileConfig.VedioFileFullName) + ".h265";
+
                     try
                     {
                         if (vedioconfig.Encoder == Encoder.x264)
@@ -923,7 +930,7 @@ namespace Easyx264CoderGUI
 #if X265
                 cbpreset.Text = "slow";
                 cbMuxer.Text = "mkv";
-                txtUserArgs.Text = "  --no-sao --strong-intra-smoothing  --no-open-gop --no-rect --no-amp  --qpmax 28 --weightb --limit-tu=4 --aq-mode 3 --aq-strength 0.8 --min-keyint 1 --merange 44  --keyint 600 --colorprim bt709  --qcomp 0.7 --range limited --pools 16 --vbv-bufsize 27000 --vbv-maxrate 27000 --psy-rd 3 --psy-rdoq 2 --bframes 6 --rdoq-level 2 --weightb --rd 4";
+                txtUserArgs.Text = "  --no-sao --strong-intra-smoothing  --no-open-gop --no-rect --no-amp --ctu 32  --qpmax 28 --weightb --limit-tu=4 --aq-mode 3 --aq-strength 0.8 --min-keyint 1 --merange 44  --keyint 600 --colorprim bt709  --qcomp 0.7 --range limited --pools 16 --vbv-bufsize 27000 --vbv-maxrate 27000 --psy-rd 3 --psy-rdoq 2 --bframes 6 --rdoq-level 2 --weightb --rd 4";
 #else
                 cbpreset.Text = "slow";
                 txtUserArgs.Text = Resource1.TempleteHDi420;

@@ -185,7 +185,17 @@ namespace Easyx264CoderGUI
         internal static string DemuxAudio(FileConfig fileConfig)
         {
             string tmp = Path.GetRandomFileName();
-            string audiofile = Path.Combine(Config.Temp, Path.GetDirectoryName(tmp), Path.ChangeExtension(tmp, ".mp4"));
+            string extension;
+            if (fileConfig.Muxer == "mkv")
+            {
+                extension = ".mka";
+            }
+            else
+            {
+                extension = ".m4a";
+            }
+
+            string audiofile = FileUtility.AppendRandomName(Config.Temp, Path.GetFileNameWithoutExtension(fileConfig.VedioFileFullName) + extension);
             ProcessStartInfo processinfo = new ProcessStartInfo();
             if (Config.IsWindows)
             {

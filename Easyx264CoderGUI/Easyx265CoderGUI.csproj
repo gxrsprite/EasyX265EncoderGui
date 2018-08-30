@@ -45,7 +45,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>F:\Easyx265Gui\</OutputPath>
+    <OutputPath>F:\发布\Easyx265Gui\</OutputPath>
     <DefineConstants>TRACE;X265</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
