@@ -43,6 +43,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.btnOneclickStart = new System.Windows.Forms.Button();
             this.gbVedio = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.cbdecoderMode = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.cbEnableQpmod = new System.Windows.Forms.CheckBox();
@@ -118,8 +120,6 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.MyFolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label18 = new System.Windows.Forms.Label();
-            this.cbdecoderMode = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.AddTask.SuspendLayout();
@@ -318,6 +318,29 @@
             this.gbVedio.TabStop = false;
             this.gbVedio.Text = "视频参数";
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(239, 17);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(53, 12);
+            this.label18.TabIndex = 25;
+            this.label18.Text = "解码设定";
+            // 
+            // cbdecoderMode
+            // 
+            this.cbdecoderMode.FormattingEnabled = true;
+            this.cbdecoderMode.Items.AddRange(new object[] {
+            "default",
+            "pipe",
+            "self"});
+            this.cbdecoderMode.Location = new System.Drawing.Point(294, 13);
+            this.cbdecoderMode.Name = "cbdecoderMode";
+            this.cbdecoderMode.Size = new System.Drawing.Size(121, 20);
+            this.cbdecoderMode.TabIndex = 24;
+            this.cbdecoderMode.Text = "default";
+            this.toolTip1.SetToolTip(this.cbdecoderMode, "倾向于使用pipe传送还是编码器本体直接处理");
+            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -334,7 +357,9 @@
             "x264",
             "x265",
             "NVEnc_H265",
-            "NVEnc_H264"});
+            "NVEnc_H264",
+            "QSVEnc_H265",
+            "QSVEnc_H264"});
             this.comboBox2.Location = new System.Drawing.Point(82, 12);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 20);
@@ -1059,29 +1084,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(239, 17);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(53, 12);
-            this.label18.TabIndex = 25;
-            this.label18.Text = "解码设定";
-            // 
-            // cbdecoderMode
-            // 
-            this.cbdecoderMode.FormattingEnabled = true;
-            this.cbdecoderMode.Items.AddRange(new object[] {
-            "default",
-            "pipe",
-            "self"});
-            this.cbdecoderMode.Location = new System.Drawing.Point(294, 13);
-            this.cbdecoderMode.Name = "cbdecoderMode";
-            this.cbdecoderMode.Size = new System.Drawing.Size(121, 20);
-            this.cbdecoderMode.TabIndex = 24;
-            this.cbdecoderMode.Text = "default";
-            this.toolTip1.SetToolTip(this.cbdecoderMode, "倾向于使用pipe传送还是编码器本体直接处理");
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1092,7 +1094,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "简单批量x264转码";
+            this.Text = "简单批量x265转码";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

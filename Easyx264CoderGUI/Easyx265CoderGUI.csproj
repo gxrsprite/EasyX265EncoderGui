@@ -87,6 +87,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CommandLine\FFmpegCommand.cs" />
+    <Compile Include="CommandLine\QSVEncCommand.cs" />
     <Compile Include="CommandLine\NvEncCommand.cs" />
     <Compile Include="CommandLine\X264Command.cs" />
     <Compile Include="ColorMatrix.cs" />

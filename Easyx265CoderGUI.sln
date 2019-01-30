@@ -1,12 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioToAAC", "AudioToAAC\AudioToAAC.csproj", "{19A73F4F-D526-460B-89C7-855D2005432B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LosslessAviRgbConverter", "LosslessAviRgbConverter\LosslessAviRgbConverter.csproj", "{76C69683-31A8-499A-A278-F52051FFAAA2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Easyx265CoderGUI", "Easyx264CoderGUI\Easyx265CoderGUI.csproj", "{33127000-74C1-4CDF-B0AE-006BB3076EE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlvBugger", "FlvBugger\FlvBugger.csproj", "{673734B7-2C76-4B2A-8261-0157C987C1A8}"
@@ -23,14 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{19A73F4F-D526-460B-89C7-855D2005432B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19A73F4F-D526-460B-89C7-855D2005432B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19A73F4F-D526-460B-89C7-855D2005432B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19A73F4F-D526-460B-89C7-855D2005432B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76C69683-31A8-499A-A278-F52051FFAAA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76C69683-31A8-499A-A278-F52051FFAAA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76C69683-31A8-499A-A278-F52051FFAAA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76C69683-31A8-499A-A278-F52051FFAAA2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{33127000-74C1-4CDF-B0AE-006BB3076EE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33127000-74C1-4CDF-B0AE-006BB3076EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33127000-74C1-4CDF-B0AE-006BB3076EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,5 +42,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {065D1033-8B51-486B-82BA-47A9FEA08ECB}
 	EndGlobalSection
 EndGlobal

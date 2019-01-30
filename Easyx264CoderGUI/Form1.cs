@@ -1,15 +1,13 @@
-﻿using Easyx264CoderGUI.CommandLine;
+﻿using CommonLibrary;
+using Easyx264CoderGUI.CommandLine;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Tsanie.FlvBugger;
-using CommonLibrary;
 using System.Xml.Linq;
+using Tsanie.FlvBugger;
 
 namespace Easyx264CoderGUI
 {
@@ -597,7 +595,11 @@ namespace Easyx264CoderGUI
                             if (fileConfig.InputType == InputType.Vedio)
                             {
                                 fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
-                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr || fileConfig.VedioConfig.decoderMode == DecoderMode.pipe)
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr)
+                                {
+                                    fileConfig.VedioConfig.decoderMode = DecoderMode.pipe;
+                                }
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.pipe)
                                 {
                                     vedioOutputFile = X265Command.ffmpegPipeX265(fileConfig);
                                 }
@@ -639,7 +641,12 @@ namespace Easyx264CoderGUI
                             if (fileConfig.InputType == InputType.Vedio)
                             {
                                 fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
-                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr || fileConfig.VedioConfig.decoderMode == DecoderMode.self)
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr)
+                                {
+                                    fileConfig.VedioConfig.decoderMode = DecoderMode.self;
+                                }
+
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.self)
                                 {
                                     vedioOutputFile = NvEncCommand.NvEncSelf(fileConfig);
                                 }
@@ -656,7 +663,11 @@ namespace Easyx264CoderGUI
                                 File.WriteAllText(avsfilename, vedioconfig.VapoursynthScript, System.Text.Encoding.UTF8);
                                 fileConfig.VapoursynthFileFullName = avsfilename;
                                 fileConfig.InputType = InputType.VapoursynthScriptFile;
-                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr || fileConfig.VedioConfig.decoderMode == DecoderMode.self)
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr)
+                                {
+                                    fileConfig.VedioConfig.decoderMode = DecoderMode.self;
+                                }
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.self)
                                 {
                                     vedioOutputFile = NvEncCommand.NvEncUseVs(fileConfig);
                                 }
@@ -677,7 +688,10 @@ namespace Easyx264CoderGUI
                             }
                             else if (fileConfig.InputType == InputType.VapoursynthScriptFile)
                             {
-                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr || fileConfig.VedioConfig.decoderMode == DecoderMode.self)
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr)
+                                    fileConfig.VedioConfig.decoderMode = DecoderMode.self;
+
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.self)
                                 {
                                     vedioOutputFile = NvEncCommand.NvEncUseVs(fileConfig);
                                 }
@@ -689,6 +703,73 @@ namespace Easyx264CoderGUI
                             else if (fileConfig.InputType == InputType.AvisynthScriptFile)
                             {
                                 vedioOutputFile = NvEncCommand.NvEncUseVs(fileConfig);
+                            }
+
+                        }
+                        else if (vedioconfig.Encoder == Encoder.QSVEnc_H265 || vedioconfig.Encoder == Encoder.QSVEnc_H264)
+                        {
+                            if (fileConfig.InputType == InputType.Vedio)
+                            {
+                                fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr)
+                                    fileConfig.VedioConfig.decoderMode = DecoderMode.self;
+
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.self)
+                                {
+                                    vedioOutputFile = QSVEncCommand.QSVEncSelf(fileConfig);
+                                }
+                                else
+                                {
+                                    vedioOutputFile = QSVEncCommand.ffmpegPipeQSVEnc(fileConfig);
+                                }
+
+                            }
+                            else if (fileConfig.InputType == InputType.VapoursynthScript)
+                            {
+                                fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
+                                string avsfilename = Path.Combine(Config.Temp, Path.ChangeExtension(Path.GetRandomFileName(), ".vpy"));
+                                File.WriteAllText(avsfilename, vedioconfig.VapoursynthScript, System.Text.Encoding.UTF8);
+                                fileConfig.VapoursynthFileFullName = avsfilename;
+                                fileConfig.InputType = InputType.VapoursynthScriptFile;
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr)
+                                    fileConfig.VedioConfig.decoderMode = DecoderMode.self;
+
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr || fileConfig.VedioConfig.decoderMode == DecoderMode.self)
+                                {
+                                    vedioOutputFile = QSVEncCommand.QSVEncUseVs(fileConfig);
+                                }
+                                else
+                                {
+                                    vedioOutputFile = QSVEncCommand.VspipeQSVEnc(fileConfig);
+                                }
+
+                            }
+                            else if (fileConfig.InputType == InputType.AvisynthScript)
+                            {
+                                fileConfig.mediaInfo = new MediaInfo(fileConfig.FullName);
+                                string avsfilename = Path.Combine(Config.Temp, Path.ChangeExtension(Path.GetRandomFileName(), ".avs"));
+                                File.WriteAllText(avsfilename, vedioconfig.AvsScript, System.Text.Encoding.Default);
+                                fileConfig.AvsFileFullName = avsfilename;
+                                fileConfig.InputType = InputType.AvisynthScriptFile;
+                                vedioOutputFile = QSVEncCommand.QSVEncUseVs(fileConfig);
+                            }
+                            else if (fileConfig.InputType == InputType.VapoursynthScriptFile)
+                            {
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr)
+                                    fileConfig.VedioConfig.decoderMode = DecoderMode.self;
+
+                                if (fileConfig.VedioConfig.decoderMode == DecoderMode.defaultStr || fileConfig.VedioConfig.decoderMode == DecoderMode.self)
+                                {
+                                    vedioOutputFile = QSVEncCommand.QSVEncUseVs(fileConfig);
+                                }
+                                else
+                                {
+                                    vedioOutputFile = QSVEncCommand.VspipeQSVEnc(fileConfig);
+                                }
+                            }
+                            else if (fileConfig.InputType == InputType.AvisynthScriptFile)
+                            {
+                                vedioOutputFile = QSVEncCommand.QSVEncUseVs(fileConfig);
                             }
 
                         }

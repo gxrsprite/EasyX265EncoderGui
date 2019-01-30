@@ -287,5 +287,10 @@ namespace ToolSet
         {
             ChangeToMkvMux();
         }
+
+        private void 退出XToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

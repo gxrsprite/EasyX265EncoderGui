@@ -39,7 +39,9 @@ namespace Easyx264CoderGUI
         x264,
         x265,
         NvEnc_H265,
-        NvEnc_H264
+        NvEnc_H264,
+        QSVEnc_H265,
+        QSVEnc_H264,
     }
 
 }
