@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioToAAC", "AudioToAAC.csproj", "{19A73F4F-D526-460B-89C7-855D2005432B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19A73F4F-D526-460B-89C7-855D2005432B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19A73F4F-D526-460B-89C7-855D2005432B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19A73F4F-D526-460B-89C7-855D2005432B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19A73F4F-D526-460B-89C7-855D2005432B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {68B8D7A4-8965-4AEE-B226-3026670BBCB3}
+	EndGlobalSection
+EndGlobal

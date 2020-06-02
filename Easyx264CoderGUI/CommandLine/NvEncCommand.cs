@@ -1,10 +1,7 @@
 ﻿using CommonLibrary;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Easyx264CoderGUI.CommandLine
@@ -37,6 +34,7 @@ namespace Easyx264CoderGUI.CommandLine
             {
                 cqp = "";
             }
+            AppendUserArgs(vedioConfig);
             string codec = vedioConfig.Encoder == Encoder.NvEnc_H265 ? "-c hevc" : "-c h264";
             var bat = $"{ffmpegline} -y -i {fileConfig.VedioFileFullName.Maohao()} -an -pix_fmt yuv420p -f yuv4mpegpipe - | {nvencexe.Maohao()} --y4m {cqp} {codec} --output-depth {vedioConfig.depth} {vedioConfig.UserArgs} -i - -o {outfile.Maohao()}";
 
@@ -63,6 +61,7 @@ namespace Easyx264CoderGUI.CommandLine
             {
                 cqp = "";
             }
+            AppendUserArgs(vedioConfig);
             string codec = vedioConfig.Encoder == Encoder.NvEnc_H265 ? "-c hevc" : "-c h264";
             var bat = $"{nvencexe.Maohao()} {cqp} {codec} --output-depth {vedioConfig.depth} {vedioConfig.UserArgs} -i {fileConfig.VedioFileFullName.Maohao()} -o {outfile.Maohao()}";
 
@@ -89,7 +88,7 @@ namespace Easyx264CoderGUI.CommandLine
             {
                 cqp = "";
             }
-
+            AppendUserArgs(vedioConfig);
             string inputfile = "";
             if (fileConfig.InputType == InputType.AvisynthScriptFile)
             {
@@ -136,7 +135,7 @@ namespace Easyx264CoderGUI.CommandLine
             {
                 inputfile = fileConfig.VapoursynthFileFullName;
             }
-
+            AppendUserArgs(vedioConfig);
             string codec = vedioConfig.Encoder == Encoder.NvEnc_H265 ? "-c hevc" : "-c h264";
             var bat = $"{ Config.VspipePath.Maohao()} --y4m { fileConfig.VapoursynthFileFullName.Maohao()} - | {nvencexe.Maohao()} --y4m {cqp} {codec} --output-depth {vedioConfig.depth} {vedioConfig.UserArgs} -i - -o {outfile.Maohao()}";
 
@@ -150,6 +149,14 @@ namespace Easyx264CoderGUI.CommandLine
             }
 
             return outfile;
+        }
+
+        static void AppendUserArgs(VedioConfig vedioConfig)
+        {
+            if (vedioConfig.Resize)
+            {
+                vedioConfig.UserArgs = $"{vedioConfig.UserArgs} --output-res {vedioConfig.Width}x{vedioConfig.Height} ";
+            }
         }
     }
 }

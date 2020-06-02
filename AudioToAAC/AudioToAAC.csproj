@@ -100,10 +100,6 @@
       <Project>{ed4fd018-9180-40d3-8fde-fb191c99ae17}</Project>
       <Name>CommonLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Easyx264CoderGUI\Easyx265CoderGUI.csproj">
-      <Project>{33127000-74C1-4CDF-B0AE-006BB3076EE2}</Project>
-      <Name>Easyx265CoderGUI</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -38,7 +38,7 @@ namespace AudioToAAC
                 e.Effect = DragDropEffects.None;
         }
 
-        public static string FileExtension = ".flac|.ape|.wav|.mp3|.aac|.mp4|.flv|.f4v|.m4a|.avi|.pcm|.ts|.tp|.amr|.mkv|.dts|.ac3";
+        public static string FileExtension = ".flac|.ape|.wav|.mp3|.aac|.mp4|.flv|.f4v|.m4a|.mka|.avi|.pcm|.ts|.tp|.amr|.mkv|.dts|.ac3";
         private void listView1_DragDrop(object sender, DragEventArgs e)
         {
             string[] s = (string[])e.Data.GetData(DataFormats.FileDrop, false);
@@ -69,7 +69,25 @@ namespace AudioToAAC
                 lvi.SubItems.Add(Path.GetFileName(path));//.Name = "FileName";
                 lvi.SubItems.Add("待转码").Name = "States";
                 lvi.SubItems.Add(Path.GetDirectoryName(path));//.Name = "Path";
-                lvi.Tag = new AudioInfo(path, dir);
+                var ai = new AudioInfo(path, dir);
+                if (cbAudioEncoder.Text == "AAC")
+                {
+                    ai.Encoder = AudioEncoder.aac;
+                }
+                else if (cbAudioEncoder.Text == "Opus")
+                {
+                    ai.Encoder = AudioEncoder.opus;
+                }
+                else if (cbAudioEncoder.Text == "FLAC")
+                {
+                    ai.Encoder = AudioEncoder.flac;
+                }
+                else
+                {
+                    ai.Encoder = AudioEncoder.aac;
+                }
+
+                lvi.Tag = ai;
                 listView1.Items.Add(lvi);
             }
         }
@@ -126,15 +144,24 @@ namespace AudioToAAC
                 });
                 AudioInfo info = item.Tag as AudioInfo;
 
+                string extension = ".m4a";
+                if (info.Encoder == AudioEncoder.opus)
+                {
+                    extension = ".opus";
+                }
+                else if (info.Encoder == AudioEncoder.flac)
+                {
+                    extension = ".flac";
+                }
                 string output = string.Empty;
                 string copyto = string.Empty;
                 if (cbKeepFileTree.Checked)
                 {
                     string ralative = FileUtility.MakeRelativePath(info.DirPath + "/", Path.GetDirectoryName(info.FullName));
                     string outpath = Path.Combine(textBox1.Text, ralative);
-                    output = Path.Combine(outpath, Path.GetFileNameWithoutExtension(info.FullName) + ".m4a");
+                    output = Path.Combine(outpath, Path.GetFileNameWithoutExtension(info.FullName) + extension);
                     string copytopath = Path.Combine(textBox2.Text, ralative);
-                    copyto = Path.Combine(copytopath, Path.GetFileNameWithoutExtension(info.FullName) + ".m4a");
+                    copyto = Path.Combine(copytopath, Path.GetFileNameWithoutExtension(info.FullName) + extension);
                     if (!Directory.Exists(outpath))
                     {
                         Directory.CreateDirectory(outpath);
@@ -147,22 +174,35 @@ namespace AudioToAAC
                 }
                 else
                 {
-                    output = Path.Combine(textBox1.Text, Path.GetFileNameWithoutExtension(info.FullName) + ".m4a");
-                    copyto = Path.Combine(textBox2.Text, Path.GetFileNameWithoutExtension(info.FullName) + ".m4a");
+                    output = Path.Combine(textBox1.Text, Path.GetFileNameWithoutExtension(info.FullName) + extension);
+                    copyto = Path.Combine(textBox2.Text, Path.GetFileNameWithoutExtension(info.FullName) + extension);
                 }
 
                 AudioConfig ac = new AudioConfig();
-                ac.Encoder = AudioEncoder.aac;
+                ac.Encoder = info.Encoder;
                 ac.Input = info.FullName;
                 ac.Quality = float.Parse(txtQuality.Text);
                 int.TryParse(txtCh.Text, out ac.Channel);
                 if (string.IsNullOrEmpty(output))
                 {
-                    output = Path.GetFileNameWithoutExtension(ac.Input) + ".m4a";
+
+                    output = Path.GetFileNameWithoutExtension(ac.Input) + extension;
                 }
                 ac.Output = output;
 
-                CommandHelper.RunFFmpegToAAC(ac);
+                if (info.Encoder == AudioEncoder.aac)
+                {
+                    CommandHelper.RunFFmpegToAAC(ac);
+                }
+                else if (info.Encoder == AudioEncoder.opus)
+                {
+                    CommandHelper.RunFFmpegToOpus(ac);
+                }
+                else if (info.Encoder == AudioEncoder.flac)
+                {
+                    CommandHelper.RunFFmpegToFlac(ac);
+                }
+
 
                 if (cbCopyID3.Checked == true && ac.Encoder == AudioEncoder.aac)
                 {

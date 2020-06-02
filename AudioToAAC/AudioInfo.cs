@@ -21,5 +21,7 @@ namespace AudioToAAC
 
         public string FullName { set; get; }
         public string DirPath { set; get; }
+
+        public AudioEncoder Encoder = AudioEncoder.aac;
     }
 }

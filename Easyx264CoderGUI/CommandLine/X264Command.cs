@@ -291,9 +291,13 @@ namespace Easyx264CoderGUI.CommandLine
                     x264Line = x264Line.Replace("$input$", "");
                     inputArg = " --input - --y4m ";
                 }
+                else if (fileConfig.VedioConfig.decoderMode == DecoderMode.self)
+                {
+                    x264Line = x264Line.Replace("$input$", fileConfig.VedioFileFullName.Maohao());
+                }
                 else
                 {
-                    x264Line = x264Line.Replace("$input$", "--input " + fileConfig.VedioFileFullName.Maohao());
+                    x264Line = x264Line.Replace("$input$", fileConfig.VedioFileFullName.Maohao());
                 }
 
             }

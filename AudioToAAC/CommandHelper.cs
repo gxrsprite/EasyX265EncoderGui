@@ -1,38 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CommonLibrary;
-using Easyx264CoderGUI;
 
 namespace AudioToAAC
 {
     public class CommandHelper
     {
-        public static string RunFFmpegToOpus(AudioConfig audioConfig)
+        public static void RunFFmpegToOpus(AudioConfig audioConfig)
         {
             string tmp = Path.GetTempPath();
-            string audiofile = FileUtility.RandomName(tmp) + ".opus";
 
             string bat = getAudioOpus(audioConfig);
             ProcessCmd.RunBat(bat, tmp);
-
-            return audiofile;
         }
 
         public static string getAudioOpus(AudioConfig audioconfig)
         {
             string ffmpegfile = "";
-            if (Config.IsWindows)
-            {
-                ffmpegfile = Path.Combine(Application.StartupPath, "tools\\ffmpeg.exe");
-            }
-            else
-            {
-                ffmpegfile = "ffmpeg";
-            }
+
+            ffmpegfile = Path.Combine(Application.StartupPath, "tools\\ffmpeg.exe");
+
 
             var audioargs = audioconfig.CommandLineArgs;
             if (audioargs.Contains("mixlfe"))
@@ -57,29 +49,17 @@ namespace AudioToAAC
             //return $"{ffmpegfile.Maohao()} -i {input.Maohao()}  {audioargs} -c:a libopus -vn -vbr on { output.Maohao()}";
         }
 
-        public static string RunFFmpegToAAC(AudioConfig audioConfig)
+        public static void RunFFmpegToAAC(AudioConfig audioConfig)
         {
-            string audiofile = FileUtility.RandomName(Path.GetTempPath()) + ".aac";
-
             string bat = getAudiobat(audioConfig);
 
 
-            ProcessCmd.RunBat(bat,Path.GetTempPath());
-
-            return audiofile;
+            ProcessCmd.RunBat(bat, Path.GetTempPath());
         }
 
         private static string getAudiobat(AudioConfig audioconfig)
         {
-            string ffmpegfile = "";
-            if (Config.IsWindows)
-            {
-                ffmpegfile = Path.Combine(Application.StartupPath, "tools\\ffmpeg.exe");
-            }
-            else
-            {
-                ffmpegfile = "ffmpeg";
-            }
+            string ffmpegfile = Path.Combine(Application.StartupPath, "tools\\ffmpeg.exe");
             var audioargs = audioconfig.CommandLineArgs;
             if (audioconfig.Channel > 0)
             {
@@ -88,6 +68,21 @@ namespace AudioToAAC
             string neroAacEncfile = Path.Combine(Application.StartupPath, "tools\\neroAacEnc.exe");
             return string.Format("tools\\ffmpeg.exe -vn -i \"{0}\" {3} -f  wav pipe:| tools\\neroAacEnc -ignorelength -q {2} -lc -if - -of \"{1}\"",
                 audioconfig.Input, audioconfig.Output, audioconfig.Quality, audioargs);
+        }
+
+
+        public static void RunFFmpegToFlac(AudioConfig audioconfig)
+        {
+            ProcessStartInfo processinfo = new ProcessStartInfo();
+            string bat = getAudioFlacBat(audioconfig.Input, audioconfig.Output, audioconfig);
+            ProcessCmd.RunBat(bat, Path.GetTempPath());
+        }
+
+        private static string getAudioFlacBat(string input, string output, AudioConfig audioconfig)
+        {
+            string ffmpegfile = Path.Combine(Application.StartupPath, "tools\\ffmpeg.exe");
+            return $"{ffmpegfile.Maohao()} -i {input.Maohao()} -c:a flac -compression_level 9  {output.Maohao()}";
+            //return $"{ffmpegfile.Maohao()} -i {input.Maohao()}  {audioargs} -c:a libopus -vn -vbr on { output.Maohao()}";
         }
     }
 }

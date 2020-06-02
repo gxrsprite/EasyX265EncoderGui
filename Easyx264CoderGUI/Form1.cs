@@ -796,11 +796,11 @@ namespace Easyx264CoderGUI
 
                     if (fileConfig.AudioConfig.Enabled && fileConfig.state != -10)
                     {
-                        if (fileConfig.InputType == InputType.Vedio && fileConfig.AudioConfig.CopyStream && fileConfig.VedioConfig.Encoder == Encoder.x264)
-                        {
-                            //直接由x264处理掉
-                        }
-                        else
+                        //if (fileConfig.InputType == InputType.Vedio && fileConfig.AudioConfig.CopyStream && fileConfig.VedioConfig.Encoder == Encoder.x264)
+                        //{
+                        //    //直接由x264处理掉
+                        //}
+                        //else
                         {
                             if (isHandling >= listView2.Items.Count)
                             {
@@ -993,11 +993,11 @@ namespace Easyx264CoderGUI
                 cbColorDepth.Text = "8";
                 cbcsp.SelectedIndex = 0;
                 txtUserArgs.Text = txtUserArgs.Text.Replace("--input-depth 10", "");
-#if X265
-                cbMuxer.Text = "mkv";
-#else
-                txtUserArgs.Text = Resource1.TempleteOnline;
-#endif
+                if (comboBox2.SelectedItem.ToString().Equals(Encoder.x265.ToString()))
+                    cbMuxer.Text = "mkv";
+                else
+                    txtUserArgs.Text = Resource1.TempleteOnline;
+
                 txtbitrate.Text = "3510";
                 textBox3.Text = "";
                 cbpreset.Text = "fast";
@@ -1008,16 +1008,19 @@ namespace Easyx264CoderGUI
             {
                 cbColorDepth.Text = "8";
                 cbcsp.SelectedIndex = 0;
-#if X265
-                cbpreset.Text = "slow";
-                cbMuxer.Text = "mkv";
-                txtUserArgs.Text = "  --no-sao --strong-intra-smoothing  --no-open-gop --no-rect --no-amp --ctu 32  --qpmax 28 --weightb --limit-tu=4 --aq-mode 3 --aq-strength 0.8 --min-keyint 1 --merange 44  --keyint 600 --colorprim bt709  --qcomp 0.7 --range limited --pools 16 --vbv-bufsize 27000 --vbv-maxrate 27000 --psy-rd 3 --psy-rdoq 2 --bframes 6 --rdoq-level 2 --weightb --rd 4";
-#else
-                cbpreset.Text = "slow";
-                txtUserArgs.Text = Resource1.TempleteHDi420;
-                
-                cbMuxer.Text = "mp4";
-#endif
+                if (comboBox2.SelectedItem.ToString().Equals(Encoder.x265.ToString()))
+                {
+                    cbpreset.Text = "slow";
+                    cbMuxer.Text = "mkv";
+                    txtUserArgs.Text = "  --no-sao --strong-intra-smoothing  --no-open-gop --no-rect --no-amp --ctu 32  --qpmax 28 --weightb --limit-tu=4 --aq-mode 3 --aq-strength 0.8 --min-keyint 1 --merange 44  --keyint 600 --colorprim bt709  --qcomp 0.7 --range limited --pools 16 --vbv-bufsize 27000 --vbv-maxrate 27000 --psy-rd 3 --psy-rdoq 2 --bframes 6 --rdoq-level 2 --weightb --rd 4";
+                }
+                else
+                {
+                    cbpreset.Text = "slow";
+                    txtUserArgs.Text = Resource1.TempleteHDi420;
+
+                    cbMuxer.Text = "mp4";
+                }
                 textBox3.Text = "21";
 
                 txtbitrate.Text = "";
@@ -1028,28 +1031,34 @@ namespace Easyx264CoderGUI
                 cbColorDepth.Text = "10";
                 cbcsp.SelectedIndex = 2;
                 txtUserArgs.AppendText(" --input-depth 10");
-#if X265
-                cbpreset.Text = "medium";
-                cbMuxer.Text = "mkv";
-#else
-                 cbpreset.Text = "slow";
-                txtUserArgs.Text = Resource1.TempleteGamei444;
-                
-                cbMuxer.Text = "mp4";
-#endif
+                if (comboBox2.SelectedItem.ToString().Equals(Encoder.x265.ToString()))
+                {
+                    cbpreset.Text = "medium";
+                    cbMuxer.Text = "mkv";
+                }
+                else
+                {
+
+
+                    cbpreset.Text = "slow";
+                    txtUserArgs.Text = Resource1.TempleteGamei444;
+
+                    cbMuxer.Text = "mp4";
+                }
                 textBox3.Text = "24";
 
                 cbUseAvsTemplete.Checked = false;
             }
             else if (cbVedioConfigTemplete.Text == "爱情动作")
             {
-#if X265
-                textBox3.Text = "26";
-                cbColorDepth.Text = "10";
-                cbpreset.Text = "medium";
-                txtUserArgs.Text = "  --no-open-gop --no-rect --weightb --aq-mode 3 --merange 40 --min-keyint 1 --qpmax 33 --keyint 1800 --colorprim bt709  --qcomp 0.65 --range limited --pools 16 --vbv-bufsize 12000 --vbv-maxrate 12000 --psy-rd 1.4";
-                cbMuxer.Text = "mkv";
-#endif
+                if (comboBox2.SelectedItem.ToString().Equals(Encoder.x265.ToString()))
+                {
+                    textBox3.Text = "26";
+                    cbColorDepth.Text = "10";
+                    cbpreset.Text = "medium";
+                    txtUserArgs.Text = "  --no-open-gop --no-rect --weightb --aq-mode 3 --merange 40 --min-keyint 1 --qpmax 33 --keyint 1800 --colorprim bt709  --qcomp 0.65 --range limited --pools 16 --vbv-bufsize 12000 --vbv-maxrate 12000 --psy-rd 1.4";
+                    cbMuxer.Text = "mkv";
+                }
             }
 
         }
@@ -1134,7 +1143,7 @@ namespace Easyx264CoderGUI
         {
             if (comboBox2.SelectedItem.ToString().Equals(Encoder.NvEnc_H265.ToString()))
             {
-                txtUserArgs.Text = "--max-bitrate 27000";
+                txtUserArgs.Text = "--max-bitrate 27000 --gop-len 1600 --lookahead 20 --weightp --aq --aq-temporal --ref 5  -b 3";
             }
         }
     }
