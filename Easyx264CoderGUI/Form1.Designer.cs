@@ -117,9 +117,9 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除此任务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.folderBrowserDialog1 = new System.Windows.Forms.MyFolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.folderBrowserDialog1 = new System.Windows.Forms.MyFolderBrowserDialog();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.AddTask.SuspendLayout();
@@ -356,6 +356,7 @@
             this.comboBox2.Items.AddRange(new object[] {
             "x264",
             "x265",
+            "x265_GHFLY_MOD",
             "NVEnc_H265",
             "NVEnc_H264",
             "QSVEnc_H265",
@@ -792,6 +793,7 @@
             this.FilePath});
             this.listView1.ContextMenuStrip = this.inputfileMenuStrip;
             this.listView1.FullRowSelect = true;
+            this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(8, 6);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(595, 191);
@@ -1036,6 +1038,7 @@
             this.columnHeader5});
             this.listView2.ContextMenuStrip = this.contextMenuStrip1;
             this.listView2.FullRowSelect = true;
+            this.listView2.HideSelection = false;
             this.listView2.Location = new System.Drawing.Point(3, 3);
             this.listView2.Name = "listView2";
             this.listView2.Size = new System.Drawing.Size(577, 490);
@@ -1076,13 +1079,13 @@
             this.删除此任务ToolStripMenuItem.Text = "删除此任务";
             this.删除此任务ToolStripMenuItem.Click += new System.EventHandler(this.删除此任务ToolStripMenuItem_Click);
             // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.SelectedPath = null;
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.SelectedPath = null;
             // 
             // Form1
             // 

@@ -332,7 +332,11 @@ namespace Easyx264CoderGUI
 
             //vedioConfig.ffmpeg4x265Args = txtffmpeg4x265.Text;
             vedioConfig.Encoder = (Encoder)Enum.Parse(typeof(Encoder), comboBox2.Text);
-
+            if (vedioConfig.Encoder == Encoder.x265_GHFLY_MOD)
+            {
+                vedioConfig.Encoder = Encoder.x265;
+                vedioConfig.Is_x265_GHFLY_MOD = true;
+            }
             vedioConfig.UserArgs = txtUserArgs.Text;
             vedioConfig.depth = int.Parse(cbColorDepth.Text);
             vedioConfig.preset = cbpreset.Text;
@@ -794,6 +798,9 @@ namespace Easyx264CoderGUI
                         continue;
                     }
 
+
+                    int delay = 0;
+                    string audiofile = string.Empty;
                     if (fileConfig.AudioConfig.Enabled && fileConfig.state != -10)
                     {
                         //if (fileConfig.InputType == InputType.Vedio && fileConfig.AudioConfig.CopyStream && fileConfig.VedioConfig.Encoder == Encoder.x264)
@@ -812,7 +819,6 @@ namespace Easyx264CoderGUI
                                 item.SubItems["States"].Text = "音频转码中";
                             });
 
-                            string audiofile = string.Empty;
                             if (!fileConfig.AudioConfig.Enabled)
                             {
 
@@ -865,41 +871,46 @@ namespace Easyx264CoderGUI
                             {
                                 item.SubItems["States"].Text = "封装中";
                             });
-                            int delay = 0;
+
                             if (fileConfig.mediaInfo != null)
                             {
                                 delay = fileConfig.mediaInfo.DelayRelativeToVideo;
                                 //delay = delay - 67;
                             }
-                            if (fileConfig.Muxer == "mkv")
-                            {
-                                vedioOutputFile = CommandHelper.MKVmergin(fileConfig, vedioOutputFile, audiofile, delay);
-                            }
-                            else if (fileConfig.Muxer == "mp4")
-                            {
-                                vedioOutputFile = CommandHelper.mp4box(fileConfig, vedioOutputFile, audiofile, delay);
-                            }
-                            else if (fileConfig.Muxer == "flv")
-                            {
-                                vedioOutputFile = CommandHelper.ffmpegmux(fileConfig, vedioOutputFile, audiofile, fileConfig.Muxer);
-                                if (fileConfig.sinablack)
-                                {
-                                    FlvMain flvbugger = new FlvMain();
-                                    flvbugger.addFile(vedioOutputFile);
-                                    flvbugger.ExecuteBlack(999d, -1, Path.ChangeExtension(vedioOutputFile, ".black.flv"));
-                                }
-                                else if (fileConfig.sinaPreblack)
-                                {
-                                    FlvMain flvbugger = new FlvMain();
-                                    flvbugger.addFile(vedioOutputFile);
-                                    flvbugger.ExecuteTime(999d, -1, Path.ChangeExtension(vedioOutputFile, ".speed.flv"));
-                                }
 
-
-                            }
                         }
 
+
                     }
+
+                    if (fileConfig.state != -10)
+                        if (fileConfig.Muxer == "mkv")
+                        {
+                            vedioOutputFile = CommandHelper.MKVmergin(fileConfig, vedioOutputFile, audiofile, delay);
+                        }
+                        else if (fileConfig.Muxer == "mp4")
+                        {
+                            vedioOutputFile = CommandHelper.mp4box(fileConfig, vedioOutputFile, audiofile, delay);
+                        }
+                        else if (fileConfig.Muxer == "flv")
+                        {
+                            vedioOutputFile = CommandHelper.ffmpegmux(fileConfig, vedioOutputFile, audiofile, fileConfig.Muxer);
+                            if (fileConfig.sinablack)
+                            {
+                                FlvMain flvbugger = new FlvMain();
+                                flvbugger.addFile(vedioOutputFile);
+                                flvbugger.ExecuteBlack(999d, -1, Path.ChangeExtension(vedioOutputFile, ".black.flv"));
+                            }
+                            else if (fileConfig.sinaPreblack)
+                            {
+                                FlvMain flvbugger = new FlvMain();
+                                flvbugger.addFile(vedioOutputFile);
+                                flvbugger.ExecuteTime(999d, -1, Path.ChangeExtension(vedioOutputFile, ".speed.flv"));
+                            }
+
+
+                        }
+
 
                     if (fileConfig.CompleteDo && fileConfig.state != -10)
                     {

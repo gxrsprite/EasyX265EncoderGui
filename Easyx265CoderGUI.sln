@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Easyx265CoderGUI", "Easyx264CoderGUI\Easyx265CoderGUI.csproj", "{33127000-74C1-4CDF-B0AE-006BB3076EE2}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolSet", "ToolSet\ToolSet.csproj", "{5D8E769A-283E-42F9-897D-ADCB4BD4258A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLibrary", "CommonLibrary\CommonLibrary.csproj", "{ED4FD018-9180-40D3-8FDE-FB191C99AE17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioToAAC", "AudioToAAC\AudioToAAC.csproj", "{19A73F4F-D526-460B-89C7-855D2005432B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{ED4FD018-9180-40D3-8FDE-FB191C99AE17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED4FD018-9180-40D3-8FDE-FB191C99AE17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED4FD018-9180-40D3-8FDE-FB191C99AE17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19A73F4F-D526-460B-89C7-855D2005432B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19A73F4F-D526-460B-89C7-855D2005432B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19A73F4F-D526-460B-89C7-855D2005432B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19A73F4F-D526-460B-89C7-855D2005432B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

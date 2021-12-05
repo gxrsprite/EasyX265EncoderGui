@@ -26,6 +26,7 @@ namespace Easyx264CoderGUI
         public bool scanorder = true;
         public string ffmpeg4x265Args = "";
         public string decoderMode = DecoderMode.defaultStr;
+        public bool Is_x265_GHFLY_MOD;
     }
 
     public enum EncoderBitrateType
@@ -38,10 +39,27 @@ namespace Easyx264CoderGUI
     {
         x264,
         x265,
+        x265_GHFLY_MOD,
         NvEnc_H265,
         NvEnc_H264,
         QSVEnc_H265,
         QSVEnc_H264,
     }
 
+    public class EncoderHelper
+    {
+        public static bool IsHevc(Encoder encoder)
+        {
+            switch (encoder)
+            {
+                case Encoder.x265:
+                case Encoder.x265_GHFLY_MOD:
+                case Encoder.NvEnc_H265:
+                case Encoder.QSVEnc_H265:
+                    return true;
+            }
+
+            return false;
+        }
+    }
 }

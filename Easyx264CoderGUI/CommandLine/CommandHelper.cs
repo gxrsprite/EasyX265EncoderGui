@@ -85,7 +85,7 @@ namespace Easyx264CoderGUI
                 ffmpegfile = "ffmpeg";
             }
 
-           
+
             var audioargs = audioconfig.CommandLineArgs;
             if (audioargs.Contains("mixlfe"))
             {
@@ -117,7 +117,14 @@ namespace Easyx264CoderGUI
             string outfile = FileUtility.GetNoSameNameFile(fileConfig.OutputFile + ".mkv");
             if (string.IsNullOrEmpty(audio))
             {
-                outfile = FileUtility.GetNoSameNameFile(fileConfig.OutputFile + ".h265.mkv");
+                if (EncoderHelper.IsHevc(fileConfig.VedioConfig.Encoder))
+                {
+                    outfile = FileUtility.GetNoSameNameFile(fileConfig.OutputFile + ".h265.mkv");
+                }
+                else
+                {
+                    outfile = FileUtility.GetNoSameNameFile(fileConfig.OutputFile + ".h264.mkv");
+                }
             }
             ProcessStartInfo processinfo = new ProcessStartInfo();
             if (Config.IsWindows)
@@ -129,9 +136,8 @@ namespace Easyx264CoderGUI
                 processinfo.FileName = Path.Combine(Application.StartupPath, "mkvmerge");
             }
 
-            processinfo.Arguments = string.Format(" -o \"{0}\" \"{1}\" {3} {2}",
-                outfile, vedio, audio.Maohao(), delay == 0 ? "" : ("--sync 0:" + delay)
-                );
+            var delaystr = delay == 0 ? "" : ("--sync 0:" + delay);
+            processinfo.Arguments = $" -o \"{outfile}\" \"{vedio}\" {delaystr} {audio.Maohao()}";
             processinfo.UseShellExecute = false;    //输出信息重定向
             processinfo.CreateNoWindow = true;
             processinfo.RedirectStandardInput = false;

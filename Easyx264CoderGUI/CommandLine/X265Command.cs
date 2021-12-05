@@ -17,6 +17,7 @@ namespace Easyx264CoderGUI
         public static string x265Excute10lite = "x265-10b";
         public static string avs4x265 = "tools" + Path.DirectorySeparatorChar + "avs4x265.exe";
         public static string x265Args = " $crf$ $profile$  --preset $preset$  $tune$  $userargs$   -o  \"$outputfile$\"  $input$";
+        public static string x265GHFLYMOD = "x265";
 
         public static string RunAvsx264mod(FileConfig fileConfig)
         {
@@ -127,7 +128,12 @@ namespace Easyx264CoderGUI
             {
                 if (vedioConfig.depth == 10)
                 {
-                    x265exe = "tools" + Path.DirectorySeparatorChar + x265Excute10lite + ".exe";
+                    if (vedioConfig.Is_x265_GHFLY_MOD)
+                    {
+                        x265exe = "tools" + Path.DirectorySeparatorChar + "GHFLYmod" + Path.DirectorySeparatorChar + x265GHFLYMOD + ".exe";
+                    }
+                    else
+                        x265exe = "tools" + Path.DirectorySeparatorChar + x265Excute10lite + ".exe";
                 }
                 else
                 {
@@ -266,33 +272,33 @@ namespace Easyx264CoderGUI
             });
         }
 
-        private static void Getx265Line(FileConfig fileConfig, int pass, out string x264Line, out string outputpath)
+        private static void Getx265Line(FileConfig fileConfig, int pass, out string x265Line, out string outputpath)
         {
             VedioConfig vedioConfig = fileConfig.VedioConfig;
-            x264Line = x265Args;
-            x264Line = x264Line.Replace("$preset$", vedioConfig.preset);
+            x265Line = x265Args;
+            x265Line = x265Line.Replace("$preset$", vedioConfig.preset);
             if (string.IsNullOrEmpty(vedioConfig.tune))
             {
-                x264Line = x264Line.Replace("$tune$", "");
+                x265Line = x265Line.Replace("$tune$", "");
             }
             else
             {
-                x264Line = x264Line.Replace("$tune$", "--tune " + vedioConfig.tune);
+                x265Line = x265Line.Replace("$tune$", "--tune " + vedioConfig.tune);
             }
             if (vedioConfig.BitType == EncoderBitrateType.crf)
             {
-                x264Line = x264Line.Replace("$crf$", "--crf " + vedioConfig.crf.ToString());
+                x265Line = x265Line.Replace("$crf$", "--crf " + vedioConfig.crf.ToString());
             }
             else
             {
                 string twopassstr = "--pass " + pass + " --bitrate " + vedioConfig.bitrate.ToString();
-                x264ArgsManager manager = new x264ArgsManager(x264Line);
+                x264ArgsManager manager = new x264ArgsManager(x265Line);
 
-                x264Line = x264Line.Replace("$crf$", twopassstr);
+                x265Line = x265Line.Replace("$crf$", twopassstr);
             }
 
 
-            x264Line = x264Line.Replace("$profile$", "");
+            x265Line = x265Line.Replace("$profile$", "");
 
             outputpath = string.Empty;
 
@@ -310,34 +316,39 @@ namespace Easyx264CoderGUI
             //}
             if (fileConfig.InputType == InputType.AvisynthScriptFile)
             {
-                x264Line = x264Line.Replace("$input$", fileConfig.AvsFileFullName.Maohao());
+                x265Line = x265Line.Replace("$input$", fileConfig.AvsFileFullName.Maohao());
             }
             else if (fileConfig.InputType == InputType.AvisynthScript || fileConfig.InputType == InputType.VapoursynthScriptFile)
             {
-                x264Line = x264Line.Replace("$input$", "");
+                x265Line = x265Line.Replace("$input$", "");
             }
             else
             {
                 if (fileConfig.VedioConfig.decoderMode == DecoderMode.pipe)
                 {
-                    x264Line = x264Line.Replace("$input$", "");
+                    x265Line = x265Line.Replace("$input$", "");
                     inputArg = " --input - --y4m ";
                 }
                 else
                 {
-                    x264Line = x264Line.Replace("$input$", "--input " + fileConfig.VedioFileFullName.Maohao());
+                    x265Line = x265Line.Replace("$input$", "--input " + fileConfig.VedioFileFullName.Maohao());
                 }
 
             }
 
-            x264Line = x264Line.Replace("$outputfile$", outputpath);
+            x265Line = x265Line.Replace("$outputfile$", outputpath);
             if (fileConfig.VedioConfig.decoderMode == "pipe")
             {
-                x264Line = x264Line.Replace("$userargs$", vedioConfig.UserArgs + inputArg);
+                x265Line = x265Line.Replace("$userargs$", vedioConfig.UserArgs + inputArg);
             }
             else
             {
-                x264Line = x264Line.Replace("$userargs$", vedioConfig.UserArgs);
+                x265Line = x265Line.Replace("$userargs$", vedioConfig.UserArgs);
+            }
+
+            if (vedioConfig.Is_x265_GHFLY_MOD && vedioConfig.depth != 10)
+            {
+                x265Line = $"-D {vedioConfig.depth} {x265Line}";
             }
         }
 

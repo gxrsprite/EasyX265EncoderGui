@@ -22,6 +22,7 @@ namespace AudioToAAC
         public Form1()
         {
             InitializeComponent();
+            Control.CheckForIllegalCrossThreadCalls = false;
             //Process.EnterDebugMode();
         }
 
@@ -145,14 +146,16 @@ namespace AudioToAAC
                 AudioInfo info = item.Tag as AudioInfo;
 
                 string extension = ".m4a";
-                if (info.Encoder == AudioEncoder.opus)
+               
+                if (cbAudioEncoder.Text == "Opus")
                 {
                     extension = ".opus";
                 }
-                else if (info.Encoder == AudioEncoder.flac)
+                else if (cbAudioEncoder.Text == "FLAC")
                 {
                     extension = ".flac";
                 }
+
                 string output = string.Empty;
                 string copyto = string.Empty;
                 if (cbKeepFileTree.Checked)
